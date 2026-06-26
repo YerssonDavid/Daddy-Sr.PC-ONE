@@ -1,0 +1,222 @@
+{
+  "nav": {
+    "features": "Qué resuelve",
+    "howItWorks": "Cómo funciona",
+    "tryIt": "Pruébalo",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "openMenu": "Abrir menú",
+    "lightMode": "Activar modo claro",
+    "darkMode": "Activar modo oscuro"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English",
+    "pt": "Português",
+    "select": "Seleccionar idioma"
+  },
+  "hero": {
+    "eyebrow": "// El mentor del taller",
+    "headlineLine1": "Arma sin miedo",
+    "headlineLine2": "a quemar nada.",
+    "sub": "Deja que Daddy te guíe en cada paso del armado. <strong>Daddy responde todo</strong>.",
+    "cta": "Comenzar ahora",
+    "ctaSecondary": "Cómo funciona",
+    "free": "15 consultas gratis · sin registro",
+    "demo": {
+      "ariaLabel": "Demostración de conversación con Daddy Sr.PC sobre compatibilidad de GPU.",
+      "question": "¿Una RTX 4070 cabe en un gabinete mini-ITX?",
+      "answer": "Depende del largo. La mayoría de RTX 4070 miden 240–300mm. En mini-ITX fíjate en el \"max GPU length\" de tu gabinete. ¿Cuál tienes? Te digo si cabe.",
+      "placeholder": "Escribe tu consulta…"
+    }
+  },
+  "features": {
+    "eyebrow": "// Qué resuelve",
+    "heading": "Cuatro dominios, un solo agente que los conecta.",
+    "compat": {
+      "title": "Compatibilidad de componentes",
+      "body": "Verifica socket, RAM, watts y refrigeración. Daddy analiza tu combo y te dice si funciona."
+    },
+    "build": {
+      "title": "Guías de ensamblaje paso a paso",
+      "body": "Desde el socket hasta la pasta térmica. Procedimientos claros para tu primer armado o un upgrade."
+    },
+    "tech": {
+      "title": "Apartado técnico a fondo",
+      "body": "TDP, caché L3, velocidades, arquitecturas. Todo lo que necesitas saber sobre cada chip."
+    },
+    "best": {
+      "title": "Mejores prácticas",
+      "body": "Cooling, gestión de cables, ventilación y mantenimiento. Cuida tu setup como Daddy te enseña."
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "// Cómo funciona",
+    "heading": "Del taller a la respuesta, en cuatro pasos.",
+    "step1": { "title": "Pregunta lo que quieras", "body": "Sin filtros, sin tabú. Técnica de novato o debate de overclock, Daddy está listo." },
+    "step2": { "title": "El agente responde con contexto", "body": "Nada de templates. Explicaciones precisas, datos técnicos y advertencias de seguridad donde hagan falta." },
+    "step3": { "title": "Tienes 15 consultas gratis", "body": "Pruébalo sin registrarte. El contador queda visible y baja con cada pregunta." },
+    "step4": { "title": "Regístrate para seguir", "body": "Gratis con 15 consultas por día, o continúa sin límites creando tu cuenta." }
+  },
+  "demo": {
+    "eyebrow": "// Pruébalo en vivo",
+    "heading": "Tu primer contacto con Daddy. Sin registro.",
+    "sub": "Estas 15 consultas son reales. El contador baja con cada pregunta — cuando llega a cero, te invitamos a seguir.",
+    "welcome": "¡Hola! Soy Daddy. Pregúntame lo que quieras sobre tu PC: compatibilidad, armado, lo que sea. Tienes 15 consultas para probar.",
+    "levels": {
+      "novato": "Primer armado",
+      "intermedio": "Intermedio",
+      "avanzado": "Avanzado"
+    },
+    "levelAriaLabel": "Nivel de respuesta",
+    "inputLabel": "Escribe tu consulta",
+    "placeholder": "Ej: ¿AM5 usa DDR4 o DDR5?",
+    "sendAriaLabel": "Enviar mensaje",
+    "typingAriaLabel": "Daddy está escribiendo",
+    "bannerSoft": "Quedan {{ count }} preguntas gratis. Regístrate para seguir sin límites.",
+    "bannerStrong": "Te queda 1 pregunta. Después, crea tu cuenta para continuar.",
+    "gate": {
+      "eyebrow": "// Llegaste al límite de prueba",
+      "title": "Hiciste 15 preguntas. ¡Listo!",
+      "text": "¿Quieres seguir? Regístrate gratis:",
+      "feature1": "15 preguntas por día",
+      "feature2": "Historial de tus chats",
+      "feature3": "Respuestas a tu nivel",
+      "cta": "Crear cuenta gratuita",
+      "login": "Ya tengo cuenta",
+      "fine": "Sin sorpresas. La mayoría usa el plan gratis."
+    },
+    "replies": {
+      "novato": {
+        "r1": "Buena pregunta. Fíjate que el socket del CPU coincida con el de la placa madre, que la RAM sea del tipo correcto (DDR4 o DDR5) y que la fuente tenga watts de sobra. Si me dices tus componentes, te los reviso uno por uno.",
+        "r2": "Tranquilo, esto es más fácil de lo que parece. Lo importante es ir por partes y no forzar nada al ensamblar. ¿Quieres que te lo explique paso a paso?"
+      },
+      "intermedio": {
+        "r1": "Depende del combo. Mira tres cosas: socket (AM5/LGA1700), versión de RAM (AM5 es DDR5 sí o sí) y el TDP combinado vs tu fuente. Pásame los modelos y te confirmo si hay cuello de botella.",
+        "r2": "Para ese caso conviene revisar el PCIe y el largo de la GPU contra el espacio del gabinete. Dime el modelo del case y la placa de video."
+      },
+      "avanzado": {
+        "r1": "Entrando en detalle: con un X3D prioriza frecuencia de RAM estable (EXPO 6000 CL30 es el sweet spot en AM5) antes que latencias agresivas. El cuello suele estar en el infinity fabric, no en el núcleo. ¿Qué kit estás mirando?",
+        "r2": "¡Ojo! El TDP nominal miente: mira el PPT real bajo carga sostenida y dimensiona el disipador con margen. Te puedo dar números concretos si me dices el chip."
+      }
+    }
+  },
+  "closing": {
+    "eyebrow": "// Arma con confianza",
+    "titleStart": "Chatea con Daddy ",
+    "titleEnd": " ahora.",
+    "sub": "Sin miedo a quemar nada. El mentor del taller está esperando tu próxima pregunta.",
+    "cta": "Comenzar ahora"
+  },
+  "footer": {
+    "features": "Qué resuelve",
+    "howItWorks": "Cómo funciona",
+    "tryIt": "Pruébalo",
+    "madeWith": "Hecho con",
+    "madeBy": "por David222"
+  },
+  "register": {
+    "eyebrow": "// Crea tu cuenta",
+    "brandTagline": "Tu taller de ensamblaje personal.",
+    "feat1": "15 consultas por día, gratis",
+    "feat2": "Historial de todas tus conversaciones",
+    "feat3": "Respuestas adaptadas a tu nivel",
+    "feat4": "Compatibilidad, armado y técnica",
+    "stepOf": "Paso {{ step }} de {{ total }}",
+    "steps": {
+      "s1": "Identidad",
+      "s2": "Acceso",
+      "s3": "Perfil"
+    },
+    "step1": {
+      "title": "¿Cómo te llamamos?",
+      "sub": "Tu nombre y tu apodo en el taller."
+    },
+    "step2": {
+      "title": "Configura tu acceso.",
+      "sub": "Correo y contraseña para entrar."
+    },
+    "step3": {
+      "title": "¿Cuál es tu mundo?",
+      "sub": "Elige el perfil que más te representa."
+    },
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "surnameLabel": "Apellido",
+    "surnamePlaceholder": "Tu apellido",
+    "apodLabel": "Apodo",
+    "apodPlaceholder": "Como te llamamos aquí",
+    "apodHint": "Mínimo 3 caracteres. Este será tu nombre en el chat.",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "correo@ejemplo.com",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Mínimo 8 caracteres",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "pwdHints": {
+      "length": "Mínimo 8 caracteres",
+      "upper": "Al menos 1 mayúscula",
+      "symbol": "Al menos 1 símbolo"
+    },
+    "interests": {
+      "gamer": "Gamer",
+      "gamerDesc": "Gaming y builds de alto rendimiento",
+      "creator": "Creador",
+      "creatorDesc": "Edición, diseño y workstations",
+      "overclocker": "Enthusiast",
+      "overclockerDesc": "Overclocking y rendimiento extremo",
+      "aprendiz": "Aprendiz",
+      "aprendizDesc": "Nuevo en el mundo PC"
+    },
+    "next": "Siguiente",
+    "back": "Atrás",
+    "submit": "Crear cuenta gratuita",
+    "submitting": "Creando cuenta…",
+    "loginPrompt": "¿Ya tienes cuenta?",
+    "loginCta": "Iniciar sesión",
+    "errors": {
+      "nameRequired": "El nombre es requerido",
+      "surnameRequired": "El apellido es requerido",
+      "apodRequired": "El apodo es requerido",
+      "apodMinLength": "El apodo debe tener mínimo 3 caracteres",
+      "emailRequired": "El correo es requerido",
+      "emailInvalid": "Correo no válido",
+      "passwordRequired": "La contraseña es requerida",
+      "passwordMinLength": "Mínimo 8 caracteres",
+      "passwordUppercase": "Incluye al menos una mayúscula",
+      "passwordSymbol": "Incluye al menos un símbolo",
+      "interestRequired": "Elige un perfil para continuar"
+    },
+    "successTitle": "¡Listo, estás dentro!",
+    "successBody": "Bienvenido al taller. Ya puedes armar con Daddy sin límites.",
+    "successCta": "Ir al chat"
+  },
+  "login": {
+    "eyebrow": "// Accede al taller",
+    "brandTagline": "Tu punto de entrada al ensamblaje.",
+    "feat1": "15 consultas por día, gratis",
+    "feat2": "Historial de tus conversaciones",
+    "feat3": "Respuestas adaptadas a tu nivel",
+    "title": "Bienvenido de vuelta.",
+    "sub": "Ingresa y sigue ensamblando donde lo dejaste.",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "correo@ejemplo.com",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Tu contraseña",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "submit": "Entrar",
+    "submitting": "Ingresando…",
+    "registerPrompt": "¿No tienes cuenta?",
+    "registerCta": "Registrarte gratis",
+    "errors": {
+      "emailRequired": "El correo es requerido",
+      "emailInvalid": "Correo no válido",
+      "passwordRequired": "La contraseña es requerida"
+    },
+    "successTitle": "¡Bienvenido de vuelta!",
+    "successBody": "Redirigiendo al taller…",
+    "successCta": "Ir al chat"
+  }
+}
