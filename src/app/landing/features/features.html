@@ -1,0 +1,31 @@
+<section id="features" class="features">
+  <div class="container">
+    <header class="features__head">
+      <p class="eyebrow" appReveal>{{ 'features.eyebrow' | transloco }}</p>
+      <h2 appReveal [revealDelay]="60">
+        {{ 'features.heading' | transloco }}
+      </h2>
+    </header>
+
+    <div class="features__grid">
+      @for (f of features; track f.id; let i = $index) {
+        <article class="card" appReveal [revealDelay]="i * 90">
+          <span class="card__header" aria-hidden="true"></span>
+          <span class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
+              <path
+                [attr.d]="f.icon"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <h3 class="card__title">{{ 'features.' + f.id + '.title' | transloco }}</h3>
+          <p class="card__body">{{ 'features.' + f.id + '.body' | transloco }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
