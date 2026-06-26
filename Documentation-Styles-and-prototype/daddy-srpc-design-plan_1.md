@@ -355,6 +355,11 @@ La mayoría usa el plan Gratis.
 
 ## 6. Vista del Chat (App Real)
 
+> 📄 **Documento detallado:** la arquitectura de frontend y el diseño completo de esta
+> pantalla (incluida la **cuadrícula animada de fondo**, los componentes Angular, el modelo de
+> estado con signals y las microinteracciones) están desarrollados en
+> [`daddy-srpc-chat-frontend_2.md`](./daddy-srpc-chat-frontend_2.md).
+
 ### 6.1 Layout General
 
 ```
