@@ -1,0 +1,715 @@
+/* ============================================================
+   Página de registro — wizard de 3 pasos
+   ============================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--solder);
+  color: var(--solder-ink);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  z-index: 9999;
+  transition: top var(--t-fast) var(--ease);
+
+  &:focus { top: 1rem; }
+}
+
+/* ============================================================
+   Layout principal
+   ============================================================ */
+.reg-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100dvh;
+  padding-top: 60px;
+}
+
+/* ============================================================
+   Panel izquierdo — brand
+   ============================================================ */
+.reg-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2.5rem, 4vw, 5rem) clamp(2rem, 3vw, 4rem);
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--bg-elevated) 0%, var(--bg-surface) 100%);
+  border-right: 1px solid var(--border);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 25% 20%, var(--solder-tint), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 75% 80%, var(--trace-tint), transparent 65%);
+    pointer-events: none;
+  }
+}
+
+.reg-brand__pcb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--trace);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.reg-brand__content {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+}
+
+.reg-brand__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  text-decoration: none;
+
+  img {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius);
+    filter: drop-shadow(0 0 12px var(--solder-tint));
+  }
+}
+
+.reg-brand__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.reg-brand__sr { color: var(--solder); }
+
+.reg-brand__eyebrow { margin-bottom: 0.75rem; }
+
+.reg-brand__tagline {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.reg-feats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.reg-feat {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  transition: color var(--t-fast) var(--ease);
+
+  &:hover { color: var(--text-primary); }
+}
+
+.reg-feat__pad {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--solder);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--solder) 20%, transparent), 0 0 8px var(--solder-tint);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 20px;
+    height: 1px;
+    background: linear-gradient(to right, var(--solder), transparent);
+    opacity: 0.4;
+  }
+}
+
+/* ============================================================
+   Panel derecho — stepped form
+   ============================================================ */
+.reg-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 3.5rem) clamp(1.5rem, 3vw, 4rem);
+  gap: 1.5rem;
+  background-color: var(--bg-base);
+}
+
+/* ============================================================
+   Progress track
+   ============================================================ */
+.reg-progress {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 460px;
+}
+
+.reg-progress__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.reg-progress__dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-tiny);
+  font-weight: 700;
+  transition:
+    border-color var(--t-normal) var(--ease),
+    background var(--t-normal) var(--ease),
+    color var(--t-normal) var(--ease),
+    box-shadow var(--t-normal) var(--ease);
+  cursor: default;
+
+  &:disabled { cursor: default; }
+  &:not(:disabled) { cursor: pointer; }
+}
+
+.reg-progress__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-tiny);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transition: color var(--t-normal) var(--ease);
+}
+
+.reg-progress__item.is-active {
+  .reg-progress__dot {
+    border-color: var(--solder);
+    background: color-mix(in srgb, var(--solder) 15%, var(--bg-elevated));
+    color: var(--solder);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--solder) 20%, transparent);
+  }
+  .reg-progress__label { color: var(--solder); }
+}
+
+.reg-progress__item.is-done {
+  .reg-progress__dot {
+    border-color: var(--trace);
+    background: color-mix(in srgb, var(--trace) 15%, var(--bg-elevated));
+    color: var(--trace);
+  }
+  .reg-progress__label { color: var(--trace); }
+}
+
+.reg-progress__line {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  margin-bottom: 1.2rem; /* align with dot center, above label */
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 0%;
+    background: var(--trace);
+    transition: width 0.4s var(--ease);
+  }
+
+  &.is-filled::after { width: 100%; }
+}
+
+/* ============================================================
+   Step card
+   ============================================================ */
+.reg-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--glass-elevated);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  box-shadow: var(--shadow-card);
+  animation: step-enter-fwd 0.35s var(--ease) both;
+
+  &.dir-back { animation: step-enter-back 0.35s var(--ease) both; }
+}
+
+@keyframes step-enter-fwd {
+  from { opacity: 0; transform: translateX(48px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes step-enter-back {
+  from { opacity: 0; transform: translateX(-48px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.reg-card__eyebrow { margin-bottom: 0.5rem; }
+
+.reg-card__title {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0.375rem;
+  line-height: 1.2;
+}
+
+.reg-card__sub {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================================
+   Form layout
+   ============================================================ */
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  margin-bottom: 1.25rem;
+}
+
+.reg-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem;
+}
+
+/* ============================================================
+   Field
+   ============================================================ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &--error {
+    .field__label { color: var(--alert); }
+
+    .field__input {
+      border-color: var(--alert);
+      background: color-mix(in srgb, var(--alert-tint) 60%, var(--bg-elevated) 40%);
+
+      &:focus {
+        outline: none;
+        border-color: var(--alert);
+        box-shadow: 0 0 0 3px var(--alert-tint);
+      }
+    }
+  }
+}
+
+.field__label {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.field__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  -webkit-appearance: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+
+  &::placeholder { color: var(--text-muted); }
+
+  &:hover:not(:focus) {
+    border-color: color-mix(in srgb, var(--border) 30%, var(--trace) 70%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--trace);
+    box-shadow: 0 0 0 3px var(--trace-tint);
+  }
+}
+
+.field__pwd-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+
+  .field__input { padding-right: 2.75rem; }
+}
+
+.field__eye {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  transition: color var(--t-fast) var(--ease);
+  padding: 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
+
+  &:hover { color: var(--trace); }
+}
+
+.field__error {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--fs-tiny);
+  font-family: var(--font-mono);
+  color: var(--alert);
+  animation: fade-up 0.2s var(--ease) both;
+}
+
+.field__hint {
+  font-size: var(--fs-tiny);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ============================================================
+   Password live hints
+   ============================================================ */
+.pwd-hints {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.625rem 0.75rem;
+  background: color-mix(in srgb, var(--bg-base) 50%, var(--bg-elevated));
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  animation: fade-up 0.2s var(--ease) both;
+}
+
+.pwd-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--fs-tiny);
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  transition: color var(--t-fast) var(--ease);
+
+  &.is-ok {
+    color: var(--solder);
+    .pwd-hint__icon { color: var(--solder); }
+  }
+}
+
+.pwd-hint__icon { flex-shrink: 0; }
+
+/* ============================================================
+   Interest cards (step 3)
+   ============================================================ */
+.reg-interests {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.reg-interest {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 1rem;
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  text-align: left;
+  color: var(--text-secondary);
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--border) 20%, var(--solder) 80%);
+    background: color-mix(in srgb, var(--solder-tint) 40%, var(--bg-elevated));
+    color: var(--text-primary);
+  }
+
+  &.is-selected {
+    border-color: var(--solder);
+    background: color-mix(in srgb, var(--solder-tint) 60%, var(--bg-elevated));
+    color: var(--text-primary);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--solder) 40%, transparent),
+                0 4px 16px var(--solder-tint);
+
+    .reg-interest__icon { color: var(--solder); }
+    .reg-interest__check { opacity: 1; transform: scale(1); }
+  }
+}
+
+.reg-interest__icon {
+  color: var(--text-muted);
+  transition: color var(--t-fast) var(--ease);
+  margin-bottom: 0.25rem;
+}
+
+.reg-interest__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.reg-interest__desc {
+  font-size: var(--fs-tiny);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Checkmark badge top-right corner */
+.reg-interest__check {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--solder);
+  color: var(--solder-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.reg-interest__err { margin-top: 0.25rem; }
+
+/* ============================================================
+   Navigation buttons
+   ============================================================ */
+.reg-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+
+  &--end { justify-content: flex-end; }
+}
+
+.reg-nav__back {
+  flex-shrink: 0;
+}
+
+.reg-nav__next {
+  flex: 1;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.reg-submit__spin { animation: spin 0.8s linear infinite; }
+
+/* ============================================================
+   Login link
+   ============================================================ */
+.reg-card__login {
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+
+.reg-card__login-cta {
+  color: var(--trace);
+  font-weight: 600;
+  margin-left: 0.3em;
+  transition: color var(--t-fast) var(--ease);
+
+  &:hover { color: var(--text-primary); }
+}
+
+/* ============================================================
+   Success state
+   ============================================================ */
+.reg-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-block: 1.5rem;
+  gap: 1rem;
+  max-width: 460px;
+  width: 100%;
+  animation: fade-up 0.5s var(--ease) both;
+}
+
+.reg-success__check {
+  color: var(--solder);
+  filter: drop-shadow(0 0 16px var(--solder-tint));
+}
+
+.reg-success__ring {
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: draw-on 0.6s var(--ease) 0.1s forwards;
+}
+
+.reg-success__tick {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: draw-on 0.4s var(--ease) 0.65s forwards;
+}
+
+@keyframes draw-on {
+  to { stroke-dashoffset: 0; }
+}
+
+.reg-success__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.reg-success__body {
+  color: var(--text-secondary);
+  max-width: 28ch;
+  line-height: 1.5;
+}
+
+.reg-success__cta { margin-top: 0.5rem; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+  .reg-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .reg-brand {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 2rem clamp(1.5rem, 4vw, 3rem);
+    justify-content: flex-start;
+  }
+
+  .reg-brand__pcb { opacity: 0.05; }
+
+  .reg-brand__content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .reg-brand__logo { margin-bottom: 0; flex-shrink: 0; }
+  .reg-brand__eyebrow,
+  .reg-brand__tagline { display: none; }
+
+  .reg-feats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+    row-gap: 0.5rem;
+  }
+
+  .reg-feat__pad::before { display: none; }
+}
+
+@media (max-width: 640px) {
+  .reg-main { padding-top: 56px; }
+
+  .reg-brand { padding: 1.25rem 1rem; }
+  .reg-brand__content { gap: 1rem; }
+  .reg-brand__logo img { width: 36px; height: 36px; }
+  .reg-brand__name { font-size: 1.125rem; }
+  .reg-feats { display: none; }
+
+  .reg-section {
+    padding: 1.25rem 1rem;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .reg-card { padding: 1.375rem 1.125rem; }
+  .reg-card__title { font-size: var(--fs-h3); }
+
+  .reg-form__row { grid-template-columns: 1fr; }
+
+  .reg-interests { grid-template-columns: 1fr; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reg-card { animation: none; }
+
+  .reg-success { animation: none; }
+
+  .reg-success__ring,
+  .reg-success__tick {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .reg-submit__spin { animation: none; }
+}
