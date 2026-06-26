@@ -1,0 +1,37 @@
+# ============================================================================
+# Override de pnpm — SOLO este proyecto (DaddyPcFrontend)
+# ----------------------------------------------------------------------------
+# La config global (~/.config/pnpm/config.yaml) endurece la cadena de
+# suministro. Aquí relajamos ÚNICAMENTE la política de "trust downgrade",
+# que da un falso positivo con:
+#
+#   @angular/build → sass@1.97.3 → chokidar@4.0.3
+#
+# chokidar 4.0.3 se publicó sin provenance attestation (una versión previa
+# sí la tenía), por eso `no-downgrade` la bloquea. Es un paquete legítimo y
+# ampliamente usado; lo permitimos solo en este repo.
+#
+# Las demás protecciones se MANTIENEN explícitas y auditables:
+#   - minimumReleaseAge: 4320  → no instalar nada lanzado en las últimas 72h
+#   - blockExoticSubdeps: true → no instalar deps de fuentes exóticas/desconocidas
+# ============================================================================
+
+# Relajado solo aquí (avisa pero no bloquea el downgrade de attestation):
+trustPolicy: warn
+
+# Protecciones heredadas, re-declaradas para que queden fijas en el repo:
+minimumReleaseAge: 4320
+minimumReleaseAgeStrict: true
+minimumReleaseAgeIgnoreMissingTime: false
+blockExoticSubdeps: true
+
+# Scripts de build nativos permitidos — todos del toolchain oficial de Angular:
+#   esbuild           → bundler/compilador (esencial para ng build)
+#   @parcel/watcher   → file-watcher nativo para ng serve
+#   lmdb              → caché de build en disco de Angular
+#   msgpackr-extract  → acelerador nativo de serialización del caché (lmdb)
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
