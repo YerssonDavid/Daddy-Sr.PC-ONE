@@ -10,6 +10,7 @@ import com.example.david.one.daddypcbackend.domain.model.User;
 import com.example.david.one.daddypcbackend.domain.valueObjects.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -66,6 +67,7 @@ public class RegistryUserUseCase implements IRegistryUser {
         user.setApod(apod);
         user.setPassword(passwordHash);
         user.setInterest(interest);
+        user.setCreatedAtUser(LocalDateTime.now());
 
         //Save User
         userR.save(user);
