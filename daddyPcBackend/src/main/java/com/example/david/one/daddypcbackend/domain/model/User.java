@@ -2,6 +2,7 @@ package com.example.david.one.daddypcbackend.domain.model;
 
 import com.example.david.one.daddypcbackend.domain.valueObjects.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class User {
@@ -12,11 +13,12 @@ public class User {
     private ApodVO apod;
     private String password;
     private InterestVO interest;
+    private LocalDateTime createdAtUser;
 
     public User() {
     }
 
-    public User(UUID id ,NameVO name, SurnameVO surname, EmailVO email, ApodVO apod, String password, InterestVO interest) {
+    public User(UUID id, NameVO name, SurnameVO surname, EmailVO email, ApodVO apod, String password, InterestVO interest, LocalDateTime createdAtUser) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -24,6 +26,7 @@ public class User {
         this.apod = apod;
         this.password = password;
         this.interest = interest;
+        this.createdAtUser = createdAtUser;
     }
 
     public UUID getId() {
@@ -80,5 +83,13 @@ public class User {
 
     public void setInterest(InterestVO interest) {
         this.interest = interest;
+    }
+
+    public LocalDateTime getCreatedAtUser() {
+        return createdAtUser;
+    }
+
+    public void setCreatedAtUser(LocalDateTime createdAtUser) {
+        this.createdAtUser = createdAtUser;
     }
 }
