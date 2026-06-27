@@ -1,0 +1,82 @@
+<!-- Chat shell: sidebar + main -->
+<div
+  class="chat-shell"
+  [attr.data-sidebar]="sidebarOpen() ? 'expanded' : 'collapsed'"
+  [attr.data-sidebar-collapsed]="sidebarCollapsed()"
+>
+
+  <!-- Sidebar (colapsable en desktop, drawer en mobile) -->
+  <app-chat-sidebar
+    [collapsed]="sidebarCollapsed()"
+    (toggle)="collapseToggle()"
+    (settingsOpen)="showSettings.set(true)"
+  />
+
+  <!-- Backdrop para cerrar el drawer en mobile -->
+  @if (sidebarOpen()) {
+    <div
+      class="chat-backdrop"
+      (click)="toggleSidebar()"
+      aria-hidden="true"
+    ></div>
+  }
+
+  <!-- Main: header + mensajes + composer + gate -->
+  <main class="chat-main">
+
+    <!-- Fondo animado de cuadrícula -->
+    <app-chat-grid aria-hidden="true" />
+
+    <!-- Header con contador y theme toggle -->
+    <app-chat-header
+      [sidebarOpen]="sidebarOpen()"
+      (toggleSidebar)="toggleSidebar()"
+    />
+
+    <!-- Aviso de requests -->
+    @if (counter.notice() === 'soft') {
+      <div class="chat-notice chat-notice--soft" role="status" aria-live="polite">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 8h.01M12 12v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        {{ 'chat.noticeRemaining' | transloco : { count: counter.remaining(), total: counter.total } }}
+      </div>
+    }
+
+    @if (counter.notice() === 'strong') {
+      <div class="chat-notice chat-notice--strong" role="alert" aria-live="assertive">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true">
+          <path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+            stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        {{ 'chat.noticeLast' | transloco }}
+      </div>
+    }
+
+    <!-- Lista de mensajes -->
+    <app-message-list
+      [messages]="store.messages()"
+      [typing]="store.typing()"
+    />
+
+    <!-- Compositor flotante -->
+    <app-chat-composer
+      [disabled]="counter.depleted()"
+      [typing]="store.typing()"
+      (send)="onSend($event)"
+    />
+
+    <!-- Gate informativo cuando se agotan los requests -->
+    @if (showDepletedGate()) {
+      <app-register-gate (close)="showDepletedGate.set(false)" />
+    }
+
+  </main>
+</div>
+
+<!-- Panel de ajustes -->
+@if (showSettings()) {
+  <app-settings-panel (close)="showSettings.set(false)" />
+}

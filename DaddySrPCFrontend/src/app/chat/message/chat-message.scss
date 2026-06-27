@@ -1,0 +1,79 @@
+/* Burbujas de mensaje — doc §7.2, §3 (glassmorphism) */
+.bubble {
+  display: flex;
+  gap: 0.625rem;
+  align-items: flex-start;
+  animation: fade-up 0.4s var(--ease) both;
+  max-width: var(--bubble-max, 720px);
+  width: fit-content;
+}
+
+/* Burbuja del agente: izquierda, glass */
+.bubble--agent {
+  align-self: flex-start;
+  margin-right: auto;
+
+  .bubble__body {
+    background: var(--bubble-agent-bg, var(--glass-surface));
+    border: 1px solid var(--bubble-agent-border, var(--glass-border));
+    border-bottom-left-radius: 4px;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+  }
+}
+
+/* Burbuja del usuario: derecha, trace tint */
+.bubble--user {
+  flex-direction: row-reverse;
+  align-self: flex-end;
+  margin-left: auto;
+
+  .bubble__body {
+    background: var(--bubble-user-bg, var(--trace-tint));
+    border: 1px solid var(--bubble-user-border, color-mix(in srgb, var(--trace) 35%, transparent));
+    border-bottom-right-radius: 4px;
+  }
+
+  .bubble__text {
+    color: var(--text-primary);
+  }
+}
+
+/* Avatar del agente */
+.bubble__avatar {
+  flex-shrink: 0;
+  margin-top: 4px;
+
+  img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--glass-border);
+  }
+}
+
+/* Cuerpo de la burbuja */
+.bubble__body {
+  padding: 0.75rem 1rem;
+  border-radius: var(--bubble-radius, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.bubble__text {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+  word-break: break-word;
+}
+
+.bubble__time {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-sm);
+  color: var(--text-muted);
+  align-self: flex-end;
+  margin-top: 0.25rem;
+}

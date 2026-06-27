@@ -1,0 +1,119 @@
+/* Chat shell — layout raíz con CSS Grid */
+:host {
+  display: block;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.chat-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w, 264px) 1fr;
+  grid-template-rows: 100dvh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bg-base);
+  position: relative;
+  transition: grid-template-columns var(--t-normal) var(--ease);
+}
+
+/* Sidebar colapsado en desktop (Fix 1) */
+.chat-shell[data-sidebar-collapsed='true'] {
+  grid-template-columns: var(--sidebar-w-collapsed) 1fr;
+}
+
+/* Main: sub-grid — compositor es absoluto, no ocupa fila */
+.chat-main {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tokens del chat */
+:host {
+  --sidebar-w: 264px;
+  --sidebar-w-collapsed: 76px;
+  --bubble-max: 720px;
+  --bubble-radius: 16px;
+  --bubble-user-bg: var(--trace-tint);
+  --bubble-user-border: color-mix(in srgb, var(--trace) 35%, transparent);
+  --bubble-agent-bg: var(--glass-surface);
+  --bubble-agent-border: var(--glass-border);
+  --composer-bg: var(--glass-elevated);
+}
+
+/* Notices de contador */
+.chat-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--fs-small);
+  position: relative;
+  z-index: 4;
+
+  &--soft {
+    background: var(--trace-tint);
+    color: var(--trace);
+    border-bottom: 1px solid color-mix(in srgb, var(--trace) 20%, transparent);
+  }
+
+  &--strong {
+    background: var(--alert-tint);
+    color: var(--alert);
+    border-bottom: 1px solid color-mix(in srgb, var(--alert) 20%, transparent);
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+}
+
+.chat-notice__link {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+
+  &:hover { opacity: 0.85; }
+}
+
+/* Backdrop para cerrar drawer en mobile */
+.chat-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: fade-up 0.2s var(--ease) both;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1024px) {
+  .chat-shell {
+    grid-template-columns: 1fr;
+  }
+
+  /* El collapse no tiene efecto en mobile; sidebar es fixed off-canvas */
+  .chat-shell[data-sidebar-collapsed='true'] {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-backdrop {
+    display: block;
+  }
+
+  .chat-shell:not([data-sidebar='expanded']) .chat-backdrop {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .chat-shell {
+    grid-template-columns: 1fr;
+  }
+
+  :host {
+    --bubble-max: 92vw;
+  }
+}

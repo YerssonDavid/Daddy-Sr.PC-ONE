@@ -1,0 +1,36 @@
+<article
+  class="bubble"
+  [class.bubble--user]="message().role === 'user'"
+  [class.bubble--agent]="message().role === 'agent'"
+>
+  <!-- Avatar del agente -->
+  @if (message().role === 'agent') {
+    <div class="bubble__avatar" aria-hidden="true">
+      <img src="logo.png" alt="" width="28" height="28" />
+    </div>
+  }
+
+  <div class="bubble__body">
+    @for (block of message().blocks; track $index) {
+      @switch (block.kind) {
+        @case ('text') {
+          <p class="bubble__text">{{ block.text }}</p>
+        }
+        @case ('table') {
+          <app-spec-table [data]="$any(block)" />
+        }
+        @case ('admonition') {
+          <app-admonition [data]="$any(block)" />
+        }
+        @case ('code') {
+          <app-code-block [data]="$any(block)" />
+        }
+      }
+    }
+
+    <!-- Timestamp -->
+    <time class="bubble__time" [attr.datetime]="message().createdAt">
+      {{ message().createdAt | date:'HH:mm' }}
+    </time>
+  </div>
+</article>

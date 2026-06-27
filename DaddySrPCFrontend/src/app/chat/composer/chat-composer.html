@@ -1,0 +1,52 @@
+<form
+  class="composer"
+  (submit)="$event.preventDefault(); submit()"
+  aria-label="Enviar mensaje a Daddy"
+>
+  <!-- Input row -->
+  <div class="composer__input-row">
+    <label for="chat-input" class="visually-hidden">{{ 'chat.placeholder' | transloco }}</label>
+    <textarea
+      #textarea
+      id="chat-input"
+      class="composer__textarea"
+      [value]="draft()"
+      (input)="onInput($event)"
+      (keydown)="onKeydown($event)"
+      [disabled]="disabled()"
+      [attr.placeholder]="'chat.placeholder' | transloco"
+      rows="1"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="sentences"
+      spellcheck="true"
+      aria-multiline="true"
+      [attr.aria-label]="'chat.placeholder' | transloco"
+    ></textarea>
+
+    <!-- Send button -->
+    <button
+      type="submit"
+      class="composer__send-btn"
+      [class.composer__send-btn--sent]="isSent()"
+      [class.composer__send-btn--typing]="typing()"
+      [disabled]="disabled() || !draft().trim()"
+      [attr.aria-label]="typing() ? 'Enviando…' : 'Enviar mensaje'"
+    >
+      @if (isSent()) {
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      } @else if (typing()) {
+        <svg class="spin" viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-dasharray="25 30" stroke-linecap="round"/>
+        </svg>
+      } @else {
+        <span class="composer__send-emoji" aria-hidden="true">🧪</span>
+      }
+    </button>
+  </div>
+
+  <!-- Hint -->
+  <p class="composer__hint">{{ 'chat.sendEnterHint' | transloco }}</p>
+</form>
