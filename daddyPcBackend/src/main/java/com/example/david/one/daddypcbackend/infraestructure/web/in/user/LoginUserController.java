@@ -1,6 +1,6 @@
 package com.example.david.one.daddypcbackend.infraestructure.web.in.user;
 
-import com.example.david.one.daddypcbackend.application.command.LoginUserCommand;
+import com.example.david.one.daddypcbackend.application.command.user.LoginUserCommand;
 import com.example.david.one.daddypcbackend.application.dto.ServerResponseDTO;
 import com.example.david.one.daddypcbackend.application.port.in.user.ILoginUser;
 import com.example.david.one.daddypcbackend.infraestructure.web.in.user.dto.LoginUserRequest;

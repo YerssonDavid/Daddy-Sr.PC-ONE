@@ -1,6 +1,6 @@
 package com.example.david.one.daddypcbackend.infraestructure.web.in.user;
 
-import com.example.david.one.daddypcbackend.application.command.CreateUserCommand;
+import com.example.david.one.daddypcbackend.application.command.user.CreateUserCommand;
 import com.example.david.one.daddypcbackend.application.dto.ServerResponseDTO;
 import com.example.david.one.daddypcbackend.application.port.in.user.IRegistryUser;
 import com.example.david.one.daddypcbackend.infraestructure.web.in.user.dto.RegisterUserRequest;
