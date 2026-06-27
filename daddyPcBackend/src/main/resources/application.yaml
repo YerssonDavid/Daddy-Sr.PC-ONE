@@ -1,3 +1,37 @@
 spring:
   application:
     name: daddyPcBackend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  ai:
+    model:
+      chat: google-genai
+      embedding: google-genai
+    google:
+      genai:
+        api-key: ${AI_EMBEDDING}
+        chat:
+          options:
+            model: gemini-2.0-flash
+        embedding:
+          api-key: ${AI_EMBEDDING}
+          text:
+            options:
+              model: text-embedding-004
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        dimensions: 768
