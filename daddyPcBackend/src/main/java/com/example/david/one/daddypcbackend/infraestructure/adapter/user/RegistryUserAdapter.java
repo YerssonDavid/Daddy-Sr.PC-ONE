@@ -8,6 +8,7 @@ import com.example.david.one.daddypcbackend.infraestructure.persistence.user.rep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -29,5 +30,10 @@ public class RegistryUserAdapter implements IUserR {
     @Override
     public boolean existUserByEmail(String email) {
         return iUserRJPa.existsUserByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return iUserRJPa.findByEmail(email).map(UserMapper::toDomain);
     }
 }

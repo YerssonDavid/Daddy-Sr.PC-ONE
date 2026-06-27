@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -51,4 +52,7 @@ public class UserEntity {
     @NotBlank(message = "El interés no puede estar vacío")
     @Size(min = 2, max = 100, message = "El interés debe tener entre 2 y 100 caracteres")
     private String interest;
+
+    @Column(name = "created_at_user", nullable = false, updatable = false)
+    private LocalDateTime createdAtUser;
 }

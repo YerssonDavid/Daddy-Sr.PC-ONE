@@ -3,7 +3,6 @@ package com.example.david.one.daddypcbackend.infraestructure.mapper;
 import com.example.david.one.daddypcbackend.domain.model.User;
 import com.example.david.one.daddypcbackend.domain.valueObjects.*;
 import com.example.david.one.daddypcbackend.infraestructure.persistence.user.entity.UserEntity;
-import org.springframework.stereotype.Component;
 
 public class UserMapper {
 
@@ -20,6 +19,7 @@ public class UserMapper {
         entity.setApod(user.getApod().value());
         entity.setPassword(user.getPassword());
         entity.setInterest(user.getInterest().value());
+        entity.setCreatedAtUser(user.getCreatedAtUser());
 
         return entity;
     }
@@ -36,7 +36,8 @@ public class UserMapper {
             new EmailVO(entity.getEmail()),
             new ApodVO(entity.getApod()),
             entity.getPassword(),
-            new InterestVO(entity.getInterest())
+            new InterestVO(entity.getInterest()),
+            entity.getCreatedAtUser()
         );
     }
 }
