@@ -1,5 +1,8 @@
 package com.example.david.one.daddypcbackend.infraestructure.config.security;
 
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,6 +26,9 @@ public class Security {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/registry/user").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login/user").permitAll()
+                        //Set authorization for token
+                        .requestMatchers(HttpMethod.POST, "/ask").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/ai/free/user").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();
@@ -47,5 +53,14 @@ public class Security {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
+    }
+
+    //Config Chat Memory for agents
+    @Bean("principalAgent")
+    public ChatMemory chatMemoryPrincipalAgent(){
+        return MessageWindowChatMemory.builder()
+                .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .maxMessages(25)
+                .build();
     }
 }
