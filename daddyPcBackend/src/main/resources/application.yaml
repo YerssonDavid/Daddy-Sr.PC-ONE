@@ -22,14 +22,17 @@ spring:
 
   ai:
     model:
-      chat: google-genai
+      chat: openai
       embedding: google-genai
+    openai:
+      base-url: https://api.siliconflow.com/v1
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: MiniMaxAI/MiniMax-M3
+          temperature: 0.3
     google:
       genai:
-        api-key: ${AI_EMBEDDING}
-        chat:
-          options:
-            model: gemini-2.0-flash
         embedding:
           api-key: ${AI_EMBEDDING}
           text:
