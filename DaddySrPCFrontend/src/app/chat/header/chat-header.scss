@@ -14,6 +14,19 @@
   z-index: 5;
 }
 
+/* Lados balanceados: mantienen el bloque del agente centrado de forma real */
+.chat-header__side {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.chat-header__side--right {
+  justify-content: flex-end;
+}
+
 /* Menu button — solo en tablet/mobile */
 .chat-header__menu-btn {
   display: none;
@@ -43,11 +56,21 @@
   }
 }
 
-/* Agent identity */
+/* Agent identity — centrada en el header */
 .chat-header__agent {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.625rem;
+  gap: 1px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.chat-header__agent-id {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
 }
 
 .chat-header__avatar {
@@ -59,6 +82,7 @@
     height: 32px;
     border-radius: 50%;
     border: 2px solid var(--glass-border);
+    object-fit: cover;
   }
 }
 
@@ -74,29 +98,22 @@
   animation: glow-pulse 3s ease-in-out infinite;
 }
 
-.chat-header__agent-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
 .chat-header__agent-name {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--fs-small);
   color: var(--text-primary);
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .chat-header__agent-status {
   font-size: var(--fs-tiny);
   color: var(--text-muted);
   line-height: 1.2;
-}
-
-/* Spacer */
-.chat-header__spacer {
-  flex: 1;
+  white-space: nowrap;
 }
 
 /* Request counter (plan §5.2) */
@@ -137,4 +154,11 @@
   font-size: var(--fs-mono-sm);
   font-weight: 500;
   letter-spacing: 0.05em;
+}
+
+/* En pantallas estrechas se prioriza el avatar + nombre; el estado se oculta */
+@media (max-width: 480px) {
+  .chat-header__agent-status {
+    display: none;
+  }
 }

@@ -5,7 +5,6 @@ import {
   input,
   output,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ChatStore, Conversation } from '../state/chat-store';
 import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
@@ -13,7 +12,7 @@ import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
 @Component({
   selector: 'app-chat-sidebar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, ThemeToggle, TranslocoPipe],
+  imports: [ThemeToggle, TranslocoPipe],
   templateUrl: './chat-sidebar.html',
   styleUrl: './chat-sidebar.scss',
 })

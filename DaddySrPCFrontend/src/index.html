@@ -5,6 +5,17 @@
   <title>Daddy Sr.PC — Armá sin miedo a quemar nada</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    Seguridad: Content-Security-Policy + política de referrer.
+    `connect-src` incluye localhost/ws para no romper el SSE del backend ni el
+    live-reload en desarrollo. En PRODUCCIÓN conviene servir una CSP más estricta
+    (sin localhost, con nonces/hashes en vez de 'unsafe-inline') mediante
+    cabeceras HTTP del servidor/proxy, que es el lugar canónico para la CSP.
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' http://localhost:8080 http://localhost:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
   <meta name="description"
     content="Daddy Sr.PC es el agente de IA que te guía en cada paso del armado de tu PC: compatibilidad, ensamblaje, técnica a fondo y mejores prácticas. Preguntá sin miedo.">
 

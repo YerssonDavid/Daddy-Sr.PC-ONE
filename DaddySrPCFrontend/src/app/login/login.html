@@ -215,12 +215,24 @@
 
         </div>
 
+        @if (serverError()) {
+          <p class="lg-field__error lg-server-error" role="alert">
+            <svg viewBox="0 0 16 16" width="11" height="11" fill="currentColor" aria-hidden="true">
+              <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 10.5a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zm.75-3.75a.75.75 0 0 1-1.5 0V5.25a.75.75 0 0 1 1.5 0v2.5z"/>
+            </svg>
+            {{ serverError() | transloco }}
+            @if (!locked() && attemptsLeft() > 0) {
+              &nbsp;({{ attemptsLeft() }} {{ 'login.errors.attemptsLeft' | transloco }})
+            }
+          </p>
+        }
+
         <!-- Submit -->
         <button
           type="button"
           class="btn btn--primary lg-submit"
           (click)="submit()"
-          [disabled]="loading()"
+          [disabled]="loading() || locked()"
           [class.is-loading]="loading()"
         >
           @if (loading()) {

@@ -1,26 +1,83 @@
-import { Injectable, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { Level, MessageBlock } from './chat-store';
-import { TranslocoService } from '@jsverse/transloco';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Level } from './chat-store';
+import { environment } from '../../../environments/environment';
 
-const REPLY_KEYS = ['r1', 'r2'] as const;
+const BASE = environment.apiBaseUrl;
 
-/** Fachada HTTP mockeable — v1 usa respuestas simuladas del i18n (idéntico a live-demo) */
+/** Parsea líneas SSE (`data: <texto>\n\n`) y devuelve el texto puro. */
+function parseSseLine(line: string): string | null {
+  // Líneas en blanco (separan eventos) o comentarios SSE: se ignoran.
+  if (line === '' || line.startsWith(':')) return null;
+  // Campo `data:` — se conserva el contenido tal cual (incluido el espacio
+  // inicial del token). Hacerle trimStart era la causa de palabras pegadas
+  // ("conGPU") al recomponer el stream por chunks.
+  if (line.startsWith('data:')) return line.slice(5);
+  return line; // fallback de texto plano por chunks
+}
+
 @Injectable({ providedIn: 'root' })
 export class ChatApi {
-  private readonly transloco = inject(TranslocoService);
-
   /**
-   * Simula la respuesta del agente con un delay de 900ms.
-   * En producción se reemplazaría con un SSE/stream real.
+   * Envía el mensaje al backend y emite chunks de texto conforme llegan.
+   * El backend devuelve Flux<String> via text/event-stream.
    */
-  ask(input: { text: string; level: Level }): Observable<MessageBlock[]> {
-    const key = REPLY_KEYS[Math.floor(Math.random() * REPLY_KEYS.length)];
-    const replyText = this.transloco.translate(
-      `demo.replies.${input.level}.${key}`,
-    );
-    const blocks: MessageBlock[] = [{ kind: 'text', text: replyText }];
-    return of(blocks).pipe(delay(900));
+  ask(input: { text: string; level: Level; conversationId?: number }): Observable<string> {
+    const conversationId = input.conversationId ?? 1;
+
+    return new Observable<string>((observer) => {
+      const controller = new AbortController();
+
+      fetch(`${BASE}/ask?conversationId=${conversationId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
+        body: JSON.stringify({ question: input.text }),
+        signal: controller.signal,
+      })
+        .then((res) => {
+          if (!res.ok) {
+            observer.error(new Error(`HTTP ${res.status}`));
+            return;
+          }
+
+          const reader = res.body!.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          const pump = (): Promise<void> =>
+            reader.read().then(({ done, value }) => {
+              if (done) {
+                // Procesa lo que quede en el buffer
+                if (buffer.trim()) {
+                  const text = parseSseLine(buffer.trim());
+                  if (text) observer.next(text);
+                }
+                observer.complete();
+                return;
+              }
+
+              buffer += decoder.decode(value, { stream: true });
+              const lines = buffer.split('\n');
+              buffer = lines.pop() ?? ''; // la última línea puede estar incompleta
+
+              for (const line of lines) {
+                const text = parseSseLine(line);
+                if (text !== null) observer.next(text);
+              }
+
+              return pump();
+            });
+
+          pump().catch((err) => {
+            if (err?.name !== 'AbortError') observer.error(err);
+          });
+        })
+        .catch((err) => {
+          if (err?.name !== 'AbortError') observer.error(err);
+        });
+
+      // Cancelación cuando el subscriber se desuscribe
+      return () => controller.abort();
+    });
   }
 }

@@ -86,18 +86,56 @@ export class ChatStore {
     }
   }
 
-  appendAgent(blocks: MessageBlock[]): void {
+  /** Crea un mensaje agente vacío en streaming y devuelve su id. */
+  startAgentStream(): string {
+    const id = uuid();
     const msg: ChatMessage = {
-      id: uuid(),
+      id,
       role: 'agent',
-      blocks,
+      blocks: [{ kind: 'text', text: '' }],
       createdAt: Date.now(),
+      pending: true,
     };
     this.pushMessage(msg);
+    return id;
   }
 
-  setLevel(l: Level): void {
-    this.level.set(l);
+  /** Acumula un chunk de texto sobre el mensaje en streaming. */
+  appendChunk(id: string, chunk: string): void {
+    const activeId = this._activeId();
+    if (!activeId) return;
+    this._conversations.update((cs) =>
+      cs.map((c) => {
+        if (c.id !== activeId) return c;
+        return {
+          ...c,
+          messages: c.messages.map((m) => {
+            if (m.id !== id) return m;
+            const prev = m.blocks[0] as { kind: 'text'; text: string };
+            return { ...m, blocks: [{ kind: 'text' as const, text: prev.text + chunk }] };
+          }),
+        };
+      }),
+    );
+  }
+
+  /** Marca el mensaje como finalizado y persiste. */
+  finalizeStream(id: string): void {
+    const activeId = this._activeId();
+    if (!activeId) return;
+    this._conversations.update((cs) =>
+      cs.map((c) => {
+        if (c.id !== activeId) return c;
+        return {
+          ...c,
+          messages: c.messages.map((m) =>
+            m.id === id ? { ...m, pending: false } : m,
+          ),
+          updatedAt: Date.now(),
+        };
+      }),
+    );
+    this.persist();
   }
 
   deleteConversation(id: string): void {

@@ -2,12 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { Nav } from '../landing/nav/nav';
 import { SiteFooter } from '../landing/site-footer/site-footer';
+import { AuthService } from '../core/auth.service';
 
 const EMAIL_RE  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_UPPER  = /[A-Z]/;
@@ -24,6 +27,9 @@ export type Interest = 'gamer' | 'creator' | 'overclocker' | 'aprendiz';
   styleUrl: './register.scss',
 })
 export class Register {
+  private readonly auth   = inject(AuthService);
+  private readonly router = inject(Router);
+
   protected readonly TOTAL = 3;
   protected readonly STEPS: Step[] = [1, 2, 3];
 
@@ -44,8 +50,9 @@ export class Register {
   protected readonly interest = signal<Interest | ''>('');
 
   protected readonly dirty   = signal(new Set<string>());
-  protected readonly loading = signal(false);
-  protected readonly success = signal(false);
+  protected readonly loading    = signal(false);
+  protected readonly success    = signal(false);
+  protected readonly serverError = signal<string | null>(null);
 
   /* ---- Validation: Step 1 ---- */
   protected readonly nameError = computed(() => {
@@ -147,10 +154,28 @@ export class Register {
   submit(): void {
     this.dirty.update(d => new Set([...d, 'interest']));
     if (!this.canStep3() || this.loading()) return;
+
     this.loading.set(true);
-    setTimeout(() => {
-      this.loading.set(false);
-      this.success.set(true);
-    }, 1400);
+    this.serverError.set(null);
+
+    this.auth.register({
+      name:     this.name().trim(),
+      surname:  this.surname().trim(),
+      email:    this.email().trim(),
+      apod:     this.apod().trim(),
+      password: this.password(),
+      interest: this.interest() as string,
+    }).subscribe({
+      next: () => {
+        this.loading.set(false);
+        this.success.set(true);
+        setTimeout(() => this.router.navigate(['/login']), 2000);
+      },
+      error: (err) => {
+        this.loading.set(false);
+        const msg = err?.error?.message ?? err?.message ?? 'register.errors.serverError';
+        this.serverError.set(msg);
+      },
+    });
   }
 }

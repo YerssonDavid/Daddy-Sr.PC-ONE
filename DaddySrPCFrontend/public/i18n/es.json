@@ -53,10 +53,22 @@
   "howItWorks": {
     "eyebrow": "// Cómo funciona",
     "heading": "Del taller a la respuesta, en cuatro pasos.",
-    "step1": { "title": "Pregunta lo que quieras", "body": "Sin filtros, sin tabú. Técnica de novato o debate de overclock, Daddy está listo." },
-    "step2": { "title": "El agente responde con contexto", "body": "Nada de templates. Explicaciones precisas, datos técnicos y advertencias de seguridad donde hagan falta." },
-    "step3": { "title": "Tienes 15 consultas gratis", "body": "Pruébalo sin registrarte. El contador queda visible y baja con cada pregunta." },
-    "step4": { "title": "Regístrate para seguir", "body": "Gratis con 15 consultas por día, o continúa sin límites creando tu cuenta." }
+    "step1": {
+      "title": "Pregunta lo que quieras",
+      "body": "Sin filtros, sin tabú. Técnica de novato o debate de overclock, Daddy está listo."
+    },
+    "step2": {
+      "title": "El agente responde con contexto",
+      "body": "Nada de templates. Explicaciones precisas, datos técnicos y advertencias de seguridad donde hagan falta."
+    },
+    "step3": {
+      "title": "Tienes 15 consultas gratis",
+      "body": "Pruébalo sin registrarte. El contador queda visible y baja con cada pregunta."
+    },
+    "step4": {
+      "title": "Regístrate para seguir",
+      "body": "Gratis con 15 consultas por día, o continúa sin límites creando tu cuenta."
+    }
   },
   "demo": {
     "eyebrow": "// Pruébalo en vivo",
@@ -217,7 +229,8 @@
     "settingsRestore": "Restaurar",
     "settingsAppearance": "Apariencia",
     "settingsLight": "Claro",
-    "settingsDark": "Oscuro"
+    "settingsDark": "Oscuro",
+    "errorConnect": "Hubo un error al conectar con Daddy. Inténtalo de nuevo."
   },
   "login": {
     "eyebrow": "// Accede al taller",
@@ -241,7 +254,10 @@
     "errors": {
       "emailRequired": "El correo es requerido",
       "emailInvalid": "Correo no válido",
-      "passwordRequired": "La contraseña es requerida"
+      "passwordRequired": "La contraseña es requerida",
+      "serverError": "Credenciales incorrectas",
+      "tooManyAttempts": "Demasiados intentos fallidos. Recarga la página para intentarlo de nuevo.",
+      "attemptsLeft": "intentos restantes"
     },
     "successTitle": "¡Bienvenido de vuelta!",
     "successBody": "Redirigiendo al taller…",

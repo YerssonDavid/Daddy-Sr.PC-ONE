@@ -53,10 +53,22 @@
   "howItWorks": {
     "eyebrow": "// Como funciona",
     "heading": "Da oficina à resposta, em quatro etapas.",
-    "step1": { "title": "Pergunte o que quiser", "body": "Sem filtros, sem tabu. Técnica de iniciante ou debate de overclock — o Daddy está pronto." },
-    "step2": { "title": "O agente responde com contexto", "body": "Sem templates. Explicações precisas, dados técnicos e avisos de segurança quando necessário." },
-    "step3": { "title": "Você tem 15 consultas grátis", "body": "Experimente sem se cadastrar. O contador fica visível e diminui com cada pergunta." },
-    "step4": { "title": "Cadastre-se para continuar", "body": "Grátis com 15 consultas por dia, ou continue sem limites criando sua conta." }
+    "step1": {
+      "title": "Pergunte o que quiser",
+      "body": "Sem filtros, sem tabu. Técnica de iniciante ou debate de overclock — o Daddy está pronto."
+    },
+    "step2": {
+      "title": "O agente responde com contexto",
+      "body": "Sem templates. Explicações precisas, dados técnicos e avisos de segurança quando necessário."
+    },
+    "step3": {
+      "title": "Você tem 15 consultas grátis",
+      "body": "Experimente sem se cadastrar. O contador fica visível e diminui com cada pergunta."
+    },
+    "step4": {
+      "title": "Cadastre-se para continuar",
+      "body": "Grátis com 15 consultas por dia, ou continue sem limites criando sua conta."
+    }
   },
   "demo": {
     "eyebrow": "// Teste ao vivo",
@@ -217,7 +229,8 @@
     "settingsRestore": "Restaurar",
     "settingsAppearance": "Aparência",
     "settingsLight": "Claro",
-    "settingsDark": "Escuro"
+    "settingsDark": "Escuro",
+    "errorConnect": "Ocorreu um erro ao conectar com o Daddy. Tente novamente."
   },
   "login": {
     "eyebrow": "// De volta ao ateliê",
@@ -241,7 +254,10 @@
     "errors": {
       "emailRequired": "O e-mail é obrigatório",
       "emailInvalid": "E-mail inválido",
-      "passwordRequired": "A senha é obrigatória"
+      "passwordRequired": "A senha é obrigatória",
+      "serverError": "Credenciais incorretas",
+      "tooManyAttempts": "Muitas tentativas falhadas. Recarregue a página para tentar novamente.",
+      "attemptsLeft": "tentativas restantes"
     },
     "successTitle": "Bem-vindo de volta!",
     "successBody": "Redirecionando para o ateliê…",

@@ -53,10 +53,22 @@
   "howItWorks": {
     "eyebrow": "// How it works",
     "heading": "From the workshop to the answer, in four steps.",
-    "step1": { "title": "Ask anything you want", "body": "No filters, no taboos. Beginner technique or overclock debate — Daddy is ready." },
-    "step2": { "title": "The agent replies with context", "body": "No templates. Precise explanations, technical data and safety warnings where needed." },
-    "step3": { "title": "You have 15 free queries", "body": "Try it without signing up. The counter stays visible and drops with each question." },
-    "step4": { "title": "Sign up to keep going", "body": "Free with 15 queries per day, or continue without limits by creating your account." }
+    "step1": {
+      "title": "Ask anything you want",
+      "body": "No filters, no taboos. Beginner technique or overclock debate — Daddy is ready."
+    },
+    "step2": {
+      "title": "The agent replies with context",
+      "body": "No templates. Precise explanations, technical data and safety warnings where needed."
+    },
+    "step3": {
+      "title": "You have 15 free queries",
+      "body": "Try it without signing up. The counter stays visible and drops with each question."
+    },
+    "step4": {
+      "title": "Sign up to keep going",
+      "body": "Free with 15 queries per day, or continue without limits by creating your account."
+    }
   },
   "demo": {
     "eyebrow": "// Try it live",
@@ -217,7 +229,8 @@
     "settingsRestore": "Restore",
     "settingsAppearance": "Appearance",
     "settingsLight": "Light",
-    "settingsDark": "Dark"
+    "settingsDark": "Dark",
+    "errorConnect": "There was an error connecting to Daddy. Please try again."
   },
   "login": {
     "eyebrow": "// Back to the workshop",
@@ -241,7 +254,10 @@
     "errors": {
       "emailRequired": "Email is required",
       "emailInvalid": "Invalid email address",
-      "passwordRequired": "Password is required"
+      "passwordRequired": "Password is required",
+      "serverError": "Invalid credentials",
+      "tooManyAttempts": "Too many failed attempts. Reload the page to try again.",
+      "attemptsLeft": "attempts left"
     },
     "successTitle": "Welcome back!",
     "successBody": "Redirecting to the workshop…",
