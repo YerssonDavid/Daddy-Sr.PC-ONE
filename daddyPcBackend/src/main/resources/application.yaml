@@ -42,3 +42,6 @@ spring:
       pgvector:
         initialize-schema: true
         dimensions: 768
+
+tavily:
+  api-key: ${TAVILY_API}
