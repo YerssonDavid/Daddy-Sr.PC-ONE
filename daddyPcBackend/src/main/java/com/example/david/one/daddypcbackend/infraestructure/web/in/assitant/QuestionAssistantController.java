@@ -2,7 +2,7 @@ package com.example.david.one.daddypcbackend.infraestructure.web.in.assitant;
 
 import com.example.david.one.daddypcbackend.application.command.assistant.QuestionToAssistantCommand;
 import com.example.david.one.daddypcbackend.application.port.in.assistant.IAssistantAI;
-import com.example.david.one.daddypcbackend.infraestructure.web.in.assitant.dto.QuestionAssistantRequest;
+import com.example.david.one.daddypcbackend.infraestructure.dto.asistant.QuestionAssistantRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
