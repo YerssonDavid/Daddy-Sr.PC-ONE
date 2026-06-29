@@ -1,0 +1,23 @@
+<section id="howit" class="howit">
+  <div class="container">
+    <header class="howit__head">
+      <p class="eyebrow" appReveal>{{ 'howItWorks.eyebrow' | transloco }}</p>
+      <h2 appReveal [revealDelay]="60">{{ 'howItWorks.heading' | transloco }}</h2>
+    </header>
+
+    <ol class="howit__steps">
+      @for (s of steps; track s.n; let last = $last) {
+        <li class="step" appReveal [revealDelay]="$index * 90">
+          <span class="step__n mono">{{ s.n }}</span>
+          <div class="step__content">
+            <h3 class="step__title">{{ 'howItWorks.' + s.key + '.title' | transloco }}</h3>
+            <p class="step__body">{{ 'howItWorks.' + s.key + '.body' | transloco }}</p>
+          </div>
+          @if (!last) {
+            <span class="step__trace" aria-hidden="true"></span>
+          }
+        </li>
+      }
+    </ol>
+  </div>
+</section>

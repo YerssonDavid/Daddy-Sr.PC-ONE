@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+/* Enlace de salto accesible (plan §8) */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  background: var(--solder);
+  color: var(--solder-ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  transition: top var(--t-fast) var(--ease);
+}
+.skip-link:focus {
+  top: 1rem;
+}

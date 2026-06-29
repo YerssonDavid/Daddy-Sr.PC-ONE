@@ -1,0 +1,266 @@
+{
+  "nav": {
+    "features": "Recursos",
+    "howItWorks": "Como funciona",
+    "tryIt": "Testar",
+    "login": "Entrar",
+    "register": "Cadastrar",
+    "openMenu": "Abrir menu",
+    "lightMode": "Ativar modo claro",
+    "darkMode": "Ativar modo escuro"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English",
+    "pt": "Português",
+    "select": "Selecionar idioma"
+  },
+  "hero": {
+    "eyebrow": "// O mentor da oficina",
+    "headlineLine1": "Monte sem medo",
+    "headlineLine2": "de queimar nada.",
+    "sub": "Deixa o Daddy te guiar em cada etapa da montagem. <strong>O Daddy responde tudo</strong>.",
+    "cta": "Começar agora",
+    "ctaSecondary": "Como funciona",
+    "free": "15 consultas grátis · sem cadastro",
+    "demo": {
+      "ariaLabel": "Demonstração de conversa com o Daddy Sr.PC sobre compatibilidade de GPU.",
+      "question": "Uma RTX 4070 cabe num gabinete mini-ITX?",
+      "answer": "Depende do comprimento. A maioria das RTX 4070 mede 240–300mm. No mini-ITX, confira o \"max GPU length\" do seu gabinete. Qual é o seu? Te digo se cabe.",
+      "placeholder": "Escreve sua dúvida…"
+    }
+  },
+  "features": {
+    "eyebrow": "// O que resolve",
+    "heading": "Quatro domínios, um único agente que os conecta.",
+    "compat": {
+      "title": "Compatibilidade de componentes",
+      "body": "Verifique socket, RAM, watts e refrigeração. O Daddy analisa seu combo e te diz se funciona."
+    },
+    "build": {
+      "title": "Guias de montagem passo a passo",
+      "body": "Do socket até a pasta térmica. Procedimentos claros para sua primeira montagem ou upgrade."
+    },
+    "tech": {
+      "title": "Detalhes técnicos aprofundados",
+      "body": "TDP, cache L3, velocidades, arquiteturas. Tudo que você precisa saber sobre cada chip."
+    },
+    "best": {
+      "title": "Melhores práticas",
+      "body": "Cooling, gerenciamento de cabos, ventilação e manutenção. Cuide do seu setup do jeito que o Daddy ensina."
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "// Como funciona",
+    "heading": "Da oficina à resposta, em quatro etapas.",
+    "step1": {
+      "title": "Pergunte o que quiser",
+      "body": "Sem filtros, sem tabu. Técnica de iniciante ou debate de overclock — o Daddy está pronto."
+    },
+    "step2": {
+      "title": "O agente responde com contexto",
+      "body": "Sem templates. Explicações precisas, dados técnicos e avisos de segurança quando necessário."
+    },
+    "step3": {
+      "title": "Você tem 15 consultas grátis",
+      "body": "Experimente sem se cadastrar. O contador fica visível e diminui com cada pergunta."
+    },
+    "step4": {
+      "title": "Cadastre-se para continuar",
+      "body": "Grátis com 15 consultas por dia, ou continue sem limites criando sua conta."
+    }
+  },
+  "demo": {
+    "eyebrow": "// Teste ao vivo",
+    "heading": "Seu primeiro contato com o Daddy. Sem cadastro.",
+    "sub": "Essas 15 consultas são reais. O contador diminui com cada pergunta — quando chegar a zero, te convidamos a continuar.",
+    "welcome": "Olá! Sou o Daddy. Me pergunta o que quiser sobre o seu PC: compatibilidade, montagem, qualquer coisa. Você tem 15 consultas para testar.",
+    "levels": {
+      "novato": "Primeira montagem",
+      "intermedio": "Intermediário",
+      "avanzado": "Avançado"
+    },
+    "levelAriaLabel": "Nível de resposta",
+    "inputLabel": "Escreva sua dúvida",
+    "placeholder": "Ex.: AM5 usa DDR4 ou DDR5?",
+    "sendAriaLabel": "Enviar mensagem",
+    "typingAriaLabel": "Daddy está digitando",
+    "bannerSoft": "Restam {{ count }} consultas grátis. Cadastre-se para continuar sem limites.",
+    "bannerStrong": "Resta 1 consulta. Crie sua conta para continuar.",
+    "gate": {
+      "eyebrow": "// Você atingiu o limite do teste",
+      "title": "Você fez 15 perguntas. Muito bem.",
+      "text": "Quer continuar? Cadastre-se grátis:",
+      "feature1": "15 perguntas por dia",
+      "feature2": "Histórico de conversas",
+      "feature3": "Respostas no seu nível",
+      "cta": "Criar conta gratuita",
+      "login": "Já tenho uma conta",
+      "fine": "Sem surpresas. A maioria usa o plano gratuito."
+    },
+    "replies": {
+      "novato": {
+        "r1": "Boa pergunta. De forma simples: certifique-se de que o socket do CPU bate com o da placa-mãe, que a RAM é do tipo correto (DDR4 ou DDR5) e que a fonte tem watts suficientes. Me diz os componentes e eu reviso um por um.",
+        "r2": "Relaxa, é mais fácil do que parece. O importante é ir por partes e nunca forçar nada ao encaixar. Quer que eu te explique passo a passo?"
+      },
+      "intermedio": {
+        "r1": "Depende do combo. Verifique três coisas: socket (AM5/LGA1700), versão da RAM (AM5 é DDR5 obrigatoriamente) e TDP combinado vs sua fonte. Me passa os modelos e confirmo se tem gargalo.",
+        "r2": "Nesse caso, confira o PCIe e o comprimento da GPU contra o espaço do gabinete. Me diz o modelo do case e da placa de vídeo."
+      },
+      "avanzado": {
+        "r1": "Entrando em detalhes: com um X3D, priorize frequência de RAM estável (EXPO 6000 CL30 é o sweet spot no AM5) antes de latências agressivas. O gargalo costuma estar no infinity fabric, não no núcleo. Qual kit você está considerando?",
+        "r2": "No aspecto térmico, o TDP nominal mente: olha o PPT real sob carga sustentada e dimensiona o cooler com margem. Posso te dar números concretos se me disser o chip."
+      }
+    }
+  },
+  "closing": {
+    "eyebrow": "// Monte com confiança",
+    "titleStart": "Converse com o Daddy ",
+    "titleEnd": " agora.",
+    "sub": "Sem medo de queimar nada. O mentor da oficina está esperando sua próxima pergunta.",
+    "cta": "Começar agora"
+  },
+  "footer": {
+    "features": "Recursos",
+    "howItWorks": "Como funciona",
+    "tryIt": "Testar",
+    "madeWith": "Feito com",
+    "madeBy": "por David222"
+  },
+  "register": {
+    "eyebrow": "// Crie sua conta",
+    "brandTagline": "Seu ateliê de montagem pessoal.",
+    "feat1": "15 consultas por dia, grátis",
+    "feat2": "Histórico completo de conversas",
+    "feat3": "Respostas no seu nível",
+    "feat4": "Compatibilidade, montagem e técnica",
+    "stepOf": "Etapa {{ step }} de {{ total }}",
+    "steps": {
+      "s1": "Identidade",
+      "s2": "Acesso",
+      "s3": "Perfil"
+    },
+    "step1": {
+      "title": "Como te chamamos?",
+      "sub": "Seu nome e apelido no ateliê."
+    },
+    "step2": {
+      "title": "Configure seu acesso.",
+      "sub": "E-mail e senha para entrar."
+    },
+    "step3": {
+      "title": "Qual é o seu mundo?",
+      "sub": "Escolha o perfil que mais combina com você."
+    },
+    "nameLabel": "Nome",
+    "namePlaceholder": "Seu nome",
+    "surnameLabel": "Sobrenome",
+    "surnamePlaceholder": "Seu sobrenome",
+    "apodLabel": "Apelido",
+    "apodPlaceholder": "Como te chamamos aqui",
+    "apodHint": "Mínimo 3 caracteres. Este será seu nome no chat.",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "email@exemplo.com",
+    "passwordLabel": "Senha",
+    "passwordPlaceholder": "Mínimo 8 caracteres",
+    "showPassword": "Mostrar senha",
+    "hidePassword": "Ocultar senha",
+    "pwdHints": {
+      "length": "Mínimo 8 caracteres",
+      "upper": "Pelo menos 1 letra maiúscula",
+      "symbol": "Pelo menos 1 símbolo"
+    },
+    "interests": {
+      "gamer": "Gamer",
+      "gamerDesc": "Gaming e builds de alto desempenho",
+      "creator": "Criador",
+      "creatorDesc": "Edição, design e workstations",
+      "overclocker": "Enthusiast",
+      "overclockerDesc": "Overclocking e desempenho extremo",
+      "aprendiz": "Aprendiz",
+      "aprendizDesc": "Novo no mundo do PC"
+    },
+    "next": "Próximo",
+    "back": "Voltar",
+    "submit": "Criar conta gratuita",
+    "submitting": "Criando conta…",
+    "loginPrompt": "Já tem uma conta?",
+    "loginCta": "Entrar",
+    "errors": {
+      "nameRequired": "O nome é obrigatório",
+      "surnameRequired": "O sobrenome é obrigatório",
+      "apodRequired": "O apelido é obrigatório",
+      "apodMinLength": "O apelido deve ter pelo menos 3 caracteres",
+      "emailRequired": "O e-mail é obrigatório",
+      "emailInvalid": "E-mail inválido",
+      "passwordRequired": "A senha é obrigatória",
+      "passwordMinLength": "Mínimo 8 caracteres",
+      "passwordUppercase": "Inclua pelo menos uma maiúscula",
+      "passwordSymbol": "Inclua pelo menos um símbolo",
+      "interestRequired": "Escolha um perfil para continuar"
+    },
+    "successTitle": "Você está dentro!",
+    "successBody": "Bem-vindo ao ateliê. Monte com o Daddy sem limites.",
+    "successCta": "Ir para o chat"
+  },
+  "chat": {
+    "newChat": "Novo chat",
+    "recent": "Recentes",
+    "settingsBtn": "Configurações",
+    "agentStatus": "Online · Especialista em PC",
+    "placeholder": "Pergunte ao Daddy… (Enter para enviar)",
+    "sendEnterHint": "Enter envia · Shift + Enter nova linha",
+    "emptyTitle": "Olá! Sou o Daddy.",
+    "emptySub": "Me pergunte qualquer coisa sobre o seu PC: compatibilidade, montagem, técnica — tudo.",
+    "suggestion1": "Uma RTX 4070 cabe num mini-ITX?",
+    "suggestion2": "AM5 usa DDR4 ou DDR5?",
+    "suggestion3": "Quantos watts preciso para um Ryzen 9?",
+    "suggestion4": "Como aplicar pasta térmica?",
+    "noticeRemaining": "Restam {{ count }} de {{ total }} consultas neste minuto.",
+    "noticeLast": "Resta 1 consulta neste minuto. Reinicia automaticamente.",
+    "limitEyebrow": "// Limite atingido",
+    "limitTitle": "Você usou suas {{ total }} consultas do minuto",
+    "limitDesc": "O contador reinicia automaticamente a cada minuto. Em breve você poderá continuar.",
+    "limitClose": "Entendi",
+    "settingsEyebrow": "// Configuração",
+    "settingsTitle": "Configurações",
+    "settingsLanguage": "Idioma",
+    "settingsColor": "Cor principal",
+    "settingsRestore": "Restaurar",
+    "settingsAppearance": "Aparência",
+    "settingsLight": "Claro",
+    "settingsDark": "Escuro",
+    "errorConnect": "Ocorreu um erro ao conectar com o Daddy. Tente novamente."
+  },
+  "login": {
+    "eyebrow": "// De volta ao ateliê",
+    "brandTagline": "Seu ponto de entrada para a montagem.",
+    "feat1": "15 consultas por dia, grátis",
+    "feat2": "Histórico completo de conversas",
+    "feat3": "Respostas no seu nível",
+    "title": "Bem-vindo de volta.",
+    "sub": "Entre e continue montando de onde parou.",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "email@exemplo.com",
+    "passwordLabel": "Senha",
+    "passwordPlaceholder": "Sua senha",
+    "showPassword": "Mostrar senha",
+    "hidePassword": "Ocultar senha",
+    "forgot": "Esqueceu sua senha?",
+    "submit": "Entrar",
+    "submitting": "Entrando…",
+    "registerPrompt": "Não tem uma conta?",
+    "registerCta": "Cadastre-se grátis",
+    "errors": {
+      "emailRequired": "O e-mail é obrigatório",
+      "emailInvalid": "E-mail inválido",
+      "passwordRequired": "A senha é obrigatória",
+      "serverError": "Credenciais incorretas",
+      "tooManyAttempts": "Muitas tentativas falhadas. Recarregue a página para tentar novamente.",
+      "attemptsLeft": "tentativas restantes"
+    },
+    "successTitle": "Bem-vindo de volta!",
+    "successBody": "Redirecionando para o ateliê…",
+    "successCta": "Ir para o chat"
+  }
+}

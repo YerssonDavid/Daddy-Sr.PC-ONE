@@ -1,0 +1,78 @@
+<article
+  class="bubble"
+  [class.bubble--user]="message().role === 'user'"
+  [class.bubble--agent]="message().role === 'agent'"
+>
+  <!-- Avatar del agente -->
+  @if (message().role === 'agent') {
+    <div class="bubble__avatar" aria-hidden="true">
+      <img src="logo.png" alt="" width="28" height="28" />
+    </div>
+  }
+
+  <div class="bubble__body">
+    @for (block of message().blocks; track $index) {
+      @switch (block.kind) {
+        @case ('text') {
+          @if (message().role === 'agent') {
+            <markdown class="bubble__md" [data]="block.text | markdown" />
+          } @else {
+            <p class="bubble__text">{{ block.text }}</p>
+          }
+        }
+        @case ('table') {
+          <app-spec-table [data]="$any(block)" />
+        }
+        @case ('admonition') {
+          <app-admonition [data]="$any(block)" />
+        }
+        @case ('code') {
+          <app-code-block [data]="$any(block)" />
+        }
+      }
+    }
+
+    @if (message().role === 'agent' && message().pending) {
+      <div class="bubble__writing" role="status" aria-label="Daddy está escribiendo">
+        <span class="bubble__writing-dot"></span>
+        <span class="bubble__writing-dot"></span>
+        <span class="bubble__writing-dot"></span>
+      </div>
+    }
+
+    <!-- Footer: hora + botón de copiar (solo en mensajes del agente) -->
+    @if (message().role === 'agent') {
+      <div class="bubble__footer">
+        <time class="bubble__time" [attr.datetime]="message().createdAt">
+          {{ message().createdAt | date: 'HH:mm' }}
+        </time>
+        @if (!message().pending) {
+          <button
+            type="button"
+            class="bubble__copy"
+            [class.is-copied]="copied()"
+            (click)="copy()"
+            [attr.aria-label]="copied() ? 'Mensaje copiado' : 'Copiar mensaje'"
+          >
+            @if (copied()) {
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Copiado</span>
+            } @else {
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="1.6"/>
+              </svg>
+              <span>Copiar</span>
+            }
+          </button>
+        }
+      </div>
+    } @else {
+      <time class="bubble__time bubble__time--user" [attr.datetime]="message().createdAt">
+        {{ message().createdAt | date: 'HH:mm' }}
+      </time>
+    }
+  </div>
+</article>

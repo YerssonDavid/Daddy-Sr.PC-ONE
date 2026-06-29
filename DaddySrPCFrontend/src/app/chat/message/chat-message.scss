@@ -1,0 +1,373 @@
+/* Burbujas de mensaje — doc §7.2, §3 (glassmorphism) */
+.bubble {
+  display: flex;
+  gap: 0.625rem;
+  align-items: flex-start;
+  animation: fade-up 0.4s var(--ease) both;
+  max-width: var(--bubble-max, 720px);
+  width: fit-content;
+}
+
+/* Burbuja del agente: izquierda, glass */
+.bubble--agent {
+  align-self: flex-start;
+  margin-right: auto;
+
+  .bubble__body {
+    background: var(--bubble-agent-bg, var(--glass-surface));
+    border: 1px solid var(--bubble-agent-border, var(--glass-border));
+    border-bottom-left-radius: 4px;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+  }
+}
+
+/* Burbuja del usuario: derecha, trace tint */
+.bubble--user {
+  flex-direction: row-reverse;
+  align-self: flex-end;
+  margin-left: auto;
+
+  .bubble__body {
+    background: var(--bubble-user-bg, var(--trace-tint));
+    border: 1px solid var(--bubble-user-border, color-mix(in srgb, var(--trace) 35%, transparent));
+    border-bottom-right-radius: 4px;
+  }
+
+  .bubble__text {
+    color: var(--text-primary);
+  }
+}
+
+/* Avatar del agente */
+.bubble__avatar {
+  flex-shrink: 0;
+  margin-top: 4px;
+
+  img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--glass-border);
+  }
+}
+
+/* Cuerpo de la burbuja */
+.bubble__body {
+  padding: 0.75rem 1rem;
+  border-radius: var(--bubble-radius, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.bubble__text {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+  word-break: break-word;
+}
+
+.bubble__writing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  min-height: 1rem;
+  margin-top: 0.15rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--trace) 8%, transparent);
+}
+
+.bubble__writing-dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--trace);
+  animation: writing-pulse 1.15s ease-in-out infinite;
+
+  &:nth-child(2) {
+    animation-delay: 0.14s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.28s;
+  }
+}
+
+@keyframes writing-pulse {
+  0%, 70%, 100% {
+    transform: translateY(0) scale(0.85);
+    opacity: 0.45;
+  }
+
+  35% {
+    transform: translateY(-4px) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble__writing-dot {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+/* ---- Contenido Markdown del agente ---- */
+.bubble__md {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+
+  /* El HTML inyectado con [innerHTML] no recibe los atributos de encapsulación
+     (_ngcontent), por eso sus descendientes se estilizan con ::ng-deep. Queda
+     acotado a .bubble__md, así que no se filtra a otros componentes. */
+  ::ng-deep {
+    p:not(:first-child),
+    h1:not(:first-child),
+    h2:not(:first-child),
+    h3:not(:first-child),
+    h4:not(:first-child),
+    h5:not(:first-child),
+    h6:not(:first-child),
+    ul:not(:first-child),
+    ol:not(:first-child),
+    pre:not(:first-child),
+    table:not(:first-child),
+    .md-p:not(:first-child),
+    .md-h:not(:first-child),
+    .md-ul:not(:first-child),
+    .md-ol:not(:first-child),
+    .md-pre:not(:first-child),
+    .md-table-wrap:not(:first-child) {
+      margin-top: 0.5rem;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .md-h {
+      font-family: var(--font-display);
+      font-weight: 600;
+      line-height: 1.3;
+      font-size: var(--fs-body);
+      color: var(--text-primary);
+    }
+
+    h1,
+    h2 {
+      font-size: 1.05em;
+    }
+
+    strong {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    em {
+      font-style: italic;
+    }
+
+    ul,
+    ol,
+    .md-ul,
+    .md-ol {
+      margin-bottom: 0;
+      padding-left: 1.4rem;
+    }
+    ul,
+    .md-ul {
+      list-style: disc;
+    }
+    ol,
+    .md-ol {
+      list-style: decimal;
+    }
+    li {
+      margin: 0.15rem 0;
+    }
+    li::marker {
+      color: var(--text-muted);
+    }
+
+    a {
+      color: var(--trace);
+      text-decoration: underline;
+    }
+
+    code:not(pre code),
+    .md-code {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      background: var(--bg-elevated);
+      padding: 0.1em 0.35em;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--glass-border);
+      word-break: break-word;
+    }
+
+    pre,
+    .md-pre {
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      background: color-mix(in srgb, var(--bg-surface) 80%, transparent);
+      border: 1px solid var(--glass-border);
+      overflow-x: auto;
+
+      code {
+        font-family: var(--font-mono);
+        font-size: var(--fs-mono-sm);
+        color: var(--text-primary);
+        white-space: pre;
+      }
+    }
+
+    hr,
+    .md-hr {
+      border: none;
+      border-top: 1px solid var(--glass-border);
+      margin: 0.6rem 0;
+    }
+
+    table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: 0.92em;
+    }
+
+    table th,
+    table td {
+      padding: 0.55rem 0.7rem;
+      border-bottom: 1px solid var(--glass-border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    table th {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--text-primary);
+      background: color-mix(in srgb, var(--trace) 10%, transparent);
+      white-space: nowrap;
+    }
+
+    table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .md-table-wrap {
+      max-width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      background: color-mix(in srgb, var(--bg-surface) 68%, transparent);
+    }
+
+    .md-table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: 0.92em;
+    }
+
+    .md-table th,
+    .md-table td {
+      padding: 0.55rem 0.7rem;
+      border-bottom: 1px solid var(--glass-border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .md-table th {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--text-primary);
+      background: color-mix(in srgb, var(--trace) 10%, transparent);
+      white-space: nowrap;
+    }
+
+    .md-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+/* ---- Footer: hora + copiar ---- */
+.bubble__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.bubble__time {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-sm);
+  color: var(--text-muted);
+}
+
+.bubble__time--user {
+  align-self: flex-end;
+  margin-top: 0.25rem;
+}
+
+.bubble__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-sm);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease),
+    opacity var(--t-fast) var(--ease);
+
+  &:hover {
+    color: var(--trace);
+    border-color: var(--glass-border);
+    background: var(--bg-elevated);
+  }
+
+  &.is-copied {
+    color: var(--solder);
+    opacity: 1;
+  }
+}
+
+/* Aparece al pasar el cursor por la burbuja o al enfocar con teclado */
+.bubble--agent:hover .bubble__copy,
+.bubble__copy:focus-visible {
+  opacity: 1;
+}
+
+/* En dispositivos táctiles (sin hover) el botón queda siempre visible */
+@media (hover: none) {
+  .bubble__copy {
+    opacity: 1;
+  }
+}

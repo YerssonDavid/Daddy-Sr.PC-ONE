@@ -1,0 +1,30 @@
+<section
+  #scroller
+  class="message-list"
+  aria-label="Conversación"
+  aria-live="polite"
+  aria-relevant="additions"
+>
+  @if (messages().length === 0) {
+    <!-- Empty state -->
+    <div class="message-list__empty">
+      <img src="logo.png" alt="Daddy Sr.PC" width="56" height="56" class="message-list__empty-logo" />
+      <h2 class="message-list__empty-title">{{ 'chat.emptyTitle' | transloco }}</h2>
+      <p class="message-list__empty-sub">{{ 'chat.emptySub' | transloco }}</p>
+      <!-- Quick-start suggestions -->
+      <div class="message-list__suggestions" role="list">
+        @for (key of suggestionKeys; track key) {
+          <button type="button" class="message-list__suggestion" role="listitem">
+            {{ key | transloco }}
+          </button>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="message-list__inner">
+      @for (msg of messages(); track msg.id) {
+        <app-chat-message [message]="msg" />
+      }
+    </div>
+  }
+</section>

@@ -1,0 +1,63 @@
+<section id="hero" class="hero">
+  <div class="container hero__grid">
+    <!-- Copy -->
+    <div class="hero__copy">
+      <p class="eyebrow" appReveal>{{ 'hero.eyebrow' | transloco }}</p>
+      <h1 appReveal [revealDelay]="60">
+        {{ 'hero.headlineLine1' | transloco }}<br />{{ 'hero.headlineLine2' | transloco }}
+      </h1>
+      <p
+        class="hero__sub"
+        appReveal
+        [revealDelay]="120"
+        [innerHTML]="'hero.sub' | transloco"
+      ></p>
+      <div class="hero__actions" appReveal [revealDelay]="180">
+        <a class="btn btn--primary" href="#demo">{{ 'hero.cta' | transloco }}</a>
+        <a class="btn btn--secondary" href="#howit">{{ 'hero.ctaSecondary' | transloco }}</a>
+      </div>
+      <p class="hero__free mono" appReveal [revealDelay]="240">
+        <span class="hero__dot" aria-hidden="true"></span>
+        {{ 'hero.free' | transloco }}
+      </p>
+    </div>
+
+    <!-- Demo viva de chat -->
+    <div class="hero__demo" appReveal [revealDelay]="120">
+      <div
+        class="chat"
+        role="img"
+        [attr.aria-label]="'hero.demo.ariaLabel' | transloco"
+      >
+        <div class="chat__bar">
+          <img class="chat__avatar" src="logo.png" alt="" width="28" height="28" />
+          <span class="chat__title">Daddy <span>Sr.PC</span></span>
+          <span class="chat__status" aria-hidden="true"></span>
+          <span class="chat__count mono">15/15</span>
+        </div>
+
+        <div class="chat__body">
+          @for (line of lines(); track $index) {
+            <div class="msg" [class.msg--user]="line.role === 'user'">
+              <p class="msg__bubble">{{ line.text }}</p>
+            </div>
+          }
+          @if (typingRole()) {
+            <div class="msg" [class.msg--user]="typingRole() === 'user'">
+              <p class="msg__bubble">{{ typing() }}<span class="caret" aria-hidden="true"></span></p>
+            </div>
+          }
+        </div>
+
+        <div class="chat__input" aria-hidden="true">
+          <span class="chat__placeholder mono">{{ 'hero.demo.placeholder' | transloco }}</span>
+          <span class="chat__send">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+              <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

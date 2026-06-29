@@ -1,0 +1,266 @@
+{
+  "nav": {
+    "features": "Features",
+    "howItWorks": "How it works",
+    "tryIt": "Try it",
+    "login": "Log in",
+    "register": "Sign up",
+    "openMenu": "Open menu",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English",
+    "pt": "Português",
+    "select": "Select language"
+  },
+  "hero": {
+    "eyebrow": "// The workshop mentor",
+    "headlineLine1": "Build without fear",
+    "headlineLine2": "of burning anything.",
+    "sub": "Let Daddy guide you through every step of the build. <strong>Daddy answers everything</strong>.",
+    "cta": "Get started",
+    "ctaSecondary": "How it works",
+    "free": "15 free queries · no sign-up",
+    "demo": {
+      "ariaLabel": "Demo conversation with Daddy Sr.PC about GPU compatibility.",
+      "question": "Does an RTX 4070 fit in a mini-ITX case?",
+      "answer": "Depends on the length. Most RTX 4070s measure 240–300mm. For mini-ITX, check the \"max GPU length\" spec of your case. Which one do you have? I'll tell you if it fits.",
+      "placeholder": "Type your question…"
+    }
+  },
+  "features": {
+    "eyebrow": "// What it solves",
+    "heading": "Four domains, one agent that connects them all.",
+    "compat": {
+      "title": "Component compatibility",
+      "body": "Check socket, RAM, watts and cooling. Daddy analyzes your combo and tells you if it works."
+    },
+    "build": {
+      "title": "Step-by-step assembly guides",
+      "body": "From the socket to the thermal paste. Clear steps for your first build or an upgrade."
+    },
+    "tech": {
+      "title": "In-depth technical details",
+      "body": "TDP, L3 cache, speeds, architectures. Everything you need to know about each chip."
+    },
+    "best": {
+      "title": "Best practices",
+      "body": "Cooling, cable management, ventilation and maintenance. Take care of your setup the way Daddy teaches."
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "// How it works",
+    "heading": "From the workshop to the answer, in four steps.",
+    "step1": {
+      "title": "Ask anything you want",
+      "body": "No filters, no taboos. Beginner technique or overclock debate — Daddy is ready."
+    },
+    "step2": {
+      "title": "The agent replies with context",
+      "body": "No templates. Precise explanations, technical data and safety warnings where needed."
+    },
+    "step3": {
+      "title": "You have 15 free queries",
+      "body": "Try it without signing up. The counter stays visible and drops with each question."
+    },
+    "step4": {
+      "title": "Sign up to keep going",
+      "body": "Free with 15 queries per day, or continue without limits by creating your account."
+    }
+  },
+  "demo": {
+    "eyebrow": "// Try it live",
+    "heading": "Your first contact with Daddy. No sign-up.",
+    "sub": "These 15 queries are real. The counter drops with each question — when it hits zero, we invite you to keep going.",
+    "welcome": "Hey! I'm Daddy. Ask me anything about your PC build: compatibility, assembly, whatever. You have 15 queries to try.",
+    "levels": {
+      "novato": "First build",
+      "intermedio": "Intermediate",
+      "avanzado": "Advanced"
+    },
+    "levelAriaLabel": "Response level",
+    "inputLabel": "Type your question",
+    "placeholder": "E.g.: Does AM5 use DDR4 or DDR5?",
+    "sendAriaLabel": "Send message",
+    "typingAriaLabel": "Daddy is typing",
+    "bannerSoft": "{{ count }} free queries left. Sign up to keep going without limits.",
+    "bannerStrong": "1 query left. Create your account to continue.",
+    "gate": {
+      "eyebrow": "// You've reached the trial limit",
+      "title": "You asked 15 questions. Nice work.",
+      "text": "Want to keep going? Sign up for free:",
+      "feature1": "15 questions per day",
+      "feature2": "Chat history",
+      "feature3": "Replies tuned to your level",
+      "cta": "Create free account",
+      "login": "I already have an account",
+      "fine": "No surprises. Most users stick with the free plan."
+    },
+    "replies": {
+      "novato": {
+        "r1": "Great question. In plain terms: make sure the CPU socket matches the motherboard, the RAM type is correct (DDR4 or DDR5) and the PSU has enough wattage. Tell me your components and I'll check them one by one.",
+        "r2": "No worries, it's easier than it looks. The key is to take it step by step and never force anything when seating parts. Want me to walk you through it?"
+      },
+      "intermedio": {
+        "r1": "Depends on the combo. Check three things: socket (AM5/LGA1700), RAM version (AM5 is DDR5 only) and combined TDP vs your PSU. Send me the models and I'll confirm if there's a bottleneck.",
+        "r2": "For that case, check the PCIe slot and GPU length against the case clearance. Tell me the case model and the graphics card."
+      },
+      "avanzado": {
+        "r1": "Getting into detail: with an X3D, prioritize stable RAM frequency (EXPO 6000 CL30 is the sweet spot on AM5) over aggressive latencies. The bottleneck is usually the infinity fabric, not the core. What kit are you looking at?",
+        "r2": "Thermally, rated TDP is misleading: look at the actual PPT under sustained load and size the cooler with margin. I can give you specific numbers if you tell me the chip."
+      }
+    }
+  },
+  "closing": {
+    "eyebrow": "// Build with confidence",
+    "titleStart": "Chat with Daddy ",
+    "titleEnd": " now.",
+    "sub": "No fear of burning anything. The workshop mentor is waiting for your next question.",
+    "cta": "Get started"
+  },
+  "footer": {
+    "features": "Features",
+    "howItWorks": "How it works",
+    "tryIt": "Try it",
+    "madeWith": "Made with",
+    "madeBy": "by David222"
+  },
+  "register": {
+    "eyebrow": "// Create your account",
+    "brandTagline": "Your personal assembly workshop.",
+    "feat1": "15 queries per day, free",
+    "feat2": "Full conversation history",
+    "feat3": "Replies tuned to your level",
+    "feat4": "Compatibility, assembly and tech",
+    "stepOf": "Step {{ step }} of {{ total }}",
+    "steps": {
+      "s1": "Identity",
+      "s2": "Access",
+      "s3": "Profile"
+    },
+    "step1": {
+      "title": "What's your name?",
+      "sub": "Your name and your handle in the workshop."
+    },
+    "step2": {
+      "title": "Set up your access.",
+      "sub": "Email and password to log in."
+    },
+    "step3": {
+      "title": "What's your world?",
+      "sub": "Choose the profile that fits you best."
+    },
+    "nameLabel": "First name",
+    "namePlaceholder": "Your first name",
+    "surnameLabel": "Last name",
+    "surnamePlaceholder": "Your last name",
+    "apodLabel": "Nickname",
+    "apodPlaceholder": "What we call you here",
+    "apodHint": "Minimum 3 characters. This will be your name in chat.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "email@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Minimum 8 characters",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "pwdHints": {
+      "length": "Minimum 8 characters",
+      "upper": "At least 1 uppercase letter",
+      "symbol": "At least 1 symbol"
+    },
+    "interests": {
+      "gamer": "Gamer",
+      "gamerDesc": "Gaming and high-performance builds",
+      "creator": "Creator",
+      "creatorDesc": "Editing, design and workstations",
+      "overclocker": "Enthusiast",
+      "overclockerDesc": "Overclocking and extreme performance",
+      "aprendiz": "Learner",
+      "aprendizDesc": "New to the PC world"
+    },
+    "next": "Next",
+    "back": "Back",
+    "submit": "Create free account",
+    "submitting": "Creating account…",
+    "loginPrompt": "Already have an account?",
+    "loginCta": "Log in",
+    "errors": {
+      "nameRequired": "First name is required",
+      "surnameRequired": "Last name is required",
+      "apodRequired": "Nickname is required",
+      "apodMinLength": "Nickname must be at least 3 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Minimum 8 characters",
+      "passwordUppercase": "Include at least one uppercase letter",
+      "passwordSymbol": "Include at least one symbol",
+      "interestRequired": "Choose a profile to continue"
+    },
+    "successTitle": "You're in!",
+    "successBody": "Welcome to the workshop. Build with Daddy without limits.",
+    "successCta": "Go to chat"
+  },
+  "chat": {
+    "newChat": "New chat",
+    "recent": "Recent",
+    "settingsBtn": "Settings",
+    "agentStatus": "Online · PC Specialist",
+    "placeholder": "Ask Daddy… (Enter to send)",
+    "sendEnterHint": "Enter sends · Shift + Enter new line",
+    "emptyTitle": "Hey! I'm Daddy.",
+    "emptySub": "Ask me anything about your PC: compatibility, assembly, tech — everything.",
+    "suggestion1": "Does an RTX 4070 fit in a mini-ITX?",
+    "suggestion2": "Does AM5 use DDR4 or DDR5?",
+    "suggestion3": "How many watts for a Ryzen 9?",
+    "suggestion4": "How do I apply thermal paste?",
+    "noticeRemaining": "{{ count }} of {{ total }} queries left this minute.",
+    "noticeLast": "1 query left this minute. Resets automatically.",
+    "limitEyebrow": "// Limit reached",
+    "limitTitle": "You've used your {{ total }} queries for this minute",
+    "limitDesc": "The counter resets automatically every minute. You'll be able to chat again soon.",
+    "limitClose": "Got it",
+    "settingsEyebrow": "// Configuration",
+    "settingsTitle": "Settings",
+    "settingsLanguage": "Language",
+    "settingsColor": "Primary color",
+    "settingsRestore": "Restore",
+    "settingsAppearance": "Appearance",
+    "settingsLight": "Light",
+    "settingsDark": "Dark",
+    "errorConnect": "There was an error connecting to Daddy. Please try again."
+  },
+  "login": {
+    "eyebrow": "// Back to the workshop",
+    "brandTagline": "Your entry point to the build.",
+    "feat1": "15 queries per day, free",
+    "feat2": "Full conversation history",
+    "feat3": "Replies tuned to your level",
+    "title": "Welcome back.",
+    "sub": "Sign in and keep building where you left off.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "email@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "forgot": "Forgot your password?",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "registerPrompt": "Don't have an account?",
+    "registerCta": "Sign up for free",
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "passwordRequired": "Password is required",
+      "serverError": "Invalid credentials",
+      "tooManyAttempts": "Too many failed attempts. Reload the page to try again.",
+      "attemptsLeft": "attempts left"
+    },
+    "successTitle": "Welcome back!",
+    "successBody": "Redirecting to the workshop…",
+    "successCta": "Go to chat"
+  }
+}

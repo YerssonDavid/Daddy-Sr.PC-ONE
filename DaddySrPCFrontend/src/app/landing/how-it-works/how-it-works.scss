@@ -1,0 +1,95 @@
+:host {
+  display: block;
+  padding-block: var(--space-section);
+  background: var(--glass-surface);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-block: 1px solid var(--glass-border);
+}
+
+.howit__head {
+  max-width: 36ch;
+  margin-bottom: 3rem;
+}
+.howit__head h2 {
+  margin-top: 0.75rem;
+}
+
+.howit__steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding-top: 0.5rem;
+  transition: transform var(--t-normal) var(--ease);
+}
+.step:hover {
+  transform: translateY(-4px);
+}
+
+/* número grande en mono cian (plan §4.3) */
+.step__n {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--trace);
+  margin-bottom: 1rem;
+  transition: text-shadow var(--t-normal) var(--ease),
+    transform var(--t-normal) var(--ease);
+}
+.step:hover .step__n {
+  text-shadow: 0 0 18px var(--trace-tint);
+  transform: scale(1.04);
+}
+
+.step__title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+}
+.step__body {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  max-width: 30ch;
+}
+
+/* traza cian que conecta cada paso con el siguiente — los guiones "fluyen" */
+.step__trace {
+  position: absolute;
+  top: 1.25rem;
+  left: calc(2.6rem);
+  right: -1.5rem;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--trace) 0 8px,
+    transparent 8px 14px
+  );
+  background-size: 28px 2px;
+  opacity: 0.5;
+  animation: trace-flow 1.2s linear infinite;
+}
+@keyframes trace-flow {
+  to { background-position: 28px 0; }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .howit__steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.5rem;
+  }
+  .step__trace {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .howit__steps {
+    grid-template-columns: 1fr;
+  }
+}

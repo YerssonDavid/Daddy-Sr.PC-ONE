@@ -1,0 +1,123 @@
+:host {
+  display: block;
+  padding-block: var(--space-section);
+}
+
+.features__head {
+  max-width: 38ch;
+  margin-bottom: 3rem;
+}
+.features__head h2 {
+  margin-top: 0.75rem;
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+/* Tarjeta base (plan §13.1) */
+.card {
+  position: relative;
+  background: var(--glass-surface);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem 1.75rem;
+  overflow: hidden;
+  transition: background-color var(--t-normal) var(--ease),
+    border-color var(--t-normal) var(--ease),
+    box-shadow var(--t-normal) var(--ease),
+    transform var(--t-normal) var(--ease);
+}
+/* glow radial que sigue al hover desde la esquina del header */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    340px circle at 20% 0%,
+    var(--trace-tint),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--t-normal) var(--ease);
+  pointer-events: none;
+}
+.card:hover {
+  background: var(--glass-elevated);
+  border-color: var(--trace);
+  box-shadow: var(--shadow-card), 0 16px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-6px);
+}
+.card:hover::after {
+  opacity: 1;
+}
+
+/* header de conexión cian en la esquina (plan §4.2) */
+.card__header {
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  width: 36px;
+  height: 3px;
+  background: var(--trace);
+  border-radius: 0 0 3px 3px;
+  transition: box-shadow var(--t-fast) var(--ease),
+    width var(--t-fast) var(--ease);
+}
+.card:hover .card__header {
+  width: 52px;
+  box-shadow: 0 0 12px var(--trace);
+}
+
+.card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  background: var(--trace-tint);
+  color: var(--trace);
+  margin-bottom: 1.1rem;
+  position: relative;
+  z-index: 1;
+  transition: transform var(--t-normal) var(--ease),
+    box-shadow var(--t-normal) var(--ease),
+    background-color var(--t-normal) var(--ease);
+}
+.card:hover .card__icon {
+  transform: translateY(-2px) scale(1.08);
+  background: color-mix(in srgb, var(--trace) 22%, transparent);
+  box-shadow: 0 0 18px var(--trace-tint);
+}
+.card__title,
+.card__body {
+  position: relative;
+  z-index: 1;
+}
+
+.card__title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.card__body {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .features__grid {
+    grid-template-columns: 1fr;
+  }
+}

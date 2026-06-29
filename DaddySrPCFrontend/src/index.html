@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <title>Daddy Sr.PC — Armá sin miedo a quemar nada</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    Seguridad: Content-Security-Policy + política de referrer.
+    `connect-src` incluye localhost/ws para no romper el SSE del backend ni el
+    live-reload en desarrollo. En PRODUCCIÓN conviene servir una CSP más estricta
+    (sin localhost, con nonces/hashes en vez de 'unsafe-inline') mediante
+    cabeceras HTTP del servidor/proxy, que es el lugar canónico para la CSP.
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' http://localhost:8080 http://localhost:* ws://localhost:* ws://127.0.0.1:*; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <meta name="description"
+    content="Daddy Sr.PC es el agente de IA que te guía en cada paso del armado de tu PC: compatibilidad, ensamblaje, técnica a fondo y mejores prácticas. Preguntá sin miedo.">
+
+  <!-- Page icons — multi-size -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- Theme color (adapta con el tema activo) -->
+  <meta name="theme-color" content="#0A0E12" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F2F4F1" media="(prefers-color-scheme: light)">
+  <meta name="msapplication-TileColor" content="#0A0E12">
+  <meta name="msapplication-TileImage" content="icon-192.png">
+
+  <!-- OG / Social -->
+  <meta property="og:title" content="Daddy Sr.PC — Armá sin miedo a quemar nada">
+  <meta property="og:description"
+    content="El mentor con las manos sucias de pasta térmica. Compatibilidad, ensamblaje y técnica, sin jerga innecesaria.">
+  <meta property="og:image" content="icon-512.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Anti-FOUC: aplica el tema antes del primer paint -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+        document.querySelector('meta[name="theme-color"]') &&
+          document.querySelector('meta[name="theme-color"]').setAttribute(
+            'content', theme === 'light' ? '#F2F4F1' : '#0A0E12'
+          );
+      } catch (e) { }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

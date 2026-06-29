@@ -1,0 +1,576 @@
+/* ============================================================
+   Página de login
+   ============================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--solder);
+  color: var(--solder-ink);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  z-index: 9999;
+  transition: top var(--t-fast) var(--ease);
+
+  &:focus { top: 1rem; }
+}
+
+/* ============================================================
+   Layout principal (same two-column grid as register)
+   ============================================================ */
+.lg-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100dvh;
+  padding-top: 60px;
+}
+
+/* ============================================================
+   Panel izquierdo — brand
+   ============================================================ */
+.lg-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2.5rem, 4vw, 5rem) clamp(2rem, 3vw, 4rem);
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--bg-elevated) 0%, var(--bg-surface) 100%);
+  border-right: 1px solid var(--border);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 50%, var(--solder-tint), transparent 70%),
+      radial-gradient(ellipse 40% 35% at 20% 80%, var(--trace-tint), transparent 65%);
+    pointer-events: none;
+  }
+}
+
+/* CPU socket SVG — fills the panel as background, pulses */
+.lg-brand__cpu {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(320px, 70%);
+  height: min(320px, 70%);
+  color: var(--solder);
+  opacity: 0.16;
+  animation: cpu-breathe 5s ease-in-out infinite;
+}
+
+/* Scan line inside the CPU SVG */
+.lg-cpu-scan {
+  animation: cpu-scan 3.5s linear infinite;
+}
+
+@keyframes cpu-breathe {
+  0%,  100% { opacity: 0.16; filter: drop-shadow(0 0 6px var(--solder-tint)); }
+  50%        { opacity: 0.28; filter: drop-shadow(0 0 20px color-mix(in srgb, var(--solder) 20%, transparent)); }
+}
+
+@keyframes cpu-scan {
+  from { transform: translateX(0); }
+  to   { transform: translateX(360px); }
+}
+
+.lg-brand__content {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+}
+
+.lg-brand__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  text-decoration: none;
+
+  img {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius);
+    filter: drop-shadow(0 0 12px var(--solder-tint));
+  }
+}
+
+.lg-brand__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.lg-brand__sr { color: var(--solder); }
+
+.lg-brand__eyebrow { margin-bottom: 0.75rem; }
+
+.lg-brand__tagline {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.lg-feats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.lg-feat {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  transition: color var(--t-fast) var(--ease);
+
+  &:hover { color: var(--text-primary); }
+}
+
+.lg-feat__dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--solder);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--solder) 20%, transparent), 0 0 8px var(--solder-tint);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 20px;
+    height: 1px;
+    background: linear-gradient(to right, var(--solder), transparent);
+    opacity: 0.4;
+  }
+}
+
+/* ============================================================
+   Panel derecho — form
+   ============================================================ */
+.lg-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 3.5rem) clamp(1.5rem, 3vw, 4rem);
+  background-color: var(--bg-base);
+}
+
+/* ============================================================
+   Login card — enters with fade-up scale
+   ============================================================ */
+.lg-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--glass-elevated);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  box-shadow: var(--shadow-card);
+  animation: lg-enter 0.45s var(--ease) both;
+
+  &.is-shaking {
+    animation: lg-shake 0.52s var(--ease) both;
+  }
+}
+
+@keyframes lg-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes lg-shake {
+  0%   { transform: translateX(0); }
+  14%  { transform: translateX(-7px); }
+  28%  { transform: translateX(7px); }
+  42%  { transform: translateX(-5px); }
+  57%  { transform: translateX(5px); }
+  71%  { transform: translateX(-3px); }
+  85%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+.lg-card__eyebrow { margin-bottom: 0.5rem; }
+
+.lg-card__title {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0.375rem;
+  line-height: 1.2;
+}
+
+.lg-card__sub {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  margin-bottom: 1.75rem;
+}
+
+/* ============================================================
+   Form
+   ============================================================ */
+.lg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================================
+   Field
+   ============================================================ */
+.lg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &--error {
+    .lg-field__label { color: var(--alert); }
+
+    .lg-field__input {
+      border-color: var(--alert);
+      background: color-mix(in srgb, var(--alert-tint) 60%, var(--bg-elevated) 40%);
+
+      &:focus {
+        outline: none;
+        border-color: var(--alert);
+        box-shadow: 0 0 0 3px var(--alert-tint);
+      }
+    }
+
+    /* Solder trace turns alert on error */
+    .lg-field__wrap::after {
+      background: var(--alert);
+    }
+  }
+}
+
+.lg-field__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.lg-field__label {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--t-fast) var(--ease);
+}
+
+/* Signature element: solder line grows left-to-right on focus */
+.lg-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+    right: 2px;
+    height: 2px;
+    background: var(--solder);
+    border-radius: 0 0 var(--radius) var(--radius);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.32s var(--ease);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  &:focus-within::after {
+    transform: scaleX(1);
+  }
+}
+
+.lg-field__icon {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: color var(--t-fast) var(--ease);
+  z-index: 1;
+}
+
+.lg-field__wrap:focus-within .lg-field__icon {
+  color: var(--trace);
+}
+
+.lg-field__input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.75rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  -webkit-appearance: none;
+  transition:
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+
+  &::placeholder { color: var(--text-muted); }
+
+  &:hover:not(:focus) {
+    border-color: color-mix(in srgb, var(--border) 30%, var(--trace) 70%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--trace);
+    box-shadow: 0 0 0 3px var(--trace-tint);
+  }
+}
+
+/* Password: leave room for eye button on the right */
+.lg-field__wrap:has(.lg-field__eye) .lg-field__input {
+  padding-right: 2.75rem;
+}
+
+.lg-field__eye {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  transition: color var(--t-fast) var(--ease);
+
+  &:hover { color: var(--trace); }
+}
+
+.lg-field__error {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--fs-tiny);
+  font-family: var(--font-mono);
+  color: var(--alert);
+  animation: lg-fade-up 0.2s var(--ease) both;
+}
+
+@keyframes lg-fade-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.lg-forgot {
+  font-size: var(--fs-tiny);
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease);
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:hover { color: var(--trace); }
+}
+
+/* ============================================================
+   Submit button
+   ============================================================ */
+.lg-submit {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.lg-submit__spin { animation: spin 0.8s linear infinite; }
+
+/* ============================================================
+   Register link
+   ============================================================ */
+.lg-card__register {
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+.lg-card__register-cta {
+  color: var(--trace);
+  font-weight: 600;
+  margin-left: 0.3em;
+  transition: color var(--t-fast) var(--ease);
+
+  &:hover { color: var(--text-primary); }
+}
+
+/* ============================================================
+   Success state
+   ============================================================ */
+.lg-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 440px;
+  width: 100%;
+  animation: lg-enter 0.5s var(--ease) both;
+}
+
+.lg-success__check {
+  color: var(--trace);
+  filter: drop-shadow(0 0 16px var(--trace-tint));
+}
+
+.lg-success__ring {
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: draw-on 0.6s var(--ease) 0.1s forwards;
+}
+
+.lg-success__tick {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: draw-on 0.4s var(--ease) 0.65s forwards;
+}
+
+@keyframes draw-on {
+  to { stroke-dashoffset: 0; }
+}
+
+.lg-success__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.lg-success__body {
+  color: var(--text-secondary);
+  max-width: 28ch;
+  line-height: 1.5;
+}
+
+.lg-success__cta { margin-top: 0.5rem; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+  .lg-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .lg-brand {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 2rem clamp(1.5rem, 4vw, 3rem);
+    justify-content: flex-start;
+  }
+
+  .lg-brand__cpu { opacity: 0.08; }
+
+  .lg-brand__content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .lg-brand__logo { margin-bottom: 0; flex-shrink: 0; }
+  .lg-brand__eyebrow,
+  .lg-brand__tagline { display: none; }
+
+  .lg-feats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+    row-gap: 0.5rem;
+  }
+
+  .lg-feat__dot::before { display: none; }
+}
+
+@media (max-width: 640px) {
+  .lg-main { padding-top: 56px; }
+
+  .lg-brand { padding: 1.25rem 1rem; }
+  .lg-brand__content { gap: 1rem; }
+  .lg-brand__logo img { width: 36px; height: 36px; }
+  .lg-brand__name { font-size: 1.125rem; }
+  .lg-feats { display: none; }
+
+  .lg-section {
+    padding: 1.25rem 1rem;
+    align-items: stretch;
+  }
+
+  .lg-card { padding: 1.375rem 1.125rem; }
+  .lg-card__title { font-size: var(--fs-h3); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .lg-card          { animation: none; }
+  .lg-card.is-shaking { animation: none; }
+  .lg-brand__cpu    { animation: none; }
+  .lg-cpu-scan      { animation: none; }
+  .lg-success       { animation: none; }
+  .lg-field__wrap::after { transition: none; }
+
+  .lg-success__ring,
+  .lg-success__tick {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .lg-submit__spin { animation: none; }
+}
