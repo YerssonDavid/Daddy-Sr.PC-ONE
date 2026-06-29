@@ -63,7 +63,6 @@ export class ChatPage {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (chunk) => {
-          if (this.store.typing()) this.store.typing.set(false);
           this.store.appendChunk(streamId, chunk);
         },
         error: () => {

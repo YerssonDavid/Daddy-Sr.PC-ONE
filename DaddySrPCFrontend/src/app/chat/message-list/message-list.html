@@ -25,9 +25,6 @@
       @for (msg of messages(); track msg.id) {
         <app-chat-message [message]="msg" />
       }
-      @if (typing()) {
-        <app-typing-indicator />
-      }
     </div>
   }
 </section>

@@ -10,12 +10,11 @@ import {
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ChatMessage as ChatMessageModel } from '../state/chat-store';
 import { ChatMessage } from '../message/chat-message';
-import { TypingIndicator } from '../typing-indicator/typing-indicator';
 
 @Component({
   selector: 'app-message-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ChatMessage, TypingIndicator, TranslocoPipe],
+  imports: [ChatMessage, TranslocoPipe],
   templateUrl: './message-list.html',
   styleUrl: './message-list.scss',
 })
