@@ -52,6 +52,50 @@
   animation: glow-pulse 2.4s var(--ease) infinite;
 }
 
+/* Botón temporal para equipo ONE */
+.hero__one-trial {
+  display: block;
+  margin-top: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: var(--solder);
+  color: var(--solder-ink);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  line-height: 1.3;
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  animation: pulse-attention 3s infinite ease-in-out;
+}
+
+.hero__one-trial:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.24);
+  animation: none;
+}
+
+.hero__one-trial-line {
+  display: block;
+}
+
+.hero__one-trial-line:first-child {
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
+@keyframes pulse-attention {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.02);
+  }
+}
+
 /* ---- Chat demo ---- */
 .chat {
   background: var(--glass-surface);
