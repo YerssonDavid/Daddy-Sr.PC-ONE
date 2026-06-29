@@ -8,8 +8,6 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 @Component
 public class AssistantAIAdapter implements IAssistantAIClient {
 
@@ -26,9 +24,6 @@ public class AssistantAIAdapter implements IAssistantAIClient {
 
     @Override
     public Flux<String> ask(String question, String conversationId) {
-        AtomicBoolean answerStarted = new AtomicBoolean(false);
-        StringBuilder buffer = new StringBuilder();
-
         return chatClient.prompt()
                 .user(question)
                 .tools(tavilySearchToolsAdapter)
