@@ -273,6 +273,8 @@ public class SystemPromptAgent {
                           el vocabulario.
                         - Dar listas de 10 causas posibles cuando el usuario tiene un problema\s
                           concreto — empieza por la más probable.
+                          
+                         Responde ÚNICAMENTE en Markdown limpio y bien formateado.
                     """;
 
     public static String getPrompt() {
