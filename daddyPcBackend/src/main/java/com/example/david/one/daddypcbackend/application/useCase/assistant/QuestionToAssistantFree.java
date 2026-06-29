@@ -7,14 +7,14 @@ import reactor.core.publisher.Flux;
 
 public class QuestionToAssistantFree implements IAssistantAIFree {
 
-    private final IAssistantAIFreeClient iAssistantAITest;
+    private final IAssistantAIFreeClient iAssistantAIFreeClient;
 
-    public QuestionToAssistantFree(IAssistantAIFreeClient iAssistantAITest) {
-        this.iAssistantAITest = iAssistantAITest;
+    public QuestionToAssistantFree(IAssistantAIFreeClient iAssistantAIFreeClient) {
+        this.iAssistantAIFreeClient = iAssistantAIFreeClient;
     }
 
     @Override
-    public Flux<String> askQuestion(QuestionToAssistantTestCommand command) {
-        return iAssistantAITest.askQuestion(command);
+    public String askQuestion(QuestionToAssistantTestCommand command) {
+        return iAssistantAIFreeClient.askQuestion(command);
     }
 }

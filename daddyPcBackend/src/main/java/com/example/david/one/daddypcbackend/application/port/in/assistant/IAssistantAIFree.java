@@ -4,5 +4,5 @@ import com.example.david.one.daddypcbackend.application.command.assistant.Questi
 import reactor.core.publisher.Flux;
 
 public interface IAssistantAIFree {
-    Flux<String> askQuestion(QuestionToAssistantTestCommand command);
+    String askQuestion(QuestionToAssistantTestCommand command);
 }
