@@ -37,20 +37,8 @@
 
       <!-- Mensajes -->
       <div class="chat__body" #body>
-        @for (m of messages(); track $index) {
-          <div class="msg" [class.msg--user]="m.role === 'user'">
-            <p class="msg__bubble">{{ m.text }}</p>
-          </div>
-        }
-        @if (typing()) {
-          <div class="msg">
-            <p
-              class="msg__bubble msg__bubble--typing"
-              [attr.aria-label]="'demo.typingAriaLabel' | transloco"
-            >
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            </p>
-          </div>
+        @for (m of messages(); track m.id) {
+          <app-chat-message [message]="m" />
         }
       </div>
 
@@ -72,6 +60,12 @@
           </button>
         }
       </div>
+
+      <!-- Nota de capacidades limitadas -->
+      <p class="demo-note">
+        <em><strong>{{ 'demo.note' | transloco }}</strong> {{ 'demo.limitedCapabilities' | transloco }}
+        <a href="/register">{{ 'demo.register' | transloco }}</a> {{ 'demo.accessAllFeatures' | transloco }}.</em>
+      </p>
 
       <!-- Input -->
       <form class="chat__input" (ngSubmit)="send()">
