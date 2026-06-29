@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: daddyPcBackend
+
+  docker:
+    compose:
+      enabled: false
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  ai:
+    model:
+      chat: openai
+      embedding: google-genai
+    openai:
+      base-url: https://api.siliconflow.com/v1
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: MiniMaxAI/MiniMax-M3
+          temperature: 0.3
+    google:
+      genai:
+        embedding:
+          api-key: ${AI_EMBEDDING}
+          text:
+            options:
+              model: text-embedding-004
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        dimensions: 768
+
+tavily:
+  api-key: ${TAVILY_API}
