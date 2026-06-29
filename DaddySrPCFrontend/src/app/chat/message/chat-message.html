@@ -15,8 +15,7 @@
       @switch (block.kind) {
         @case ('text') {
           @if (message().role === 'agent') {
-            <!-- Contenido del modelo renderizado como Markdown (seguro) -->
-            <div class="bubble__md" [innerHTML]="block.text | markdown"></div>
+            <markdown class="bubble__md" [data]="block.text | markdown" />
           } @else {
             <p class="bubble__text">{{ block.text }}</p>
           }
@@ -31,6 +30,14 @@
           <app-code-block [data]="$any(block)" />
         }
       }
+    }
+
+    @if (message().role === 'agent' && message().pending) {
+      <div class="bubble__writing" role="status" aria-label="Daddy está escribiendo">
+        <span class="bubble__writing-dot"></span>
+        <span class="bubble__writing-dot"></span>
+        <span class="bubble__writing-dot"></span>
+      </div>
     }
 
     <!-- Footer: hora + botón de copiar (solo en mensajes del agente) -->
