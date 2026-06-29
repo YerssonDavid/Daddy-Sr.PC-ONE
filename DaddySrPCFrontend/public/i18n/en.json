@@ -23,6 +23,17 @@
     "cta": "Get started",
     "ctaSecondary": "How it works",
     "free": "15 free queries · no sign-up",
+    "freeTrial": "3 free queries · no sign-up",
+    "oneTrial": {
+      "line1": "Temporary access for testing",
+      "line2": "ONE Team: try the full agent"
+    },
+    "demo": {
+      "note": "Note:",
+      "limitedCapabilities": "This trial mode uses a model with limited capabilities.",
+      "register": "Sign up",
+      "accessAllFeatures": "to access all features"
+    },
     "demo": {
       "ariaLabel": "Demo conversation with Daddy Sr.PC about GPU compatibility.",
       "question": "Does an RTX 4070 fit in a mini-ITX case?",
@@ -71,6 +82,10 @@
     }
   },
   "demo": {
+    "note": "Note:",
+    "limitedCapabilities": "This trial mode uses a model with limited capabilities.",
+    "register": "Sign up",
+    "accessAllFeatures": "to access all features",
     "eyebrow": "// Try it live",
     "heading": "Your first contact with Daddy. No sign-up.",
     "sub": "These 15 queries are real. The counter drops with each question — when it hits zero, we invite you to keep going.",

@@ -23,6 +23,11 @@
     "cta": "Comenzar ahora",
     "ctaSecondary": "Cómo funciona",
     "free": "15 consultas gratis · sin registro",
+    "freeTrial": "3 consultas gratis · sin registro",
+    "oneTrial": {
+      "line1": "Acceso temporal para pruebas",
+      "line2": "Equipo ONE: probar agente completo"
+    },
     "demo": {
       "ariaLabel": "Demostración de conversación con Daddy Sr.PC sobre compatibilidad de GPU.",
       "question": "¿Una RTX 4070 cabe en un gabinete mini-ITX?",
@@ -71,6 +76,10 @@
     }
   },
   "demo": {
+    "note": "Nota:",
+    "limitedCapabilities": "Este modo de prueba usa un modelo con capacidades limitadas.",
+    "register": "Regístrate",
+    "accessAllFeatures": "para acceder a todas las funciones",
     "eyebrow": "// Pruébalo en vivo",
     "heading": "Tu primer contacto con Daddy. Sin registro.",
     "sub": "Estas 15 consultas son reales. El contador baja con cada pregunta — cuando llega a cero, te invitamos a seguir.",
