@@ -8,6 +8,7 @@
   <!-- Sidebar (colapsable en desktop, drawer en mobile) -->
   <app-chat-sidebar
     [collapsed]="sidebarCollapsed()"
+    [open]="sidebarOpen()"
     (toggle)="collapseToggle()"
     (settingsOpen)="showSettings.set(true)"
   />

@@ -94,7 +94,6 @@
     grid-template-columns: 1fr;
   }
 
-  /* El collapse no tiene efecto en mobile; sidebar es fixed off-canvas */
   .chat-shell[data-sidebar-collapsed='true'] {
     grid-template-columns: 1fr;
   }
@@ -106,14 +105,23 @@
   .chat-shell:not([data-sidebar='expanded']) .chat-backdrop {
     display: none;
   }
-}
 
-@media (max-width: 640px) {
-  .chat-shell {
-    grid-template-columns: 1fr;
+  .chat-main {
+    padding-bottom: 100px;
   }
 
   :host {
+    --sidebar-w: 0px;
+  }
+}
+
+@media (max-width: 640px) {
+  :host {
     --bubble-max: 92vw;
+  }
+
+  .chat-notice {
+    padding: 0.4rem 0.8rem;
+    font-size: clamp(0.7rem, 1.6vw, var(--fs-small));
   }
 }

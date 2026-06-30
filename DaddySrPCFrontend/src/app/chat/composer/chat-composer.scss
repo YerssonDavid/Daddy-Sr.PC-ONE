@@ -140,10 +140,31 @@
   }
 }
 
-/* Mobile: reduce el padding lateral */
+/* Mobile: reduce bordes, incluye safe-area */
 @media (max-width: 640px) {
   .composer {
-    bottom: 1rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0rem));
     width: calc(100% - 1.5rem);
+    padding: 0.75rem 1rem 0.65rem;
+    border-radius: var(--radius);
+  }
+
+  .composer__input-row {
+    gap: 0.4rem;
+  }
+
+  .composer__textarea {
+    font-size: var(--fs-body);
+    padding: 0.6rem 0.75rem;
+    min-height: 44px;
+  }
+
+  .composer__send-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .composer__hint {
+    font-size: 0.65rem;
   }
 }
