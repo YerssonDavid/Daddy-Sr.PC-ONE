@@ -14,11 +14,8 @@ public class AssistantAIAdapter implements IAssistantAIClient {
     private final TavilySearchToolsAdapter tavilySearchToolsAdapter;
     private final ChatClient chatClient;
 
-    public AssistantAIAdapter(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory, TavilySearchToolsAdapter tavilySearchToolsAdapter) {
-        this.chatClient = chatClientBuilder
-                .defaultSystem(SystemPromptAgent.getPrompt())
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
-                .build();
+    public AssistantAIAdapter(ChatClient chatClient, TavilySearchToolsAdapter tavilySearchToolsAdapter) {
+        this.chatClient = chatClient;
         this.tavilySearchToolsAdapter = tavilySearchToolsAdapter;
     }
 
