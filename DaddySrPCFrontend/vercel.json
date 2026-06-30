@@ -1,9 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "framework": "angular",
-  "buildCommand": "ng build --configuration production",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm build",
   "outputDirectory": "dist/daddy-pc/browser",
+  "framework": null,
   "routes": [
     {
       "src": "/(.*)",
