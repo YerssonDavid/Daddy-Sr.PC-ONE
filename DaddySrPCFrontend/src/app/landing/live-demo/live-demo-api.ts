@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 export class LiveDemoApi {
   /**
    * Envía el mensaje al backend y recibe la respuesta completa formateada.
-   * El backend devuelve un JSON con el campo 'response' que contiene el texto formateado.
+   * El backend devuelve un string plano con el texto formateado.
    */
   ask(text: string): Observable<string> {
     return new Observable<string>((observer) => {
@@ -20,14 +20,14 @@ export class LiveDemoApi {
             observer.error(new Error(`HTTP ${res.status}`));
             return;
           }
-          return res.json();
+          return res.text();
         })
-        .then((data) => {
-          if (data && data.response) {
-            observer.next(data.response);
+        .then((responseText) => {
+          if (responseText) {
+            observer.next(responseText);
             observer.complete();
           } else {
-            observer.error(new Error('Invalid response format'));
+            observer.error(new Error('Empty response'));
           }
         })
         .catch((err) => {
