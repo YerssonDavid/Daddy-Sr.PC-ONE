@@ -13,15 +13,19 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { MarkdownComponent } from 'ngx-markdown';
 import { startWith, switchMap } from 'rxjs';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { MdNormalizePipe, stripModelThinking } from '../../chat/message/markdown.pipe';
 import { LiveDemoApi } from './live-demo-api';
-import { ChatMessage } from '../../chat/message/chat-message';
-import { MarkdownPipe } from '../../chat/message/markdown.pipe';
+
+function uuid(): string {
+  return crypto.randomUUID?.() ?? Math.random().toString(36).slice(2);
+}
 
 type Level = 'novato' | 'intermedio' | 'avanzado';
 
-interface ChatMessageModel {
+interface ChatMessage {
   id: string;
   role: 'user' | 'agent';
   blocks: { kind: 'text'; text: string }[];
@@ -32,28 +36,22 @@ interface ChatMessageModel {
 const TOTAL_REQUESTS = 3;
 const REPLY_KEYS = ['r1', 'r2'] as const;
 
-function uuid(): string {
-  return crypto.randomUUID?.() ?? Math.random().toString(36).slice(2);
-}
-
 @Component({
   selector: 'app-live-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, RevealDirective, TranslocoPipe, ChatMessage, MarkdownPipe],
+  imports: [FormsModule, RevealDirective, TranslocoPipe, MdNormalizePipe, MarkdownComponent],
   templateUrl: './live-demo.html',
   styleUrl: './live-demo.scss',
 })
 export class LiveDemo implements OnInit, OnDestroy {
   protected readonly total = TOTAL_REQUESTS;
 
-  protected readonly messages = signal<ChatMessageModel[]>([]);
+  protected readonly messages = signal<ChatMessage[]>([]);
   protected readonly remaining = signal(TOTAL_REQUESTS);
   protected readonly level = signal<Level>('intermedio');
   protected readonly draft = signal('');
   protected readonly typing = signal(false);
   protected readonly gateOpen = signal(false);
-
-  private readonly api = inject(LiveDemoApi);
 
   protected readonly notice = computed<'none' | 'soft' | 'strong'>(() => {
     const r = this.remaining();
@@ -70,6 +68,7 @@ export class LiveDemo implements OnInit, OnDestroy {
 
   private readonly transloco = inject(TranslocoService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly api = inject(LiveDemoApi);
 
   private get reducedMotion(): boolean {
     return (
@@ -97,7 +96,7 @@ export class LiveDemo implements OnInit, OnDestroy {
         id: uuid(),
         role: 'agent',
         blocks: [{ kind: 'text', text: this.transloco.translate('demo.welcome') }],
-        createdAt: Date.now(),
+        createdAt: Date.now()
       },
     ]);
     this.remaining.set(TOTAL_REQUESTS);
@@ -114,26 +113,29 @@ export class LiveDemo implements OnInit, OnDestroy {
     const text = this.draft().trim();
     if (!text || this.typing() || this.remaining() === 0) return;
 
-    this.messages.update((m) => [
-      ...m,
-      {
-        id: uuid(),
-        role: 'user',
-        blocks: [{ kind: 'text', text }],
-        createdAt: Date.now(),
-      },
-    ]);
+    this.messages.update((m) => [...m, {
+      id: uuid(),
+      role: 'user',
+      blocks: [{ kind: 'text', text }],
+      createdAt: Date.now()
+    }]);
     this.draft.set('');
     this.remaining.update((r) => r - 1);
     this.scrollSoon();
 
-    this.respond();
+    if (this.remaining() === 0) {
+      this.respond(true);
+    } else {
+      this.respond(false);
+    }
   }
 
-  private respond(): void {
+  private respond(openGateAfter: boolean): void {
     const streamId = uuid();
+    const userMessage = this.messages()[this.messages().length - 1];
+
     this.messages.update((m) => [
-      ...m,
+      ...m, 
       {
         id: streamId,
         role: 'agent',
@@ -146,21 +148,28 @@ export class LiveDemo implements OnInit, OnDestroy {
     this.scrollSoon();
 
     this.api
-      .ask(this.messages()[this.messages().length - 2].blocks[0].text)
+      .ask(userMessage.blocks[0].text)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (chunk) => {
+        next: (response: string) => {
+          const formattedResponse = stripModelThinking(response);
+
           this.messages.update((m) =>
-            m.map((msg) => {
-              if (msg.id !== streamId) return msg;
-              const prev = msg.blocks[0] as { kind: 'text'; text: string };
-              return {
-                ...msg,
-                blocks: [{ kind: 'text', text: prev.text + chunk }],
-              };
-            }),
+            m.map((msg) =>
+              msg.id === streamId
+                ? {
+                    ...msg,
+                    blocks: [{ kind: 'text', text: formattedResponse }],
+                    pending: false,
+                  }
+                : msg,
+            ),
           );
+          this.typing.set(false);
           this.scrollSoon();
+          if (openGateAfter) {
+            this.timers.push(setTimeout(() => this.gateOpen.set(true), 700));
+          }
         },
         error: () => {
           this.messages.update((m) =>
@@ -168,29 +177,14 @@ export class LiveDemo implements OnInit, OnDestroy {
               msg.id === streamId
                 ? {
                     ...msg,
+                    blocks: [{ kind: 'text', text: this.transloco.translate('chat.errorConnect') }],
                     pending: false,
-                    blocks: [
-                      {
-                        kind: 'text',
-                        text: this.transloco.translate('chat.errorConnect'),
-                      },
-                    ],
                   }
                 : msg,
             ),
           );
           this.typing.set(false);
           this.scrollSoon();
-        },
-        complete: () => {
-          this.messages.update((m) =>
-            m.map((msg) => (msg.id === streamId ? { ...msg, pending: false } : msg)),
-          );
-          this.typing.set(false);
-          this.scrollSoon();
-          if (this.remaining() === 0) {
-            this.timers.push(setTimeout(() => this.gateOpen.set(true), 700));
-          }
         },
       });
   }

@@ -323,10 +323,6 @@
   color: var(--text-muted);
 }
 
-.bubble__time--user {
-  align-self: flex-end;
-  margin-top: 0.25rem;
-}
 
 .bubble__copy {
   display: inline-flex;
@@ -361,6 +357,7 @@
 
 /* Aparece al pasar el cursor por la burbuja o al enfocar con teclado */
 .bubble--agent:hover .bubble__copy,
+.bubble--user:hover .bubble__copy,
 .bubble__copy:focus-visible {
   opacity: 1;
 }
