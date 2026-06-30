@@ -54,13 +54,4 @@ public class Security {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-
-    //Config Chat Memory for agents
-    @Bean("principalAgent")
-    public ChatMemory chatMemoryPrincipalAgent(){
-        return MessageWindowChatMemory.builder()
-                .chatMemoryRepository(new InMemoryChatMemoryRepository())
-                .maxMessages(25)
-                .build();
-    }
 }
