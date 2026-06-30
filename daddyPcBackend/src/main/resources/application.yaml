@@ -23,7 +23,6 @@ spring:
   ai:
     model:
       chat: openai
-      embedding: google-genai
     openai:
       base-url: https://api.siliconflow.com/v1
       api-key: ${OPENAI_API_KEY}
@@ -31,17 +30,11 @@ spring:
         options:
           model: MiniMaxAI/MiniMax-M3
           temperature: 0.3
-    google:
-      genai:
-        embedding:
-          api-key: ${AI_EMBEDDING}
-          text:
-            options:
-              model: text-embedding-004
-    vectorstore:
-      pgvector:
-        initialize-schema: true
-        dimensions: 768
+      embedding:
+        options:
+          model: Qwen/Qwen3-Embedding-0.6B
+          dimensions: 768
+
 
 tavily:
   api-key: ${TAVILY_API}

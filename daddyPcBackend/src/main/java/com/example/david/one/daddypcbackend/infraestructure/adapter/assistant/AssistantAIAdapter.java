@@ -8,27 +8,19 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 @Component
 public class AssistantAIAdapter implements IAssistantAIClient {
 
     private final TavilySearchToolsAdapter tavilySearchToolsAdapter;
     private final ChatClient chatClient;
 
-    public AssistantAIAdapter(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory, TavilySearchToolsAdapter tavilySearchToolsAdapter) {
-        this.chatClient = chatClientBuilder
-                .defaultSystem(SystemPromptAgent.getPrompt())
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
-                .build();
+    public AssistantAIAdapter(ChatClient chatClient, TavilySearchToolsAdapter tavilySearchToolsAdapter) {
+        this.chatClient = chatClient;
         this.tavilySearchToolsAdapter = tavilySearchToolsAdapter;
     }
 
     @Override
     public Flux<String> ask(String question, String conversationId) {
-        AtomicBoolean answerStarted = new AtomicBoolean(false);
-        StringBuilder buffer = new StringBuilder();
-
         return chatClient.prompt()
                 .user(question)
                 .tools(tavilySearchToolsAdapter)
