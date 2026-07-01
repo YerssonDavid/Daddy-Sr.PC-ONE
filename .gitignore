@@ -22,3 +22,13 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Java / Maven
+.mvn/
+target/
+*.class
+*.jar
+*.war
+
+# Logs
+*.log

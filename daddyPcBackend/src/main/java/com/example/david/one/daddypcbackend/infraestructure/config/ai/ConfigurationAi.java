@@ -19,7 +19,7 @@ public class ConfigurationAi {
     public ChatClient chatClient(ChatClient.Builder builder, VectorStore vectorStore, @Qualifier("principalAgent") ChatMemory chatMemory) {
         QuestionAnswerAdvisor advisor = QuestionAnswerAdvisor.builder(vectorStore)
                 .searchRequest(SearchRequest.builder()
-                        .similarityThreshold(0.75)
+                        .similarityThreshold(0.5)
                         .topK(5)
                         .build())
                 .build();

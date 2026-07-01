@@ -5,6 +5,7 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.reader.pdf.config.PdfDocumentReaderConfig;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -22,6 +23,20 @@ public class PdfReader {
     private final VectorStore vectorStore;
 
     public void ingestAllDocuments() {
+        // Verify if already exist document in the database
+        SearchRequest checkRequest = SearchRequest.builder()
+                .query("dummy")
+                .topK(1)
+                .similarityThreshold(0.0)
+                .build();
+
+        List<Document> existing = vectorStore.similaritySearch(checkRequest);
+
+        if (!existing.isEmpty()) {
+            System.out.println("Documents already indexed, skipping ingestion...");
+            return;
+        }
+
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Resource[] resources;
 
