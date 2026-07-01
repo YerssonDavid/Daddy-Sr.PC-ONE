@@ -13,8 +13,8 @@
         [innerHTML]="'hero.sub' | transloco"
       ></p>
       <div class="hero__actions" appReveal [revealDelay]="180">
-        <a class="btn btn--primary" href="#demo">{{ 'hero.cta' | transloco }}</a>
-        <a class="btn btn--secondary" href="#howit">{{ 'hero.ctaSecondary' | transloco }}</a>
+        <a class="btn btn--primary" routerLink="/register">{{ 'hero.cta' | transloco }}</a>
+        <button class="btn btn--secondary" (click)="scrollToDemo()">{{ 'hero.ctaSecondary' | transloco }}</button>
       </div>
       <a class="hero__one-trial" href="/chat" appReveal [revealDelay]="210">
         <span class="hero__one-trial-line">{{ 'hero.oneTrial.line1' | transloco }}</span>

@@ -10,6 +10,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { startWith, switchMap } from 'rxjs';
+import { RouterLink } from '@angular/router';
 import { RevealDirective } from '../../shared/reveal.directive';
 
 interface DemoLine {
@@ -20,7 +21,7 @@ interface DemoLine {
 @Component({
   selector: 'app-hero',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RevealDirective, TranslocoPipe],
+  imports: [RevealDirective, TranslocoPipe, RouterLink],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
@@ -34,6 +35,10 @@ export class Hero implements OnInit, OnDestroy {
 
   private readonly transloco = inject(TranslocoService);
   private readonly destroyRef = inject(DestroyRef);
+
+  protected scrollToDemo(): void {
+    document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   private get reducedMotion(): boolean {
     return (

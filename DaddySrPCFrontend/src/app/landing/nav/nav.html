@@ -12,7 +12,7 @@
     <nav class="nav__links" [class.is-open]="menuOpen()" aria-label="Navegación principal">
       <a href="#features" (click)="closeMenu()">{{ 'nav.features' | transloco }}</a>
       <a href="#howit" (click)="closeMenu()">{{ 'nav.howItWorks' | transloco }}</a>
-      <a href="#demo" (click)="closeMenu()">{{ 'nav.tryIt' | transloco }}</a>
+      <a href="#" (click)="$event.preventDefault(); scrollTo('demo')">{{ 'nav.tryIt' | transloco }}</a>
 
       <!-- Auth en mobile (dentro del menú) -->
       <div class="nav__auth-mobile">

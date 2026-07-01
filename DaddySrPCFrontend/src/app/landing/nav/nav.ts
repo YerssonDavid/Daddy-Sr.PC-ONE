@@ -31,4 +31,9 @@ export class Nav {
   closeMenu(): void {
     this.menuOpen.set(false);
   }
+
+  scrollTo(id: string): void {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    this.menuOpen.set(false);
+  }
 }
