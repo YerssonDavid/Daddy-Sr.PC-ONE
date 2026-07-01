@@ -5,7 +5,11 @@
   align-items: flex-start;
   animation: fade-up 0.4s var(--ease) both;
   max-width: var(--bubble-max, 720px);
-  width: fit-content;
+  width: 100%; /* Ocupa todo el ancho disponible en móviles */
+  
+  @media (min-width: 768px) {
+    width: fit-content; /* Desktop: ancho ajustado al contenido */
+  }
 }
 
 /* Burbuja del agente: izquierda, glass */
@@ -60,6 +64,7 @@
   flex-direction: column;
   gap: 0.25rem;
   min-width: 0;
+  width: 100%; /* Asegura que el contenido ocupe el ancho disponible */
 }
 
 .bubble__text {
@@ -123,7 +128,7 @@
   display: block;
   max-width: 100%;
   overflow-x: auto;
-  font-size: var(--fs-body);
+  font-size: clamp(var(--fs-mono-sm), 2vw, var(--fs-body)); /* Escala dinámica */
   line-height: 1.6;
   color: var(--text-primary);
   overflow-wrap: anywhere;
@@ -154,6 +159,7 @@
 
     p {
       margin: 0;
+      font-size: clamp(0.8rem, 1.8vw, 1rem); /* Escala en móviles */
     }
 
     h1,
@@ -166,13 +172,13 @@
       font-family: var(--font-display);
       font-weight: 600;
       line-height: 1.3;
-      font-size: var(--fs-body);
+      font-size: clamp(1rem, 2.2vw, 1.2rem); /* Escala dinámica */
       color: var(--text-primary);
     }
 
     h1,
     h2 {
-      font-size: 1.05em;
+      font-size: clamp(1.1rem, 2.4vw, 1.3rem);
     }
 
     strong {
@@ -188,7 +194,7 @@
     .md-ul,
     .md-ol {
       margin-bottom: 0;
-      padding-left: 1.4rem;
+      padding-left: 1.2rem; /* Menos padding en móviles */
     }
     ul,
     .md-ul {
@@ -200,6 +206,7 @@
     }
     li {
       margin: 0.15rem 0;
+      font-size: clamp(0.8rem, 1.8vw, 1rem);
     }
     li::marker {
       color: var(--text-muted);
@@ -213,7 +220,7 @@
     code:not(pre code),
     .md-code {
       font-family: var(--font-mono);
-      font-size: 0.85em;
+      font-size: clamp(0.7rem, 1.6vw, 0.85rem);
       background: var(--bg-elevated);
       padding: 0.1em 0.35em;
       border-radius: var(--radius-sm);
@@ -228,10 +235,11 @@
       background: color-mix(in srgb, var(--bg-surface) 80%, transparent);
       border: 1px solid var(--glass-border);
       overflow-x: auto;
+      font-size: clamp(0.7rem, 1.6vw, 0.85rem); /* Escala en móviles */
 
       code {
         font-family: var(--font-mono);
-        font-size: var(--fs-mono-sm);
+        font-size: clamp(0.7rem, 1.6vw, 0.85rem);
         color: var(--text-primary);
         white-space: pre;
       }
@@ -246,17 +254,18 @@
 
     table {
       width: 100%;
-      min-width: 520px;
+      min-width: 100%; /* Evita overflow en móviles */
       border-collapse: collapse;
-      font-size: 0.92em;
+      font-size: clamp(0.7rem, 1.6vw, 0.92rem);
     }
 
     table th,
     table td {
-      padding: 0.55rem 0.7rem;
+      padding: 0.4rem 0.5rem; /* Menos padding en móviles */
       border-bottom: 1px solid var(--glass-border);
       text-align: left;
       vertical-align: top;
+      font-size: clamp(0.7rem, 1.6vw, 0.85rem);
     }
 
     table th {
@@ -265,6 +274,7 @@
       color: var(--text-primary);
       background: color-mix(in srgb, var(--trace) 10%, transparent);
       white-space: nowrap;
+      font-size: clamp(0.75rem, 1.7vw, 0.9rem);
     }
 
     table tbody tr:last-child td {
@@ -281,17 +291,18 @@
 
     .md-table {
       width: 100%;
-      min-width: 520px;
+      min-width: 100%; /* Evita overflow en móviles */
       border-collapse: collapse;
-      font-size: 0.92em;
+      font-size: clamp(0.7rem, 1.6vw, 0.92rem);
     }
 
     .md-table th,
     .md-table td {
-      padding: 0.55rem 0.7rem;
+      padding: 0.4rem 0.5rem;
       border-bottom: 1px solid var(--glass-border);
       text-align: left;
       vertical-align: top;
+      font-size: clamp(0.7rem, 1.6vw, 0.85rem);
     }
 
     .md-table th {
@@ -300,6 +311,7 @@
       color: var(--text-primary);
       background: color-mix(in srgb, var(--trace) 10%, transparent);
       white-space: nowrap;
+      font-size: clamp(0.75rem, 1.7vw, 0.9rem);
     }
 
     .md-table tbody tr:last-child td {
@@ -319,26 +331,22 @@
 
 .bubble__time {
   font-family: var(--font-mono);
-  font-size: var(--fs-mono-sm);
+  font-size: clamp(0.65rem, 1.5vw, var(--fs-mono-sm)); /* Escala dinámica */
   color: var(--text-muted);
 }
 
-.bubble__time--user {
-  align-self: flex-end;
-  margin-top: 0.25rem;
-}
 
 .bubble__copy {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.2rem 0.45rem;
+  padding: 0.5rem 0.75rem; /* Más grande para touch */
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   background: transparent;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: var(--fs-mono-sm);
+  font-size: clamp(var(--fs-mono-sm), 1.8vw, var(--fs-small)); /* Escala dinámica */
   cursor: pointer;
   opacity: 0;
   transition:
@@ -346,6 +354,8 @@
     border-color var(--t-fast) var(--ease),
     background-color var(--t-fast) var(--ease),
     opacity var(--t-fast) var(--ease);
+  min-width: 48px; /* Tamaño mínimo para touch */
+  min-height: 48px;
 
   &:hover {
     color: var(--trace);
@@ -361,6 +371,7 @@
 
 /* Aparece al pasar el cursor por la burbuja o al enfocar con teclado */
 .bubble--agent:hover .bubble__copy,
+.bubble--user:hover .bubble__copy,
 .bubble__copy:focus-visible {
   opacity: 1;
 }

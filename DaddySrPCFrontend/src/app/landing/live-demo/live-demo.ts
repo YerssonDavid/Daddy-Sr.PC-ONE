@@ -13,23 +13,33 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { MarkdownComponent } from 'ngx-markdown';
 import { startWith, switchMap } from 'rxjs';
 import { RevealDirective } from '../../shared/reveal.directive';
+import { MdNormalizePipe, stripModelThinking } from '../../chat/message/markdown.pipe';
+import { LiveDemoApi } from './live-demo-api';
+
+function uuid(): string {
+  return crypto.randomUUID?.() ?? Math.random().toString(36).slice(2);
+}
 
 type Level = 'novato' | 'intermedio' | 'avanzado';
 
 interface ChatMessage {
+  id: string;
   role: 'user' | 'agent';
-  text: string;
+  blocks: { kind: 'text'; text: string }[];
+  createdAt: number;
+  pending?: boolean;
 }
 
-const TOTAL_REQUESTS = 15;
+const TOTAL_REQUESTS = 3;
 const REPLY_KEYS = ['r1', 'r2'] as const;
 
 @Component({
   selector: 'app-live-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, RevealDirective, TranslocoPipe],
+  imports: [FormsModule, RevealDirective, TranslocoPipe, MdNormalizePipe, MarkdownComponent],
   templateUrl: './live-demo.html',
   styleUrl: './live-demo.scss',
 })
@@ -58,6 +68,7 @@ export class LiveDemo implements OnInit, OnDestroy {
 
   private readonly transloco = inject(TranslocoService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly api = inject(LiveDemoApi);
 
   private get reducedMotion(): boolean {
     return (
@@ -81,7 +92,12 @@ export class LiveDemo implements OnInit, OnDestroy {
     this.timers.forEach(clearTimeout);
     this.timers = [];
     this.messages.set([
-      { role: 'agent', text: this.transloco.translate('demo.welcome') },
+      {
+        id: uuid(),
+        role: 'agent',
+        blocks: [{ kind: 'text', text: this.transloco.translate('demo.welcome') }],
+        createdAt: Date.now()
+      },
     ]);
     this.remaining.set(TOTAL_REQUESTS);
     this.draft.set('');
@@ -97,7 +113,12 @@ export class LiveDemo implements OnInit, OnDestroy {
     const text = this.draft().trim();
     if (!text || this.typing() || this.remaining() === 0) return;
 
-    this.messages.update((m) => [...m, { role: 'user', text }]);
+    this.messages.update((m) => [...m, {
+      id: uuid(),
+      role: 'user',
+      blocks: [{ kind: 'text', text }],
+      createdAt: Date.now()
+    }]);
     this.draft.set('');
     this.remaining.update((r) => r - 1);
     this.scrollSoon();
@@ -110,24 +131,62 @@ export class LiveDemo implements OnInit, OnDestroy {
   }
 
   private respond(openGateAfter: boolean): void {
-    const key = REPLY_KEYS[Math.floor(Math.random() * REPLY_KEYS.length)];
-    const reply = this.transloco.translate(`demo.replies.${this.level()}.${key}`);
+    const streamId = uuid();
+    const userMessage = this.messages()[this.messages().length - 1];
+
+    this.messages.update((m) => [
+      ...m, 
+      {
+        id: streamId,
+        role: 'agent',
+        blocks: [{ kind: 'text', text: '' }],
+        createdAt: Date.now(),
+        pending: true,
+      },
+    ]);
     this.typing.set(true);
+    this.scrollSoon();
 
-    const reveal = () => {
-      this.messages.update((m) => [...m, { role: 'agent', text: reply }]);
-      this.typing.set(false);
-      this.scrollSoon();
-      if (openGateAfter) {
-        this.timers.push(setTimeout(() => this.gateOpen.set(true), 700));
-      }
-    };
+    this.api
+      .ask(userMessage.blocks[0].text)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (response: string) => {
+          const formattedResponse = stripModelThinking(response);
 
-    if (this.reducedMotion) {
-      reveal();
-    } else {
-      this.timers.push(setTimeout(reveal, 900));
-    }
+          this.messages.update((m) =>
+            m.map((msg) =>
+              msg.id === streamId
+                ? {
+                    ...msg,
+                    blocks: [{ kind: 'text', text: formattedResponse }],
+                    pending: false,
+                  }
+                : msg,
+            ),
+          );
+          this.typing.set(false);
+          this.scrollSoon();
+          if (openGateAfter) {
+            this.timers.push(setTimeout(() => this.gateOpen.set(true), 700));
+          }
+        },
+        error: () => {
+          this.messages.update((m) =>
+            m.map((msg) =>
+              msg.id === streamId
+                ? {
+                    ...msg,
+                    blocks: [{ kind: 'text', text: this.transloco.translate('chat.errorConnect') }],
+                    pending: false,
+                  }
+                : msg,
+            ),
+          );
+          this.typing.set(false);
+          this.scrollSoon();
+        },
+      });
   }
 
   closeGate(): void {

@@ -37,9 +37,15 @@
 
       <!-- Mensajes -->
       <div class="chat__body" #body>
-        @for (m of messages(); track $index) {
+        @for (m of messages(); track m.id) {
           <div class="msg" [class.msg--user]="m.role === 'user'">
-            <p class="msg__bubble">{{ m.text }}</p>
+            @for (block of m.blocks; track $index) {
+              @if (m.role === 'agent') {
+                <markdown class="msg__bubble" [data]="block.text | mdNormalize" />
+              } @else {
+                <p class="msg__bubble">{{ block.text }}</p>
+              }
+            }
           </div>
         }
         @if (typing()) {

@@ -313,19 +313,26 @@
 
 /* ---- Tablet/Mobile: off-canvas drawer (doc §9) ---- */
 @media (max-width: 1024px) {
+  :host {
+    /* No ocupa espacio en el grid del shell */
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: visible;
+  }
+
   .sidebar {
     position: fixed;
     inset-block: 0;
     inset-inline-start: 0;
-    width: 264px !important;
+    width: 264px;
     transform: translateX(-100%);
     transition: transform var(--t-normal) var(--ease);
     z-index: 100;
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
   }
 
-  /* Abre el drawer cuando el shell tiene data-sidebar="expanded" */
-  :host-context([data-sidebar='expanded']) .sidebar {
+  .sidebar--open {
     transform: translateX(0);
   }
 }

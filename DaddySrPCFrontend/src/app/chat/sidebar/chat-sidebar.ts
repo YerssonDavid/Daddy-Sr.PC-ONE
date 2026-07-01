@@ -18,6 +18,7 @@ import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
 })
 export class ChatSidebar {
   readonly collapsed = input(false);
+  readonly open = input(false);
   readonly toggle = output<void>();
   readonly settingsOpen = output<void>();
 

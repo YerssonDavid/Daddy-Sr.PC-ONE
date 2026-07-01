@@ -16,9 +16,13 @@
         <a class="btn btn--primary" href="#demo">{{ 'hero.cta' | transloco }}</a>
         <a class="btn btn--secondary" href="#howit">{{ 'hero.ctaSecondary' | transloco }}</a>
       </div>
+      <a class="hero__one-trial" href="/chat" appReveal [revealDelay]="210">
+        <span class="hero__one-trial-line">{{ 'hero.oneTrial.line1' | transloco }}</span>
+        <span class="hero__one-trial-line">{{ 'hero.oneTrial.line2' | transloco }}</span>
+      </a>
       <p class="hero__free mono" appReveal [revealDelay]="240">
         <span class="hero__dot" aria-hidden="true"></span>
-        {{ 'hero.free' | transloco }}
+        {{ 'hero.freeTrial' | transloco }}
       </p>
     </div>
 
@@ -33,7 +37,7 @@
           <img class="chat__avatar" src="logo.png" alt="" width="28" height="28" />
           <span class="chat__title">Daddy <span>Sr.PC</span></span>
           <span class="chat__status" aria-hidden="true"></span>
-          <span class="chat__count mono">15/15</span>
+          <span class="chat__count mono">3/3</span>
         </div>
 
         <div class="chat__body">

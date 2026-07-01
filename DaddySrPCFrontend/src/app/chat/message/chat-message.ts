@@ -5,12 +5,12 @@ import { ChatMessage as ChatMessageModel } from '../state/chat-store';
 import { SpecTable } from '../message-blocks/spec-table';
 import { Admonition } from '../message-blocks/admonition';
 import { CodeBlock } from '../message-blocks/code-block';
-import { MarkdownPipe, normalizeModelMarkdown } from './markdown.pipe';
+import { MdNormalizePipe, stripModelThinking } from './markdown.pipe';
 
 @Component({
   selector: 'app-chat-message',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SpecTable, Admonition, CodeBlock, DatePipe, MarkdownComponent, MarkdownPipe],
+  imports: [SpecTable, Admonition, CodeBlock, DatePipe, MarkdownComponent, MdNormalizePipe],
   templateUrl: './chat-message.html',
   styleUrl: './chat-message.scss',
 })
@@ -24,7 +24,7 @@ export class ChatMessage {
   copy(): void {
     const text = this.message()
       .blocks.map((b) => {
-        if (b.kind === 'text' || b.kind === 'admonition') return normalizeModelMarkdown(b.text);
+        if (b.kind === 'text' || b.kind === 'admonition') return stripModelThinking(b.text);
         if (b.kind === 'code') return b.code;
         return '';
       })
