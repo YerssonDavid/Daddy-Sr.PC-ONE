@@ -21,7 +21,7 @@
     "headlineLine2": "de queimar nada.",
     "sub": "Deixa o Daddy te guiar em cada etapa da montagem. <strong>O Daddy responde tudo</strong>.",
     "cta": "Começar agora",
-    "ctaSecondary": "Como funciona",
+    "ctaSecondary": "Como funciona?",
     "free": "15 consultas grátis · sem cadastro",
     "freeTrial": "3 consultas grátis · sem cadastro",
     "oneTrial": {
@@ -136,9 +136,9 @@
     "cta": "Começar agora"
   },
   "footer": {
-    "features": "Recursos",
-    "howItWorks": "Como funciona",
-    "tryIt": "Testar",
+    "features": "Recursos?",
+    "howItWorks": "Como funciona?",
+    "tryIt": "Testar?",
     "madeWith": "Feito com",
     "madeBy": "por David222"
   },
@@ -250,7 +250,6 @@
   "login": {
     "eyebrow": "// De volta ao ateliê",
     "brandTagline": "Seu ponto de entrada para a montagem.",
-    "feat1": "15 consultas por dia, grátis",
     "feat2": "Histórico completo de conversas",
     "feat3": "Respostas no seu nível",
     "title": "Bem-vindo de volta.",
