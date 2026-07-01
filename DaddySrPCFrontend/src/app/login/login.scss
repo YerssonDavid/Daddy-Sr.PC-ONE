@@ -20,27 +20,27 @@
 }
 
 /* ============================================================
-   Layout principal (same two-column grid as register)
+   Layout principal
    ============================================================ */
 .lg-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  position: relative;
   min-height: 100dvh;
   padding-top: 60px;
+  overflow: hidden;
 }
 
 /* ============================================================
-   Panel izquierdo — brand
+   Panel izquierdo — brand (full background)
    ============================================================ */
 .lg-brand {
-  position: relative;
+  position: absolute;
+  inset: 0;
+  padding-top: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(2.5rem, 4vw, 5rem) clamp(2rem, 3vw, 4rem);
   overflow: hidden;
   background: linear-gradient(160deg, var(--bg-elevated) 0%, var(--bg-surface) 100%);
-  border-right: 1px solid var(--border);
 
   &::before {
     content: '';
@@ -77,8 +77,8 @@
 }
 
 @keyframes cpu-scan {
-  from { transform: translateX(0); }
-  to   { transform: translateX(360px); }
+  from { transform: translateX(-240px); }
+  to   { transform: translateX(240px); }
 }
 
 .lg-brand__content {
@@ -124,54 +124,18 @@
   letter-spacing: -0.01em;
 }
 
-.lg-feats {
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-}
-
-.lg-feat {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: var(--fs-body);
-  color: var(--text-secondary);
-  transition: color var(--t-fast) var(--ease);
-
-  &:hover { color: var(--text-primary); }
-}
-
-.lg-feat__dot {
-  flex-shrink: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--solder);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--solder) 20%, transparent), 0 0 8px var(--solder-tint);
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    width: 20px;
-    height: 1px;
-    background: linear-gradient(to right, var(--solder), transparent);
-    opacity: 0.4;
-  }
-}
-
 /* ============================================================
-   Panel derecho — form
+   Panel — form centrado sobre el fondo
    ============================================================ */
 .lg-section {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100dvh;
   padding: clamp(1.5rem, 3vw, 3.5rem) clamp(1.5rem, 3vw, 4rem);
-  background-color: var(--bg-base);
 }
 
 /* ============================================================
@@ -180,9 +144,9 @@
 .lg-card {
   width: 100%;
   max-width: 440px;
-  background: var(--glass-elevated);
-  backdrop-filter: blur(var(--blur));
-  -webkit-backdrop-filter: blur(var(--blur));
+  background: color-mix(in srgb, var(--glass-elevated) 75%, transparent);
+  backdrop-filter: blur(calc(var(--blur) * 1.5));
+  -webkit-backdrop-filter: blur(calc(var(--blur) * 1.5));
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: clamp(1.75rem, 3vw, 2.5rem);
@@ -502,51 +466,13 @@
    Responsive
    ============================================================ */
 @media (max-width: 1024px) {
-  .lg-main {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-  }
-
-  .lg-brand {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    padding: 2rem clamp(1.5rem, 4vw, 3rem);
-    justify-content: flex-start;
-  }
-
   .lg-brand__cpu { opacity: 0.08; }
-
-  .lg-brand__content {
-    max-width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .lg-brand__logo { margin-bottom: 0; flex-shrink: 0; }
-  .lg-brand__eyebrow,
-  .lg-brand__tagline { display: none; }
-
-  .lg-feats {
-    flex-direction: row;
-    flex-wrap: wrap;
-    column-gap: 1.5rem;
-    row-gap: 0.5rem;
-  }
-
-  .lg-feat__dot::before { display: none; }
 }
 
 @media (max-width: 640px) {
   .lg-main { padding-top: 56px; }
 
-  .lg-brand { padding: 1.25rem 1rem; }
-  .lg-brand__content { gap: 1rem; }
-  .lg-brand__logo img { width: 36px; height: 36px; }
-  .lg-brand__name { font-size: 1.125rem; }
-  .lg-feats { display: none; }
+  .lg-brand { padding-top: 56px; }
 
   .lg-section {
     padding: 1.25rem 1rem;
