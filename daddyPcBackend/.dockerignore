@@ -1,0 +1,40 @@
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Build output
+target/
+
+# Maven wrapper (imagen ya trae maven)
+.mvn/
+mvnw
+mvnw.cmd
+
+# Documentación
+*.md
+doc.md
+
+# Docker files (no necesarios en build)
+compose.yaml
+docker-compose*.yml
+
+# IDE / Editor
+.qodo/
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Entorno / secrets
+.env
+.env.*
+secrets/
+
+# Logs
+*.log
