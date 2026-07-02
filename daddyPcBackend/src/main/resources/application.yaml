@@ -6,12 +6,6 @@ spring:
     compose:
       enabled: false
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: secret
-    driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: create
@@ -28,12 +22,15 @@ spring:
       api-key: ${OPENAI_API_KEY}
       chat:
         options:
-          model: MiniMaxAI/MiniMax-M3
+          model: zai-org/GLM-5.1
           temperature: 0.3
       embedding:
         options:
           model: Qwen/Qwen3-Embedding-0.6B
           dimensions: 768
+  output:
+    ansi:
+      enabled: always
 
 
 tavily:
