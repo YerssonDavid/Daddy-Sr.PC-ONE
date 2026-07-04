@@ -1,6 +1,7 @@
 package com.example.david.one.daddypcbackend.infraestructure.config.ai;
 
 import com.example.david.one.daddypcbackend.infraestructure.dto.asistant.SystemPromptAgent;
+import com.example.david.one.daddypcbackend.infraestructure.dto.asistant.SystemPromptAgentSupport;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
@@ -15,7 +16,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ConfigurationAi {
-    @Bean
+
+    //ChatClient for principal agent
+    @Bean("principalAgentChatClient")
     public ChatClient chatClient(ChatClient.Builder builder, VectorStore vectorStore, @Qualifier("principalAgent") ChatMemory chatMemory) {
         QuestionAnswerAdvisor advisor = QuestionAnswerAdvisor.builder(vectorStore)
                 .searchRequest(SearchRequest.builder()
@@ -38,6 +41,33 @@ public class ConfigurationAi {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
                 .maxMessages(25)
+                .build();
+    }
+
+
+    //Chat client for support agent
+    @Bean("supportAgentChatClient")
+    public ChatClient supportAgentChatClient(ChatClient.Builder builder, VectorStore vectorStore, @Qualifier("supportAgent") ChatMemory chatMemory) {
+        QuestionAnswerAdvisor advisor = QuestionAnswerAdvisor.builder(vectorStore)
+                .searchRequest(SearchRequest.builder()
+                        .similarityThreshold(0.5)
+                        .topK(5)
+                        .build())
+                .build();
+
+        MessageChatMemoryAdvisor memoryAdvisor = MessageChatMemoryAdvisor.builder(chatMemory).build();
+        return builder
+                .defaultSystem(SystemPromptAgentSupport.getPrompt())
+                .defaultAdvisors(advisor, memoryAdvisor)
+                .build();
+    }
+
+    //Config chat memory for agent of support
+    @Bean("supportAgent")
+    public ChatMemory chatMemorySupportAgent(){
+        return MessageWindowChatMemory.builder()
+                .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .maxMessages(20)
                 .build();
     }
 }
