@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Level } from './chat-store';
+import { CHAT_API_ENDPOINT } from './chat-agent.config';
 import { environment } from '../../../environments/environment';
 
 const BASE = environment.apiBaseUrl;
@@ -14,8 +15,10 @@ function extractDataValue(line: string): string {
   return line.slice(5);
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ChatApi {
+  private readonly endpoint = inject(CHAT_API_ENDPOINT);
+
   /**
    * Envía el mensaje al backend y emite chunks de texto conforme llegan.
    * El backend devuelve Flux<String> via text/event-stream.
@@ -30,7 +33,7 @@ export class ChatApi {
     return new Observable<string>((observer) => {
       const controller = new AbortController();
 
-      fetch(`${BASE}/ask?conversationId=${conversationId}`, {
+      fetch(`${BASE}${this.endpoint}?conversationId=${conversationId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
         body: JSON.stringify({ question: input.text }),

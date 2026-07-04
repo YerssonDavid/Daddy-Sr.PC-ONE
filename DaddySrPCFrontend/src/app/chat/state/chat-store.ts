@@ -1,4 +1,5 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { CHAT_STORAGE_KEY } from './chat-agent.config';
 
 export type Role = 'user' | 'agent';
 export type Level = 'novato' | 'intermedio' | 'avanzado';
@@ -24,14 +25,13 @@ export interface Conversation {
   updatedAt: number;
 }
 
-const LS_KEY = 'daddy-chat-state';
-
 function uuid(): string {
   return crypto.randomUUID?.() ?? Math.random().toString(36).slice(2);
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ChatStore {
+  private readonly storageKey: string;
   private readonly _conversations = signal<Conversation[]>([]);
   private readonly _activeId = signal<string | null>(null);
 
@@ -45,6 +45,7 @@ export class ChatStore {
   readonly messages = computed(() => this.active()?.messages ?? []);
 
   constructor() {
+    this.storageKey = inject(CHAT_STORAGE_KEY);
     this.loadFromStorage();
     if (this._conversations().length === 0) {
       this.newConversation();
@@ -167,7 +168,7 @@ export class ChatStore {
         conversations: this._conversations().slice(0, 20), // keep last 20
         activeId: this._activeId(),
       };
-      localStorage.setItem(LS_KEY, JSON.stringify(data));
+      localStorage.setItem(this.storageKey, JSON.stringify(data));
     } catch {
       /* ignore */
     }
@@ -175,7 +176,7 @@ export class ChatStore {
 
   private loadFromStorage(): void {
     try {
-      const raw = localStorage.getItem(LS_KEY);
+      const raw = localStorage.getItem(this.storageKey);
       if (!raw) return;
       const data = JSON.parse(raw) as { conversations: Conversation[]; activeId: string | null };
       if (Array.isArray(data.conversations)) {
