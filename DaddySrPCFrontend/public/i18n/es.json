@@ -21,9 +21,9 @@
     "headlineLine2": "a quemar nada.",
     "sub": "Deja que Daddy te guíe en cada paso del armado. <strong>Daddy responde todo</strong>.",
     "cta": "Comenzar ahora",
-    "ctaSecondary": "Cómo funciona",
-    "free": "15 consultas gratis · sin registro",
-    "freeTrial": "3 consultas gratis · sin registro",
+    "ctaSecondary": "¿Cómo funciona?",
+    "free": "3 consultas sin necesidad de registro (con limitaciones)",
+    "freeTrial": "3 consultas sin necesidad de registro (con limitaciones)",
     "oneTrial": {
       "line1": "Acceso temporal para pruebas",
       "line2": "Equipo ONE: probar agente completo"
@@ -67,8 +67,8 @@
       "body": "Nada de templates. Explicaciones precisas, datos técnicos y advertencias de seguridad donde hagan falta."
     },
     "step3": {
-      "title": "Tienes 15 consultas gratis",
-      "body": "Pruébalo sin registrarte. El contador queda visible y baja con cada pregunta."
+      "title": "Tienes 3 consultas sin necesidad de registro (con limitaciones)",
+      "body": "Pruébalo sin registrarte. El contador queda visible y baja con cada pregunta. Ten en cuenta que el modo de prueba tiene limitaciones."
     },
     "step4": {
       "title": "Regístrate para seguir",
@@ -82,8 +82,8 @@
     "accessAllFeatures": "para acceder a todas las funciones",
     "eyebrow": "// Pruébalo en vivo",
     "heading": "Tu primer contacto con Daddy. Sin registro.",
-    "sub": "Estas 15 consultas son reales. El contador baja con cada pregunta — cuando llega a cero, te invitamos a seguir.",
-    "welcome": "¡Hola! Soy Daddy. Pregúntame lo que quieras sobre tu PC: compatibilidad, armado, lo que sea. Tienes 15 consultas para probar.",
+    "sub": "Estas 3 consultas son reales. El contador baja con cada pregunta — cuando llega a cero, te invitamos a seguir.",
+    "welcome": "¡Hola! Soy Daddy. Pregúntame lo que quieras sobre tu PC: compatibilidad, armado, lo que sea. Tienes 3 consultas para probar.",
     "levels": {
       "novato": "Primer armado",
       "intermedio": "Intermedio",
@@ -130,9 +130,9 @@
     "cta": "Comenzar ahora"
   },
   "footer": {
-    "features": "Qué resuelve",
-    "howItWorks": "Cómo funciona",
-    "tryIt": "Pruébalo",
+    "features": "¿Qué resuelve?",
+    "howItWorks": "¿Cómo funciona?",
+    "tryIt": "¿Pruébalo?",
     "madeWith": "Hecho con",
     "madeBy": "por David222"
   },
@@ -225,6 +225,16 @@
     "suggestion2": "¿AM5 usa DDR4 o DDR5?",
     "suggestion3": "¿Cuántos watts necesito para un Ryzen 9?",
     "suggestion4": "¿Cómo aplicar pasta térmica?",
+    "agentDaddy": "Daddy Sr.PC",
+    "supportAgent": "Agente servicio al cliente",
+    "supportAgentName": "Soporte Técnico",
+    "supportAgentStatus": "En línea · Soporte técnico",
+    "supportEmptyTitle": "¡Hola! Soy el agente de servicio técnico.",
+    "supportEmptySub": "Pregúntame lo que necesites sobre los servicios físicos de Daddy Sr.PC: mantenimiento, envíos, garantías, presupuestos — todo.",
+    "supportSuggestion1": "¿Cuánto es el tiempo promedio de mantenimiento?",
+    "supportSuggestion2": "¿Cuánto cuestan los envios a las tiendas físicas del país?",
+    "supportSuggestion3": "¿Ofrecen garantía en los servicios de mantenimiento?",
+    "supportSuggestion4": "¿Cuáles son los horarios de atención en tienda física?",
     "noticeRemaining": "Quedan {{ count }} de {{ total }} consultas este minuto.",
     "noticeLast": "Te queda 1 consulta este minuto. Se restablece automáticamente.",
     "limitEyebrow": "// Límite alcanzado",
@@ -244,7 +254,6 @@
   "login": {
     "eyebrow": "// Accede al taller",
     "brandTagline": "Tu punto de entrada al ensamblaje.",
-    "feat1": "15 consultas por día, gratis",
     "feat2": "Historial de tus conversaciones",
     "feat3": "Respuestas adaptadas a tu nivel",
     "title": "Bienvenido de vuelta.",

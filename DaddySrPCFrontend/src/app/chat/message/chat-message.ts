@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { ChatMessage as ChatMessageModel } from '../state/chat-store';
+import { CHAT_AGENT_CONFIG } from '../state/chat-agent.config';
 import { SpecTable } from '../message-blocks/spec-table';
 import { Admonition } from '../message-blocks/admonition';
 import { CodeBlock } from '../message-blocks/code-block';
@@ -16,6 +17,7 @@ import { MdNormalizePipe, stripModelThinking } from './markdown.pipe';
 })
 export class ChatMessage {
   readonly message = input.required<ChatMessageModel>();
+  protected readonly agentConfig = inject(CHAT_AGENT_CONFIG);
 
   protected readonly copied = signal(false);
   private copyTimer?: ReturnType<typeof setTimeout>;

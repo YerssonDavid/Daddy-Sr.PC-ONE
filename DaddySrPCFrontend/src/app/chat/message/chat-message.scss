@@ -5,10 +5,10 @@
   align-items: flex-start;
   animation: fade-up 0.4s var(--ease) both;
   max-width: var(--bubble-max, 720px);
-  width: 100%; /* Ocupa todo el ancho disponible en móviles */
+  width: 100%;
   
   @media (min-width: 768px) {
-    width: fit-content; /* Desktop: ancho ajustado al contenido */
+    width: fit-content;
   }
 }
 
@@ -49,10 +49,13 @@
   margin-top: 4px;
 
   img {
-    width: 28px;
-    height: 28px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    border: 1.5px solid var(--glass-border);
+    background: var(--bg-elevated);
+    object-fit: contain;
+    border: 1.5px solid var(--border);
+    box-shadow: 0 0 0 2px var(--bg-base);
   }
 }
 

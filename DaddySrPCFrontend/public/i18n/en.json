@@ -21,8 +21,8 @@
     "headlineLine2": "of burning anything.",
     "sub": "Let Daddy guide you through every step of the build. <strong>Daddy answers everything</strong>.",
     "cta": "Get started",
-    "ctaSecondary": "How it works",
-    "free": "15 free queries · no sign-up",
+    "ctaSecondary": "How it works?",
+    "free": "3 free queries · no sign-up",
     "freeTrial": "3 free queries · no sign-up",
     "oneTrial": {
       "line1": "Temporary access for testing",
@@ -73,7 +73,7 @@
       "body": "No templates. Precise explanations, technical data and safety warnings where needed."
     },
     "step3": {
-      "title": "You have 15 free queries",
+      "title": "You have 3 queries with no sign-up (with limitations)",
       "body": "Try it without signing up. The counter stays visible and drops with each question."
     },
     "step4": {
@@ -88,8 +88,8 @@
     "accessAllFeatures": "to access all features",
     "eyebrow": "// Try it live",
     "heading": "Your first contact with Daddy. No sign-up.",
-    "sub": "These 15 queries are real. The counter drops with each question — when it hits zero, we invite you to keep going.",
-    "welcome": "Hey! I'm Daddy. Ask me anything about your PC build: compatibility, assembly, whatever. You have 15 queries to try.",
+    "sub": "These 3 queries are real. The counter drops with each question — when it hits zero, we invite you to keep going.",
+    "welcome": "Hey! I'm Daddy. Ask me anything about your PC build: compatibility, assembly, whatever. You have 3 queries to try.",
     "levels": {
       "novato": "First build",
       "intermedio": "Intermediate",
@@ -104,7 +104,7 @@
     "bannerStrong": "1 query left. Create your account to continue.",
     "gate": {
       "eyebrow": "// You've reached the trial limit",
-      "title": "You asked 15 questions. Nice work.",
+      "title": "You asked 3 questions. Nice work.",
       "text": "Want to keep going? Sign up for free:",
       "feature1": "15 questions per day",
       "feature2": "Chat history",
@@ -136,16 +136,16 @@
     "cta": "Get started"
   },
   "footer": {
-    "features": "Features",
-    "howItWorks": "How it works",
-    "tryIt": "Try it",
+    "features": "Features?",
+    "howItWorks": "How it works?",
+    "tryIt": "Try it?",
     "madeWith": "Made with",
     "madeBy": "by David222"
   },
   "register": {
     "eyebrow": "// Create your account",
     "brandTagline": "Your personal assembly workshop.",
-    "feat1": "15 queries per day, free",
+    "feat1": "3 queries per day, free",
     "feat2": "Full conversation history",
     "feat3": "Replies tuned to your level",
     "feat4": "Compatibility, assembly and tech",
@@ -231,6 +231,16 @@
     "suggestion2": "Does AM5 use DDR4 or DDR5?",
     "suggestion3": "How many watts for a Ryzen 9?",
     "suggestion4": "How do I apply thermal paste?",
+    "agentDaddy": "Daddy Sr.PC",
+    "supportAgent": "Customer service agent",
+    "supportAgentName": "Tech Support",
+    "supportAgentStatus": "Online · Tech Support",
+    "supportEmptyTitle": "Hello! I'm the tech support agent.",
+    "supportEmptySub": "Ask me anything about Daddy Sr.PC's physical services: maintenance, shipping, warranties, quotes — everything.",
+    "supportSuggestion1": "What is the average maintenance time?",
+    "supportSuggestion2": "How much does shipping to physical stores cost?",
+    "supportSuggestion3": "Do you offer a warranty on maintenance services?",
+    "supportSuggestion4": "What are the in-store service hours?",
     "noticeRemaining": "{{ count }} of {{ total }} queries left this minute.",
     "noticeLast": "1 query left this minute. Resets automatically.",
     "limitEyebrow": "// Limit reached",
@@ -250,7 +260,6 @@
   "login": {
     "eyebrow": "// Back to the workshop",
     "brandTagline": "Your entry point to the build.",
-    "feat1": "15 queries per day, free",
     "feat2": "Full conversation history",
     "feat3": "Replies tuned to your level",
     "title": "Welcome back.",

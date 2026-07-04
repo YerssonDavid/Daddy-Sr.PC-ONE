@@ -5,6 +5,7 @@ import {
   input,
   output,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ChatStore, Conversation } from '../state/chat-store';
 import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
@@ -22,10 +23,20 @@ export class ChatSidebar {
   readonly toggle = output<void>();
   readonly settingsOpen = output<void>();
 
+  private readonly router = inject(Router);
   protected readonly store = inject(ChatStore);
+  protected readonly isSupportRoute = this.router.url.includes('/chat/support');
 
   newChat(): void {
     this.store.newConversation();
+  }
+
+  goToSupport(): void {
+    this.router.navigate(['/chat/support']);
+  }
+
+  goToDaddy(): void {
+    this.router.navigate(['/chat']);
   }
 
   selectConversation(conv: Conversation): void {

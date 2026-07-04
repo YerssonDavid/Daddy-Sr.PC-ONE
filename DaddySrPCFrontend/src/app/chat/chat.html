@@ -60,6 +60,7 @@
     <app-message-list
       [messages]="store.messages()"
       [typing]="store.typing()"
+      (suggestionClick)="onSend($event)"
     />
 
     <!-- Compositor flotante -->

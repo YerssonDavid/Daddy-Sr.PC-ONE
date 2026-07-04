@@ -16,9 +16,9 @@ import { RevealDirective } from '../../shared/reveal.directive';
         <p class="closing__sub">
           {{ 'closing.sub' | transloco }}
         </p>
-        <a class="btn btn--primary closing__cta" href="#demo">
+        <button class="btn btn--primary closing__cta" (click)="scrollToDemo()">
           {{ 'closing.cta' | transloco }}
-        </a>
+        </button>
       </div>
     </section>
   `,
@@ -51,4 +51,8 @@ import { RevealDirective } from '../../shared/reveal.directive';
     `,
   ],
 })
-export class Closing {}
+export class Closing {
+  scrollToDemo(): void {
+    document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
+  }
+}

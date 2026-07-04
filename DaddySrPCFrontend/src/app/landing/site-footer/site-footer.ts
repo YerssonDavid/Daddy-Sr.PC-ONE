@@ -12,12 +12,19 @@ import { TranslocoPipe } from '@jsverse/transloco';
           <img src="logo.png" alt="" width="28" height="28" />
           <span>Daddy <span class="footer__sr">Sr.PC</span></span>
         </a>
+
         <nav class="footer__links" aria-label="Footer navigation">
           <a href="#features">{{ 'footer.features' | transloco }}</a>
           <a href="#howit">{{ 'footer.howItWorks' | transloco }}</a>
-          <a href="#demo">{{ 'footer.tryIt' | transloco }}</a>
+          <button class="footer__link-btn" (click)="scrollToDemo()">{{ 'footer.tryIt' | transloco }}</button>
         </nav>
-        <div class="footer__meta">
+
+        <div class="footer__bottom-group">
+          <span class="footer__project mono">Proyecto ONE 2026</span>
+          <p class="footer__copy mono">© {{ year }} Daddy Sr.PC</p>
+        </div>
+
+        <div class="footer__right-col">
           <a
             class="footer__github mono"
             href="https://github.com/YerssonDavid"
@@ -47,7 +54,6 @@ import { TranslocoPipe } from '@jsverse/transloco';
               <rect y="15" width="30" height="5" fill="#CE1126" />
             </svg>
           </p>
-          <p class="footer__copy mono">© {{ year }} Daddy Sr.PC</p>
         </div>
       </div>
     </footer>
@@ -57,16 +63,19 @@ import { TranslocoPipe } from '@jsverse/transloco';
       .footer {
         border-top: 1px solid var(--border);
         background: var(--bg-surface);
-        padding-block: 2rem;
+        height: 7em;
       }
       .footer__inner {
+        height: 100%;
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.25rem;
+        flex-direction: column;
+        position: relative;
       }
       .footer__brand {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
         display: inline-flex;
         align-items: center;
         gap: 0.55rem;
@@ -83,21 +92,37 @@ import { TranslocoPipe } from '@jsverse/transloco';
       }
       .footer__links {
         display: flex;
+        justify-content: center;
         gap: 1.5rem;
+        padding-top: 1em;
+        transform: translateX(-13px);
       }
-      .footer__links a {
+      .footer__links a,
+      .footer__link-btn {
         font-size: var(--fs-small);
         color: var(--text-secondary);
         transition: color var(--t-fast) var(--ease);
       }
-      .footer__links a:hover {
+      .footer__link-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        padding: 0;
+      }
+      .footer__links a:hover,
+      .footer__link-btn:hover {
         color: var(--trace);
       }
-      .footer__meta {
+      .footer__right-col {
+        position: absolute;
+        bottom: 0;
+        right: 0;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         gap: 0.35rem;
+        transform: translateY(-10px);
       }
       .footer__github {
         display: inline-flex;
@@ -139,9 +164,23 @@ import { TranslocoPipe } from '@jsverse/transloco';
       .footer__made:hover .footer__flag {
         transform: translateY(-1px) scale(1.1);
       }
+      .footer__bottom-group {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        transform: translateY(-10px);
+      }
+      .footer__project {
+        font-size: var(--fs-mono-sm);
+        color: var(--text-muted);
+        text-align: center;
+      }
       .footer__copy {
         font-size: var(--fs-mono-sm);
         color: var(--text-muted);
+        text-align: center;
       }
       @keyframes heartbeat {
         0%, 100% { transform: scale(1); }
@@ -150,12 +189,8 @@ import { TranslocoPipe } from '@jsverse/transloco';
         45% { transform: scale(1.18); }
       }
       @media (max-width: 560px) {
-        .footer__inner {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .footer__meta {
-          align-items: flex-start;
+        .footer__right-col {
+          align-items: center;
         }
       }
     `,
@@ -163,4 +198,8 @@ import { TranslocoPipe } from '@jsverse/transloco';
 })
 export class SiteFooter {
   protected readonly year = new Date().getFullYear();
+
+  scrollToDemo(): void {
+    document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
+  }
 }
