@@ -31,7 +31,11 @@ spring:
   output:
     ansi:
       enabled: always
+  profiles:
+    active: dev
 
+  autoconfigure:
+    exclude: org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
 
 tavily:
   api-key: ${TAVILY_API}

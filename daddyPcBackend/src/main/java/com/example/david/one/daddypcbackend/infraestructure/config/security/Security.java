@@ -28,6 +28,7 @@ public class Security {
                         .requestMatchers(HttpMethod.POST, "/login/user").permitAll()
                         //Set authorization for token
                         .requestMatchers(HttpMethod.POST, "/ask").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/ask/support").permitAll()
                         .requestMatchers(HttpMethod.POST, "/ai/free/user").permitAll()
                         .anyRequest().authenticated()
                 );

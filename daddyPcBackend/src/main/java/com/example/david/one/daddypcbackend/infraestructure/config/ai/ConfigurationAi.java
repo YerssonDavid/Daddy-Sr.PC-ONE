@@ -8,18 +8,21 @@ import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvi
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.ai.vectorstore.pgvector.PgVectorStore;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class ConfigurationAi {
 
     //ChatClient for principal agent
     @Bean("principalAgentChatClient")
-    public ChatClient chatClient(ChatClient.Builder builder, VectorStore vectorStore, @Qualifier("principalAgent") ChatMemory chatMemory) {
+    public ChatClient chatClient(ChatClient.Builder builder, @Qualifier("vectorPrincipalAgent") VectorStore vectorStore, @Qualifier("principalAgent") ChatMemory chatMemory) {
         QuestionAnswerAdvisor advisor = QuestionAnswerAdvisor.builder(vectorStore)
                 .searchRequest(SearchRequest.builder()
                         .similarityThreshold(0.5)
@@ -47,10 +50,10 @@ public class ConfigurationAi {
 
     //Chat client for support agent
     @Bean("supportAgentChatClient")
-    public ChatClient supportAgentChatClient(ChatClient.Builder builder, VectorStore vectorStore, @Qualifier("supportAgent") ChatMemory chatMemory) {
+    public ChatClient supportAgentChatClient(ChatClient.Builder builder, @Qualifier("vectorSupportAgent") VectorStore vectorStore, @Qualifier("supportAgent") ChatMemory chatMemory) {
         QuestionAnswerAdvisor advisor = QuestionAnswerAdvisor.builder(vectorStore)
                 .searchRequest(SearchRequest.builder()
-                        .similarityThreshold(0.5)
+                        .similarityThreshold(0.1)
                         .topK(5)
                         .build())
                 .build();
@@ -68,6 +71,22 @@ public class ConfigurationAi {
         return MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
                 .maxMessages(20)
+                .build();
+    }
+
+    @Bean("vectorPrincipalAgent")
+    public PgVectorStore vectorStorePrincipalAgent(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
+        return PgVectorStore.builder(jdbcTemplate, embeddingModel)
+                .vectorTableName("principal_agent")
+                .initializeSchema(true)
+                .build();
+    }
+
+    @Bean("vectorSupportAgent")
+    public PgVectorStore vectorStoreSupportAgent(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
+        return PgVectorStore.builder(jdbcTemplate, embeddingModel)
+                .vectorTableName("support_agent")
+                .initializeSchema(true)
                 .build();
     }
 }
