@@ -4,11 +4,14 @@ import {
   Component,
   effect,
   ElementRef,
+  inject,
   input,
+  output,
   viewChild,
 } from '@angular/core';
-import { TranslocoPipe } from '@jsverse/transloco';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { ChatMessage as ChatMessageModel } from '../state/chat-store';
+import { CHAT_AGENT_CONFIG } from '../state/chat-agent.config';
 import { ChatMessage } from '../message/chat-message';
 
 @Component({
@@ -21,13 +24,15 @@ import { ChatMessage } from '../message/chat-message';
 export class MessageList {
   readonly messages = input.required<ChatMessageModel[]>();
   readonly typing = input(false);
+  readonly suggestionClick = output<string>();
 
-  protected readonly suggestionKeys = [
-    'chat.suggestion1',
-    'chat.suggestion2',
-    'chat.suggestion3',
-    'chat.suggestion4',
-  ];
+  private readonly transloco = inject(TranslocoService);
+  protected readonly agentConfig = inject(CHAT_AGENT_CONFIG);
+
+  protected selectSuggestion(key: string): void {
+    const text = this.transloco.translate(key);
+    this.suggestionClick.emit(text);
+  }
 
   private readonly scroller = viewChild<ElementRef<HTMLElement>>('scroller');
 

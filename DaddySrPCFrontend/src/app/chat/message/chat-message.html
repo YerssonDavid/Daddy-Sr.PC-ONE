@@ -6,7 +6,7 @@
   <!-- Avatar del agente -->
   @if (message().role === 'agent') {
     <div class="bubble__avatar" aria-hidden="true">
-      <img src="logo.png" alt="" width="28" height="28" />
+      <img [src]="agentConfig.logo" alt="" width="28" height="28" />
     </div>
   }
 

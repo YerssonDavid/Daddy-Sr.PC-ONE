@@ -213,6 +213,41 @@
   }
 }
 
+/* ---- Agent switch ---- */
+.sidebar__agent-switch {
+  padding: 0.5rem 0.75rem 0;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.sidebar__support-btn {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  padding: 0.5rem 0.625rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  cursor: pointer;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+
+  &:hover {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+  }
+}
+
+.sidebar__support-icon {
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 /* ---- Footer ---- */
 .sidebar__footer {
   display: flex;
@@ -303,6 +338,11 @@
 
   .sidebar__delete-btn {
     display: none;
+  }
+
+  .sidebar__support-btn {
+    justify-content: center;
+    padding: 0.5rem;
   }
 
   .sidebar__footer {

@@ -49,10 +49,13 @@
   margin-top: 4px;
 
   img {
-    width: 28px;
-    height: 28px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    border: 1.5px solid var(--glass-border);
+    background: var(--bg-elevated);
+    object-fit: contain;
+    border: 1.5px solid var(--border);
+    box-shadow: 0 0 0 2px var(--bg-base);
   }
 }
 

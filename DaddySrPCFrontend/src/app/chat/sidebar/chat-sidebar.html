@@ -74,6 +74,31 @@
     </ul>
   </nav>
 
+  <!-- Agent switch: Daddy <-> Support -->
+  <div class="sidebar__agent-switch">
+    @if (isSupportRoute) {
+      <button
+        type="button"
+        class="sidebar__support-btn"
+        (click)="goToDaddy()"
+        [attr.title]="collapsed() ? ('chat.agentDaddy' | transloco) : null"
+      >
+        <img src="logo.png" alt="" width="20" height="20" class="sidebar__support-icon" />
+        <span class="sidebar__collapsible">{{ 'chat.agentDaddy' | transloco }}</span>
+      </button>
+    } @else {
+      <button
+        type="button"
+        class="sidebar__support-btn"
+        (click)="goToSupport()"
+        [attr.title]="collapsed() ? ('chat.supportAgent' | transloco) : null"
+      >
+        <img src="img/customer-service-logo.png" alt="" width="20" height="20" class="sidebar__support-icon" />
+        <span class="sidebar__collapsible">{{ 'chat.supportAgent' | transloco }}</span>
+      </button>
+    }
+  </div>
+
   <!-- Footer -->
   <footer class="sidebar__footer">
     <app-theme-toggle />
