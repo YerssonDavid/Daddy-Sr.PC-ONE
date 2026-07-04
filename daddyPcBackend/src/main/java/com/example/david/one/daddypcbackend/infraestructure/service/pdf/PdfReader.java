@@ -20,9 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PdfReader {
 
-    private final VectorStore vectorStore;
-
-    public void ingestAllDocuments() {
+    public void ingestAllDocuments(String subfolder, VectorStore vectorStore) throws IOException {
         // Verify if already exist document in the database
         SearchRequest checkRequest = SearchRequest.builder()
                 .query("dummy")
@@ -41,19 +39,19 @@ public class PdfReader {
         Resource[] resources;
 
         try {
-            resources = resolver.getResources("classpath:pdf/*.pdf");
+            resources = resolver.getResources("classpath:pdf/" + subfolder + "/*.pdf");
         } catch (IOException e) {
             throw new RuntimeException("Error finding documents", e);
         }
 
         for (Resource resource : resources) {
-            ingestSinglePdf(resource);
+            ingestSinglePdf(resource, vectorStore);
         }
 
         System.out.println("Ingested completed!");
     }
 
-    private void ingestSinglePdf(Resource resource) {
+    private void ingestSinglePdf(Resource resource, VectorStore vectorStore) throws IOException {
         try {
             String filename = resource.getFilename();
 

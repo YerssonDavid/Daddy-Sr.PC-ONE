@@ -5,6 +5,7 @@ import com.example.david.one.daddypcbackend.infraestructure.dto.asistant.SystemP
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
@@ -14,7 +15,7 @@ public class AssistantAIAdapter implements IAssistantAIClient {
     private final TavilySearchToolsAdapter tavilySearchToolsAdapter;
     private final ChatClient chatClient;
 
-    public AssistantAIAdapter(ChatClient chatClient, TavilySearchToolsAdapter tavilySearchToolsAdapter) {
+    public AssistantAIAdapter(@Qualifier("principalAgentChatClient") ChatClient chatClient, TavilySearchToolsAdapter tavilySearchToolsAdapter) {
         this.chatClient = chatClient;
         this.tavilySearchToolsAdapter = tavilySearchToolsAdapter;
     }

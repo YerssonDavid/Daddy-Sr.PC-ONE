@@ -1,7 +1,9 @@
 package com.example.david.one.daddypcbackend.infraestructure.config.beans.assistant;
 
+import com.example.david.one.daddypcbackend.application.port.out.assistant.IAskToAiSupportClient;
 import com.example.david.one.daddypcbackend.application.port.out.assistant.IAssistantAIClient;
 import com.example.david.one.daddypcbackend.application.port.out.assistant.IAssistantAIFreeClient;
+import com.example.david.one.daddypcbackend.application.useCase.assistant.QuestionAiSupport;
 import com.example.david.one.daddypcbackend.application.useCase.assistant.QuestionAiUseCase;
 import com.example.david.one.daddypcbackend.application.useCase.assistant.QuestionToAssistantFree;
 import org.springframework.context.annotation.Bean;
@@ -18,5 +20,10 @@ public class ConfigAssistant {
     @Bean
     public QuestionToAssistantFree questionToAssistantTest(IAssistantAIFreeClient iAssistantAITestClient) {
         return new QuestionToAssistantFree(iAssistantAITestClient);
+    }
+
+    @Bean
+    public QuestionAiSupport questionAiSupport(IAskToAiSupportClient iAskToAiSupportClient) {
+        return new QuestionAiSupport(iAskToAiSupportClient);
     }
 }
