@@ -44,7 +44,7 @@ export const routes: Routes = [
       {
         provide: CHAT_AGENT_CONFIG,
         useValue: {
-          name: 'Soporte Técnico',
+          name: 'chat.supportAgentName',
           logo: 'img/customer-service-logo.png',
           statusKey: 'chat.supportAgentStatus',
           emptyTitleKey: 'chat.supportEmptyTitle',
@@ -56,6 +56,7 @@ export const routes: Routes = [
             'chat.supportSuggestion4',
           ],
           showEmptyLogo: false,
+          floatingHeader: true,
         } satisfies ChatAgentConfig,
       },
     ],

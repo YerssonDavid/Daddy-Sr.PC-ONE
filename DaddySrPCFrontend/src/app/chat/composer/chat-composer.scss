@@ -154,9 +154,13 @@
   }
 
   .composer__textarea {
-    font-size: var(--fs-body);
+    font-size: var(--fs-small);
     padding: 0.6rem 0.75rem;
     min-height: 44px;
+  }
+
+  .composer__textarea::placeholder {
+    font-size: var(--fs-small);
   }
 
   .composer__send-btn {
@@ -165,6 +169,8 @@
   }
 
   .composer__hint {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+    line-height: 1.3;
+    margin-top: 0.15rem;
   }
 }

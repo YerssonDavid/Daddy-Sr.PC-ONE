@@ -82,6 +82,10 @@ export class ChatPage {
   }
 
   collapseToggle(): void {
-    this.sidebarCollapsed.update((v) => !v);
+    if (window.innerWidth <= 1024) {
+      this.sidebarOpen.set(false);
+    } else {
+      this.sidebarCollapsed.update((v) => !v);
+    }
   }
 }

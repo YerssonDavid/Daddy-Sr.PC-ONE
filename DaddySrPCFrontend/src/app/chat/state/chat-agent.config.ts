@@ -18,6 +18,7 @@ export interface ChatAgentConfig {
   emptySubKey: string;
   suggestionKeys: [string, string, string, string];
   showEmptyLogo?: boolean;
+  floatingHeader?: boolean;
 }
 
 export const CHAT_AGENT_CONFIG = new InjectionToken<ChatAgentConfig>('CHAT_AGENT_CONFIG', {
@@ -35,5 +36,6 @@ export const CHAT_AGENT_CONFIG = new InjectionToken<ChatAgentConfig>('CHAT_AGENT
       'chat.suggestion4',
     ],
     showEmptyLogo: true,
+    floatingHeader: false,
   }),
 });

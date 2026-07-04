@@ -5,10 +5,10 @@
   align-items: flex-start;
   animation: fade-up 0.4s var(--ease) both;
   max-width: var(--bubble-max, 720px);
-  width: 100%; /* Ocupa todo el ancho disponible en móviles */
+  width: 100%;
   
   @media (min-width: 768px) {
-    width: fit-content; /* Desktop: ancho ajustado al contenido */
+    width: fit-content;
   }
 }
 
