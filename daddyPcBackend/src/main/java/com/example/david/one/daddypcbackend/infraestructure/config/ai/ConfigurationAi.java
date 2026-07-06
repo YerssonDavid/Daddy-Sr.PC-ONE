@@ -78,7 +78,7 @@ public class ConfigurationAi {
     public PgVectorStore vectorStorePrincipalAgent(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
         return PgVectorStore.builder(jdbcTemplate, embeddingModel)
                 .vectorTableName("principal_agent")
-                .initializeSchema(true)
+                .initializeSchema(false)
                 .build();
     }
 
@@ -86,7 +86,7 @@ public class ConfigurationAi {
     public PgVectorStore vectorStoreSupportAgent(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
         return PgVectorStore.builder(jdbcTemplate, embeddingModel)
                 .vectorTableName("support_agent")
-                .initializeSchema(true)
+                .initializeSchema(false)
                 .build();
     }
 }
