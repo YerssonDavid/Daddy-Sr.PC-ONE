@@ -88,6 +88,28 @@
   to   { opacity: 0.80; transform: scale(1.04); }
 }
 
+/* Tema claro: trazo negro intenso para que la rejilla se note */
+[data-theme='light'] {
+  .grid-fine {
+    background-image:
+      linear-gradient(rgba(0,0,0,.21) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,.21) 1px, transparent 1px);
+    opacity: 1;
+  }
+  .grid-coarse {
+    background-image:
+      linear-gradient(rgba(0,0,0,.14) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, rgba(0,0,0,.14) 1.5px, transparent 1.5px);
+    opacity: 1;
+  }
+  .grid-nodes {
+    background-image:
+      radial-gradient(circle, rgba(0,0,0,.27) 0 1.6px, transparent 2px);
+    filter: none;
+    opacity: 1;
+  }
+}
+
 /* Accesibilidad: apagado con prefers-reduced-motion (doc §3.5) */
 @media (prefers-reduced-motion: reduce) {
   .grid-fine,

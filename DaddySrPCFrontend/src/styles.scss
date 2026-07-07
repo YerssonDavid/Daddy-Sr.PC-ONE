@@ -61,6 +61,8 @@
   --glass-elevated: color-mix(in srgb, var(--bg-elevated) 75%, transparent);
   --glass-border: color-mix(in srgb, var(--border) 65%, transparent);
   --blur: 14px;
+
+  --bg-grid-color: var(--glass-border);
 }
 
 /* ---- Tema claro — plan §2.2 (serigrafía sobre PCB) ---- */
@@ -85,6 +87,9 @@
   --glass-surface: color-mix(in srgb, var(--bg-surface) 70%, transparent);
   --glass-elevated: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
   --glass-border: color-mix(in srgb, var(--border) 70%, transparent);
+
+  /* Cuadrícula de fondo más marcada */
+  --bg-grid-color: rgba(0, 0, 0, 0.18);
 }
 
 /* ============================================================
@@ -141,8 +146,8 @@ body::before {
       var(--trace-tint),
       transparent 50%
     ),
-    linear-gradient(var(--glass-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+    linear-gradient(var(--bg-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid-color) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
   opacity: 0.5;
   animation: ambient-drift 24s ease-in-out infinite alternate;
