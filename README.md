@@ -12,6 +12,8 @@ Un agente de inteligencia artificial que te **acompaña, guía y resuelve** todo
 
 [![License](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE)
 [![Angular](https://img.shields.io/badge/Angular-21-DD0031.svg)](https://angular.dev)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1-6DB33F.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-21-ED8B00.svg)](https://www.java.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6.svg)](https://www.typescriptlang.org)
 [![AI Agent](https://img.shields.io/badge/AI-Agentic-blueviolet.svg)]()
 [![RAG](https://img.shields.io/badge/RAG-Enabled-success.svg)]()
@@ -26,8 +28,8 @@ Un agente de inteligencia artificial que te **acompaña, guía y resuelve** todo
 
 **¿Te fue útil este proyecto?**
 
-[![⭐ Dale una estrella](https://img.shields.io/github/stars/yerssondavidf/DaddySrPCFrontend?style=social)](https://github.com/yerssondavidf/DaddySrPCFrontend/stargazers)
-[![Fork](https://img.shields.io/github/forks/yerssondavidf/DaddySrPCFrontend?style=social)](https://github.com/yerssondavidf/DaddySrPCFrontend/fork)
+[![⭐ Dale una estrella](https://img.shields.io/github/stars/YerssonDavid/Daddy-Sr.PC-ONE?style=social)](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/stargazers)
+[![Fork](https://img.shields.io/github/forks/YerssonDavid/Daddy-Sr.PC-ONE?style=social)](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/fork)
 
 Una estrella ayuda al proyecto a llegar a más personas. ¡Gracias! 🙌
 
@@ -187,25 +189,30 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 
 ## 🛠️ Tech Stack
 
-### Frontend (este repositorio)
+### Frontend
 
 | Tecnología | Versión | Propósito |
 |---|---|---|
 | Angular | 21 | Framework principal |
 | TypeScript | 5.9 | Tipado estático |
-| Transloco | — | Internacionalización (i18n) |
-| RxJS | — | Programación reactiva |
-| Vitest | — | Unit testing |
+| Transloco | 8.4 | Internacionalización (i18n) |
+| RxJS | 7.8 | Programación reactiva |
+| Vitest | 4.x | Unit testing |
+| ngx-markdown | 22 | Renderizado Markdown |
 | PWA | — | Instalación y offline support |
 
 ### Backend
 
-| Tecnología | Propósito |
-|---|---|
-| Java 21 | Runtime del servidor |
-| Spring Boot 3.x | Framework backend |
-| Spring AI | Integración con LLMs y herramientas |
-| OpenAI Compatible APIs | Modelo de lenguaje |
+| Tecnología | Versión | Propósito |
+|---|---|---|
+| Java | 21 | Runtime del servidor |
+| Spring Boot | 4.1.0 | Framework backend |
+| Spring AI | 2.0.0 | Integración con LLMs y herramientas |
+| Spring Security | — | Autenticación y autorización |
+| Spring Data JPA | — | Persistencia y ORM |
+| PostgreSQL + PgVector | — | Base de datos + búsqueda semántica |
+| SiliconFlow API | — | LLM (GLM-5.0, Qwen3.5-9B) |
+| Tavily API | — | Búsqueda web en tiempo real |
 
 ### Infraestructura de IA
 
@@ -213,7 +220,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 |---|---|
 | Agentic AI | Planeación y ejecución de herramientas |
 | RAG | Recuperación aumentada de conocimiento |
-| Vector Database | Búsqueda semántica |
+| Vector Database (PgVector) | Búsqueda semántica |
 | Conversation Memory | Contexto persistente por sesión |
 | Tool Calling | Acceso a datos externos en tiempo real |
 
@@ -221,31 +228,88 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 
 | Componente | Propósito |
 |---|---|
-| Docker | Contenedorización |
-| PostgreSQL | Base de datos principal |
-| REST APIs | Comunicación cliente-servidor |
+| Docker / Docker Compose | Contenedorización |
+| Vercel | Hosting del frontend |
+| GCP | Hosting del backend |
+| OCI | Hosting de base de datos PostgreSQL |
+| Doppler | Gestión de secretos |
 
->[!NOTE] Para fines de cumplir con los objetivos del challenge, se implemento la base de datos en OCI, pero el backend esta alojado en GCP. Se comunican por medio de 2 tuneles privados en una VPN de GCP a OCI.
+### Arquitectura del backend
+
+El backend sigue **Arquitectura Hexagonal (Ports & Adapters)** con separación en tres capas:
+
+| Capa | Propósito |
+|---|---|
+| `domain/` | Modelo de dominio y Value Objects |
+| `application/` | Puertos de entrada/salida y casos de uso |
+| `infraestructure/` | Adaptadores, controladores REST, persistencia JPA |
+
+>[!NOTE] Para fines de cumplir con los objetivos del challenge, se implementó la base de datos en OCI, pero el backend está alojado en GCP. Se comunican por medio de 2 túneles privados en una VPN de GCP a OCI.
 
 ---
 
 ## 📦 Estructura del repositorio
 
 ```text
-DaddySrPCFrontend/
-├── public/                 # Assets estáticos (logo, iconos, i18n, PWA)
-│   ├── i18n/               # Traducciones (es, en, pt)
-│   ├── flags/              # Íconos de idiomas
-│   └── logo.png            # Logo de la aplicación
-├── src/
-│   ├── app/
-│   │   ├── core/           # Servicios globales (theme, i18n)
-│   │   ├── features/       # Páginas principales (landing, login, chat...)
-│   │   └── shared/         # Componentes reutilizables
-│   └── styles/             # Design tokens y estilos globales
-├── angular.json
-├── package.json
-└── README.md
+Daddy-Sr.PC-ONE/
+├── img/                                  # Screenshots de los agentes
+├── daddyPcBackend/                       # Backend — Spring Boot (Java 21)
+│   ├── src/main/java/.../daddypcbackend/
+│   │   ├── application/
+│   │   │   ├── command/                  # Comandos CQRS
+│   │   │   │   ├── assistant/            #   QuestionToAssistantCommand
+│   │   │   │   └── user/                 #   CreateUserCommand, LoginUserCommand
+│   │   │   ├── dto/                      # DTOs de respuesta
+│   │   │   ├── port/
+│   │   │   │   ├── in/                   # Puertos de entrada (interfaces)
+│   │   │   │   │   ├── assistant/        #   IAssistantAI, IAssistantAIFree, IAssistantAISupport
+│   │   │   │   │   └── user/             #   ILoginUser, IRegistryUser
+│   │   │   │   └── out/                  # Puertos de salida (interfaces)
+│   │   │   │       ├── assistant/        #   IAssistantAIClient, ITavilySearchTools
+│   │   │   │       └── user/             #   IPasswordEncoder, IUserR
+│   │   │   └── useCase/                  # Casos de uso
+│   │   │       ├── assistant/            #   QuestionAiUseCase, QuestionAiSupport, QuestionToAssistantFree
+│   │   │       └── user/                 #   LoginUserUseCase, RegistryUserUseCase
+│   │   ├── domain/
+│   │   │   ├── exception/                # InputDataInvalid
+│   │   │   ├── model/                    # User (modelo de dominio)
+│   │   │   └── valueObjects/             # EmailVO, PasswordVO, NameVO, etc.
+│   │   └── infraestructure/
+│   │       ├── adapter/                  # Implementaciones de puertos de salida
+│   │       │   ├── assistant/            #   AssistantAIAdapter, TavilySearchToolsAdapter
+│   │       │   └── user/                 #   PasswordEncoderAdapter, RegistryUserAdapter
+│   │       ├── config/                   # Configuración Spring (AI, Security, PDF, Beans)
+│   │       ├── persistence/user/         # Entidad JPA + repositorio
+│   │       ├── service/pdf/              # Lector de PDFs para RAG
+│   │       └── web/in/                   # Controladores REST
+│   │           ├── assitant/             #   QuestionAssistantController, QuestionAssistantFreeController
+│   │           └── user/                 #   LoginUserController, RegistryUserController
+│   ├── src/main/resources/
+│   │   ├── application.yaml             # Configuración base
+│   │   ├── application-dev.yaml          # Configuración desarrollo
+│   │   ├── application-prod.yaml         # Configuración producción
+│   │   └── pdf/                          # Documentación técnica para RAG
+│   ├── Dockerfile
+│   ├── compose.yaml
+│   ├── docker-compose.prod.yml
+│   └── pom.xml
+└── DaddySrPCFrontend/                    # Frontend — Angular 21
+    ├── public/
+    │   ├── i18n/                         # Traducciones (es, en, pt)
+    │   ├── logo.png, style-chat.png      # Assets estáticos
+    │   └── manifest.webmanifest          # PWA manifest
+    ├── src/
+    │   ├── app/
+    │   │   ├── core/                     # Servicios globales (auth, theme, transloco)
+    │   │   ├── landing/                  # Página principal (hero, features, live-demo, etc.)
+    │   │   ├── chat/                     # Chat agéntico (composer, mensajes, sidebar, estado)
+    │   │   ├── login/                    # Inicio de sesión
+    │   │   ├── register/                 # Registro de usuarios
+    │   │   └── shared/                   # Componentes reutilizables (theme-toggle, lang-selector, etc.)
+    │   └── environments/                 # environment.ts / environment.prod.ts
+    ├── angular.json
+    ├── package.json
+    └── vercel.json
 ```
 
 ---
@@ -255,14 +319,15 @@ DaddySrPCFrontend/
 ### Requisitos
 
 - Node.js 20+
-- Angular CLI 21+
+- Java 21
+- Docker (para base de datos PostgreSQL + PgVector)
 
-### Instalación
+### Frontend
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/yerssondavidf/DaddySrPCFrontend.git
-cd DaddySrPCFrontend
+git clone https://github.com/YerssonDavid/Daddy-Sr.PC-ONE.git
+cd Daddy-Sr.PC-ONE/DaddySrPCFrontend
 
 # Instalar dependencias
 npm install
@@ -271,22 +336,34 @@ npm install
 ng serve
 ```
 
-La aplicación estará disponible en `http://localhost:4200/` y se recargará automáticamente con cada cambio.
+La aplicación estará disponible en `http://localhost:4200/`.
+
+### Backend
+
+```bash
+cd daddyPcBackend
+
+# Iniciar base de datos con Docker
+docker compose up -d
+
+# Ejecutar servidor (puerto 8080)
+./mvnw spring-boot:run
+```
 
 ### Comandos útiles
 
 ```bash
-# Generar un nuevo componente
-ng generate component nombre-componente
+# Frontend — build de producción
+cd DaddySrPCFrontend && ng build
 
-# Build de producción
-ng build
+# Frontend — unit tests
+cd DaddySrPCFrontend && ng test
 
-# Ejecutar unit tests
-ng test
+# Backend — empaquetar JAR
+cd daddyPcBackend && ./mvnw package
 
-# Ejecutar tests e2e
-ng e2e
+# Backend — ejecutar tests
+cd daddyPcBackend && ./mvnw test
 ```
 
 ---
@@ -310,10 +387,10 @@ Si Daddy Sr.PC te fue útil o simplemente te parece un proyecto interesante:
 
 | Acción | Por qué importa |
 |---|---|
-| ⭐ **[Dale una estrella](https://github.com/yerssondavidf/DaddySrPCFrontend/stargazers)** | Ayuda a que más personas lo descubran |
-| 🍴 **[Haz un Fork](https://github.com/yerssondavidf/DaddySrPCFrontend/fork)** | Contribuye o adáptalo a tus necesidades |
-| 🐞 **[Reporta un bug](https://github.com/yerssondavidf/DaddySrPCFrontend/issues)** | Ayúdanos a mejorar la calidad |
-| 💡 **[Sugiere una feature](https://github.com/yerssondavidf/DaddySrPCFrontend/issues/new)** | Tu idea puede ser el próximo update |
+| ⭐ **[Dale una estrella](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/stargazers)** | Ayuda a que más personas lo descubran |
+| 🍴 **[Haz un Fork](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/fork)** | Contribuye o adáptalo a tus necesidades |
+| 🐞 **[Reporta un bug](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/issues)** | Ayúdanos a mejorar la calidad |
+| 💡 **[Sugiere una feature](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/issues/new)** | Tu idea puede ser el próximo update |
 | 📢 **Compártelo** | Cuéntale a alguien que lo necesite |
 
 ---
@@ -332,6 +409,6 @@ Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 Hecho con ❤️ para la comunidad PC
 
-[⭐ Star en GitHub](https://github.com/yerssondavidf/DaddySrPCFrontend/stargazers) · [🍴 Fork](https://github.com/yerssondavidf/DaddySrPCFrontend/fork) · [🐞 Issues](https://github.com/yerssondavidf/DaddySrPCFrontend/issues)
+[⭐ Star en GitHub](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/stargazers) · [🍴 Fork](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/fork) · [🐞 Issues](https://github.com/YerssonDavid/Daddy-Sr.PC-ONE/issues)
 
 </div>
