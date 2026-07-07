@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="../img/logo.png" alt="Daddy Sr.PC Logo" width="140" />
+<img src="./img/logo.png" alt="Daddy Sr.PC Logo" width="140" />
 
 # Daddy Sr.PC
 
@@ -20,7 +20,7 @@ Un agente de inteligencia artificial que te **acompaña, guía y resuelve** todo
 
 </p>
 
-  <a href="https://daddypc.up-x.me/"> Sitio Web</a>
+  <a href="https://daddypc.up-x.me/"> App Web</a>
 
 <p>
 
