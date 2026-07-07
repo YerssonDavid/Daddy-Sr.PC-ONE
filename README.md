@@ -137,6 +137,29 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 
 ---
 
+## Uso
+
+Actualmente esta en la etapa preview, la app se compone de 3 agentes:
+
+1. Agente soporte tecnico (Daddy Sr.PC): Este es el agente principal se encuentra en la ruta `/chat`. Este agente es el que más capacidades tiene:
+     - [x] Acceso a busquedas web en tiempo real.
+     - [x] Acceso a la documentación tecnica mediante RAG.
+     - [x] Modelo GLM-5.2
+
+2. Agente atención al cliente: Este agente es el que se encarga de responder todas las dudas de los clientes, se encuentra en la ruta `/chat/support` y tiene solamente tiene acceso a la documentación empresarial:
+     - [ ] Acceso a busquedas web en tiempo real.
+     - [x] Acceso a la documentación tecnica mediante RAG.
+     - [x] Modelo GLM-5.2
+
+3. Agente de prueba: Este agente se encuentra en la página principal de Daddy Sr.PC en el apartado de `Pruébalo en vivo`, este modelo tiene limitaciones.
+     - [x] Acceso a busquedas web en tiempo real.
+     - [ ] Acceso a la documentación tecnica mediante RAG.
+     - [ ] Modelo GLM-5.2
+
+>[!NOTE] Actualmente no se requiere registro para probar el modelo, puede acceder al modelo con más capacidades mediante el botón de `Equipo ONE: probar agente completo`. 
+
+---
+
 ## 🛠️ Tech Stack
 
 ### Frontend (este repositorio)
@@ -176,6 +199,8 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 | Docker | Contenedorización |
 | PostgreSQL | Base de datos principal |
 | REST APIs | Comunicación cliente-servidor |
+
+>[!NOTE] Para fines de cumplir con los objetivos del challenge, se implemento la base de datos en OCI, pero el backend esta alojado en GCP. Se comunican por medio de 2 tuneles privados en una VPN de GCP a OCI.
 
 ---
 
