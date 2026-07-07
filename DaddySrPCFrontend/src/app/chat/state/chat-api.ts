@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Level } from './chat-store';
 import { CHAT_API_ENDPOINT } from './chat-agent.config';
 import { environment } from '../../../environments/environment';
+import { ConversationIdService } from '../../shared/conversation-id.service';
 
 const BASE = environment.apiBaseUrl;
 
@@ -18,6 +19,7 @@ function extractDataValue(line: string): string {
 @Injectable()
 export class ChatApi {
   private readonly endpoint = inject(CHAT_API_ENDPOINT);
+  private readonly conversationId = inject(ConversationIdService);
 
   /**
    * Envía el mensaje al backend y emite chunks de texto conforme llegan.
@@ -27,8 +29,8 @@ export class ChatApi {
    * con `\n` para preservar los saltos de línea (esenciales para que el
    * markdown se renderice correctamente: listas, tablas, encabezados, etc.).
    */
-  ask(input: { text: string; level: Level; conversationId?: number }): Observable<string> {
-    const conversationId = input.conversationId ?? 1;
+  ask(input: { text: string; level: Level }): Observable<string> {
+    const conversationId = this.conversationId.get();
 
     return new Observable<string>((observer) => {
       const controller = new AbortController();
