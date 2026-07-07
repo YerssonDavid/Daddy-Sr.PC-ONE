@@ -11,4 +11,4 @@ spring:
       initialization-fail-timeout: -1
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update

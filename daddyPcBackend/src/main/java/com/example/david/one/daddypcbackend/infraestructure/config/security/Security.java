@@ -46,7 +46,7 @@ public class Security {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedOrigins(List.of("https://daddypc.up-x.me"));
         config.setAllowedMethods(List.of("*"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Request-With"));
         config.setAllowCredentials(true);
