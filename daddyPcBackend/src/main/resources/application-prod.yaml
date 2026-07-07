@@ -1,6 +1,14 @@
+server:
+  port: ${PORT:8080}
+
 spring:
   datasource:
     url: ${URL_DATABASE}
     username: ${DB_USER:postgres}
     password: ${PASSWORD_DATABASE}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      initialization-fail-timeout: -1
+  jpa:
+    hibernate:
+      ddl-auto: update

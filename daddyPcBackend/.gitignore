@@ -29,5 +29,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
+CaCertificate-daddypc-database-instance.pub
+CaCertificate-daddypc-database-instance.pub:Zone.Identifier
+.opencode/
+doppler.json
+scripts/

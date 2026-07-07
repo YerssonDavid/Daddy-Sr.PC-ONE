@@ -9,6 +9,7 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.pgvector.PgVectorStore;
@@ -34,6 +35,7 @@ public class ConfigurationAi {
 
         return builder
                 .defaultSystem(SystemPromptAgent.getPrompt())
+                .defaultOptions(OpenAiChatOptions.builder().maxTokens(4096))
                 .defaultAdvisors(advisor, memoryAdvisor)
                 .build();
     }
@@ -78,7 +80,7 @@ public class ConfigurationAi {
     public PgVectorStore vectorStorePrincipalAgent(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
         return PgVectorStore.builder(jdbcTemplate, embeddingModel)
                 .vectorTableName("principal_agent")
-                .initializeSchema(true)
+                .initializeSchema(false)
                 .build();
     }
 
@@ -86,7 +88,7 @@ public class ConfigurationAi {
     public PgVectorStore vectorStoreSupportAgent(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
         return PgVectorStore.builder(jdbcTemplate, embeddingModel)
                 .vectorTableName("support_agent")
-                .initializeSchema(true)
+                .initializeSchema(false)
                 .build();
     }
 }

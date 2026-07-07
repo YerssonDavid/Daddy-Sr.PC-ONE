@@ -1,6 +1,7 @@
 package com.example.david.one.daddypcbackend.infraestructure.adapter.assistant;
 
 import com.example.david.one.daddypcbackend.application.port.out.assistant.ITavilySearchTools;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class TavilySearchToolsAdapter implements ITavilySearchTools {
 
@@ -29,6 +31,7 @@ public class TavilySearchToolsAdapter implements ITavilySearchTools {
     @Override
     public String search(@ToolParam(description = "Consulta de búsqueda en lenguaje natural") String query) {
 
+        log.warn(apiKeyTavily);
         try {
             Map<String, Object> requestBody = Map.of(
                     "api_key", apiKeyTavily,
