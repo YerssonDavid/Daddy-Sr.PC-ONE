@@ -16,7 +16,8 @@ public class AssistantFreeAdapter implements IAssistantAIFreeClient {
     public AssistantFreeAdapter(TavilySearchToolsAdapter tavilySearchToolsAdapter, ChatClient.Builder chatClient) {
         this.tavilySearchToolsAdapter = tavilySearchToolsAdapter;
         this.chatClient = chatClient.defaultOptions(OpenAiChatOptions.builder()
-                .model("deepseek-ai/DeepSeek-V4-Flash")
+                .model("Qwen/Qwen3.5-9B")
+                .maxTokens(4096)
                 .temperature(0.3))
                 .defaultSystem(SystemPromptAgentFree.getPrompt())
                 .build();
@@ -24,10 +25,33 @@ public class AssistantFreeAdapter implements IAssistantAIFreeClient {
 
     @Override
     public String askQuestion(QuestionToAssistantTestCommand command) {
-        return chatClient.prompt()
-                .user(command.question())
-                .tools(tavilySearchToolsAdapter)
-                .call()
-                .content();
+        try {
+            return chatClient.prompt()
+                    .user(command.question())
+                    .tools(tavilySearchToolsAdapter)
+                    .call()
+                    .content();
+        } catch (RuntimeException e) {
+            if (isToolCallError(e)) {
+                return "Lo siento, ocurrió un error al procesar la respuesta del asistente. Por favor, intenta reformular tu pregunta.";
+            }
+            throw e;
+        }
+    }
+
+    private boolean isToolCallError(Throwable e) {
+        if (e.getMessage() == null) {
+            return false;
+        }
+        String msg = e.getMessage();
+        if (msg.contains("Conversion from JSON") || msg.contains("toolName cannot be null")) {
+            return true;
+        }
+        Throwable cause = e.getCause();
+        if (cause != null && cause.getMessage() != null) {
+            msg = cause.getMessage();
+            return msg.contains("Conversion from JSON") || msg.contains("toolName cannot be null");
+        }
+        return false;
     }
 }

@@ -22,8 +22,9 @@ spring:
       api-key: ${OPENAI_API_KEY}
       chat:
         options:
-          model: zai-org/GLM-5.1
+          model: zai-org/GLM-5
           temperature: 0.3
+          max-tokens: 4096
       embedding:
         options:
           model: Qwen/Qwen3-Embedding-0.6B
