@@ -39,6 +39,10 @@ export class ChatSidebar {
     this.router.navigate(['/chat']);
   }
 
+  goHome(): void {
+    this.router.navigate(['/home']);
+  }
+
   selectConversation(conv: Conversation): void {
     this.store.setActive(conv.id);
   }

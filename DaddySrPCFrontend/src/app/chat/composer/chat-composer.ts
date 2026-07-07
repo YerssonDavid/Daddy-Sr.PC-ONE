@@ -34,7 +34,7 @@ export class ChatComposer {
     this.draft.set('');
     this.autoResize();
     this.playBriefSentState();
-    this.textarea()?.nativeElement.focus();
+    this.textarea()?.nativeElement.blur();
   }
 
   onKeydown(e: KeyboardEvent): void {
