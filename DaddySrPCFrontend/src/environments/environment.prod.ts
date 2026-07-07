@@ -8,5 +8,5 @@
  */
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://daddypc-backend.up-x.me',
+  apiBaseUrl: 'https://backend-daddypc.up-x.me',
 };
