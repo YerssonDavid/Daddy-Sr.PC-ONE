@@ -160,26 +160,26 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 ## Comprobante agentes
 
 #### **Agente principal Sr.PC**
-![agente1](../img/Sr.PC1.png)
+![agente1](./img/Sr.PC1.png)
 
 ---
-![agente1](../img/Sr.PC2.png)
+![agente1](./img/Sr.PC2.png)
 
 ---
 
 #### **Agente de servicio al cliente Sr.PC**
-![agente1](../img/Sr.PC_Soporte1.png)
+![agente1](./img/Sr.PC_Soporte1.png)
 
 ---
-![agente1](../img/Sr.PC_Soporte2.png)
+![agente1](./img/Sr.PC_Soporte2.png)
 
 ---
-![agente1](../img/Sr.PC_Soporte3.png)
+![agente1](./img/Sr.PC_Soporte3.png)
 
 ---
 
 #### **Agente de prueba**
-![agente1](../img/Sr.PC_Landing1.png)
+![agente1](./img/Sr.PC_Landing1.png)
 
 ---
 

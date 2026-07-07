@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/logo.png" alt="Daddy Sr.PC Logo" width="140" />
+<img src="../img/logo.png" alt="Daddy Sr.PC Logo" width="140" />
 
 # Daddy Sr.PC
 
