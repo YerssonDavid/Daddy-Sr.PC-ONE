@@ -137,6 +137,52 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 
 ---
 
+# Comparativa de Agentes — Daddy Sr.PC (Preview)
+
+| Característica | Soporte Técnico (`/chat`) | Atención al Cliente (`/chat/support`) | Agente de Prueba (Página principal) |
+|---|---|---|---|
+| **Modelo** | GLM-5.0 | GLM-5.0 | Qwen3.5-9B |
+| **Búsqueda web en tiempo real** | ✅ Sí | ❌ No | ✅ Sí |
+| **Documentación técnica (RAG)** | ✅ Sí | ✅ Sí | ❌ No |
+| **Memoria de conversación** | ✅ Sí | ✅ Sí | ❌ No |
+| **Registro requerido** | ❌ No (acceso libre - Temporal) | ❌ No (acceso libre - Temporal) | ❌ No (acceso libre) |
+| **Nivel de capacidades** | Máximo (agente principal) | Intermedio (enfocado en dudas empresariales) | Limitado (demo) |
+| **Acceso ampliado** | Vía botón "Equipo ONE: probar agente completo | Vía botón "Equipo ONE: probar agente completo | -- |
+
+**Notas:**
+- El agente de soporte técnico es el más completo, combinando RAG + búsqueda web en tiempo real.
+- El agente de atención al cliente está restringido únicamente a documentación empresarial vía RAG.
+- El agente de prueba, disponible sin registro, usa un modelo más ligero (Qwen3.5-9B) y carece de memoria y RAG, aunque sí tiene búsqueda web en tiempo real.
+
+>[!NOTE] Actualmente no se requiere registro para probar el modelo, puede acceder al modelo con más capacidades mediante el botón de `Equipo ONE: probar agente completo`. 
+
+---
+## Comprobante agentes
+
+#### **Agente principal Sr.PC**
+![agente1](../img/Sr.PC1.png)
+
+---
+![agente1](../img/Sr.PC2.png)
+
+---
+
+#### **Agente de servicio al cliente Sr.PC**
+![agente1](../img/Sr.PC_Soporte1.png)
+
+---
+![agente1](../img/Sr.PC_Soporte2.png)
+
+---
+![agente1](../img/Sr.PC_Soporte3.png)
+
+---
+
+#### **Agente de prueba**
+![agente1](../img/Sr.PC_Landing1.png)
+
+---
+
 ## 🛠️ Tech Stack
 
 ### Frontend (este repositorio)
@@ -176,6 +222,8 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 | Docker | Contenedorización |
 | PostgreSQL | Base de datos principal |
 | REST APIs | Comunicación cliente-servidor |
+
+>[!NOTE] Para fines de cumplir con los objetivos del challenge, se implemento la base de datos en OCI, pero el backend esta alojado en GCP. Se comunican por medio de 2 tuneles privados en una VPN de GCP a OCI.
 
 ---
 

@@ -137,26 +137,34 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 
 ---
 
-## Uso
+# Comparativa de Agentes — Daddy Sr.PC (Preview)
 
-Actualmente esta en la etapa preview, la app se compone de 3 agentes:
+| Característica | Soporte Técnico (`/chat`) | Atención al Cliente (`/chat/support`) | Agente de Prueba (Página principal) |
+|---|---|---|---|
+| **Modelo** | GLM-5.0 | GLM-5.0 | Qwen3.5-9B |
+| **Búsqueda web en tiempo real** | ✅ Sí | ❌ No | ✅ Sí |
+| **Documentación técnica (RAG)** | ✅ Sí | ✅ Sí | ❌ No |
+| **Memoria de conversación** | ✅ Sí | ✅ Sí | ❌ No |
+| **Registro requerido** | ❌ No (acceso libre - Temporal) | ❌ No (acceso libre - Temporal) | ❌ No (acceso libre) |
+| **Nivel de capacidades** | Máximo (agente principal) | Intermedio (enfocado en dudas empresariales) | Limitado (demo) |
+| **Acceso ampliado** | Vía botón "Equipo ONE: probar agente completo | Vía botón "Equipo ONE: probar agente completo | -- |
 
-1. Agente soporte tecnico (Daddy Sr.PC): Este es el agente principal se encuentra en la ruta `/chat`. Este agente es el que más capacidades tiene:
-     - [x] Acceso a busquedas web en tiempo real.
-     - [x] Acceso a la documentación tecnica mediante RAG.
-     - [x] Modelo GLM-5.2
-
-2. Agente atención al cliente: Este agente es el que se encarga de responder todas las dudas de los clientes, se encuentra en la ruta `/chat/support` y tiene solamente tiene acceso a la documentación empresarial:
-     - [ ] Acceso a busquedas web en tiempo real.
-     - [x] Acceso a la documentación tecnica mediante RAG.
-     - [x] Modelo GLM-5.2
-
-3. Agente de prueba: Este agente se encuentra en la página principal de Daddy Sr.PC en el apartado de `Pruébalo en vivo`, este modelo tiene limitaciones.
-     - [x] Acceso a busquedas web en tiempo real.
-     - [ ] Acceso a la documentación tecnica mediante RAG.
-     - [ ] Modelo GLM-5.2
+**Notas:**
+- El agente de soporte técnico es el más completo, combinando RAG + búsqueda web en tiempo real.
+- El agente de atención al cliente está restringido únicamente a documentación empresarial vía RAG.
+- El agente de prueba, disponible sin registro, usa un modelo más ligero (Qwen3.5-9B) y carece de memoria y RAG, aunque sí tiene búsqueda web en tiempo real.
 
 >[!NOTE] Actualmente no se requiere registro para probar el modelo, puede acceder al modelo con más capacidades mediante el botón de `Equipo ONE: probar agente completo`. 
+
+---
+## Comprobante agentes
+
+![agente1](./img/Sr.PC1.png)
+![agente1](./img/Sr.PC2.png)
+![agente1](./img/Sr.PC_Landing1.png)
+![agente1](./img/Sr.PC_Soporte1.png)
+![agente1](./img/Sr.PC_Soporte2.png)
+![agente1](./img/Sr.PC_Soporte3.png)
 
 ---
 
