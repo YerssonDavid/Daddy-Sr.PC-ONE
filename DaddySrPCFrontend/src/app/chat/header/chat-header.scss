@@ -71,6 +71,50 @@
     border: 1px solid var(--glass-border);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
   }
+
+  /* En desktop (>1024px): mismo diseño que /chat */
+  @media (min-width: 1025px) {
+    position: relative;
+    pointer-events: auto;
+    background: var(--glass-surface);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    border-bottom: 1px solid var(--glass-border);
+    justify-content: flex-start;
+    padding: 0 1.25rem;
+    height: 60px;
+
+    .chat-header__side--left {
+      display: flex;
+    }
+
+    .chat-header__agent {
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 0;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .chat-header__side--right {
+      position: relative;
+      right: auto;
+      top: 1.23em;
+      transform: none;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      box-shadow: none;
+      align-self: center;
+    }
+  }
 }
 
 /* Lados balanceados: mantienen el bloque del agente centrado de forma real */
@@ -340,6 +384,14 @@
       border-radius: 0;
       padding: 0;
     }
+
+    .chat-header__theme-desktop {
+      display: none;
+    }
+  }
+
+  .chat-header__theme-desktop {
+    display: none;
   }
 }
 

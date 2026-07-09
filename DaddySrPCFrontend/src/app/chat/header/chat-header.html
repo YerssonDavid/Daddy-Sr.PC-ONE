@@ -1,6 +1,6 @@
 <header class="chat-header" [class.chat-header--floating]="agentConfig.floatingHeader">
 
-  <!-- Left: menu button + theme toggle (visible en tablet/mobile) -->
+  <!-- Left: menu button (visible en tablet/mobile) -->
   <div class="chat-header__side chat-header__side--left">
     <button
       type="button"
@@ -17,7 +17,6 @@
         }
       </svg>
     </button>
-    <app-theme-toggle />
   </div>
 
   <!-- Center: agent identity (avatar + nombre centrados) -->
@@ -65,6 +64,7 @@
       <span class="chat-header__gh-count">{{ ghStars.count() ?? '—' }}</span>
       <span class="chat-header__gh-label">Star</span>
     </a>
+    <app-theme-toggle class="chat-header__theme-desktop" />
   </div>
 
 </header>
