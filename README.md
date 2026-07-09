@@ -6,6 +6,8 @@
 
 ### Tu agente de IA especializado en PC Hardware
 
+[![🚀 Probar App Web](https://img.shields.io/badge/🚀_Probar_App_Web-daddypc.up--x.me-FF7139?style=for-the-badge&logo=google-chrome&logoColor=white)](https://daddypc.up-x.me/)
+
 Un agente de inteligencia artificial que te **acompaña, guía y resuelve** todo lo que necesites saber sobre hardware, compatibilidad, ensamblaje, marcas y mucho más — con respuestas precisas, personalizadas y en tiempo real.
 
 <p>
@@ -21,8 +23,6 @@ Un agente de inteligencia artificial que te **acompaña, guía y resuelve** todo
 [![i18n](https://img.shields.io/badge/i18n-ES%20%7C%20EN%20%7C%20PT-orange.svg)]()
 
 </p>
-
-  <a href="https://daddypc.up-x.me/"> App Web</a>
 
 <p>
 
@@ -234,6 +234,18 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 | OCI | Hosting de base de datos PostgreSQL |
 | Doppler | Gestión de secretos |
 
+## 🌐 Despliegue
+
+| Componente | Plataforma |
+|---|---|
+| Frontend | [Vercel](https://vercel.com) — [`https://daddypc.up-x.me/`](https://daddypc.up-x.me/) |
+| Backend | Google Cloud Platform (GCP) |
+| Base de datos | Oracle Cloud Infrastructure (OCI) |
+
+El backend en **GCP** y la base de datos en **OCI** se comunican a través de una **VPN privada**.
+
+---
+
 ### Arquitectura del backend
 
 El backend sigue **Arquitectura Hexagonal (Ports & Adapters)** con separación en tres capas:
@@ -244,7 +256,7 @@ El backend sigue **Arquitectura Hexagonal (Ports & Adapters)** con separación e
 | `application/` | Puertos de entrada/salida y casos de uso |
 | `infraestructure/` | Adaptadores, controladores REST, persistencia JPA |
 
->[!NOTE] Para fines de cumplir con los objetivos del challenge, se implementó la base de datos en OCI, pero el backend está alojado en GCP. Se comunican por medio de 2 túneles privados en una VPN de GCP a OCI.
+>[!NOTE] El backend está alojado en **GCP** y la base de datos en **OCI**, comunicándose a través de una **VPN privada**.
 
 ---
 
