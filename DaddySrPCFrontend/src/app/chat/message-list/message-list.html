@@ -5,15 +5,15 @@
   aria-live="polite"
   aria-relevant="additions"
 >
+  <div class="msg-fade-top" aria-hidden="true"></div>
+
   @if (messages().length === 0) {
-    <!-- Empty state -->
     <div class="message-list__empty">
       @if (agentConfig.showEmptyLogo !== false) {
         <img [src]="agentConfig.logo" alt="" width="56" height="56" class="message-list__empty-logo" />
       }
       <h2 class="message-list__empty-title">{{ agentConfig.emptyTitleKey | transloco }}</h2>
       <p class="message-list__empty-sub">{{ agentConfig.emptySubKey | transloco }}</p>
-      <!-- Quick-start suggestions -->
       <div class="message-list__suggestions" role="list">
         @for (key of agentConfig.suggestionKeys; track key) {
           <button type="button" class="message-list__suggestion" role="listitem" (click)="selectSuggestion(key)">
@@ -29,4 +29,6 @@
       }
     </div>
   }
+
+  <div class="msg-fade-bottom" aria-hidden="true"></div>
 </section>

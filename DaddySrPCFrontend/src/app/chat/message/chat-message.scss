@@ -61,17 +61,17 @@
 
 /* Cuerpo de la burbuja */
 .bubble__body {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem 0;
   border-radius: var(--bubble-radius, 16px);
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   min-width: 0;
-  width: 100%; /* Asegura que el contenido ocupe el ancho disponible */
+  width: 100%;
 }
 
 .bubble__text {
-  font-size: var(--fs-body);
+  font-size: clamp(0.816rem, 1.8vw, 1.02rem);
   line-height: 1.6;
   color: var(--text-primary);
   margin: 0;
@@ -131,7 +131,7 @@
   display: block;
   max-width: 100%;
   overflow-x: auto;
-  font-size: clamp(var(--fs-mono-sm), 2vw, var(--fs-body)); /* Escala dinámica */
+  font-size: clamp(0.765rem, 2vw, 1.02rem);
   line-height: 1.6;
   color: var(--text-primary);
   overflow-wrap: anywhere;
@@ -162,7 +162,7 @@
 
     p {
       margin: 0;
-      font-size: clamp(0.8rem, 1.8vw, 1rem); /* Escala en móviles */
+      font-size: clamp(0.816rem, 1.8vw, 1.02rem);
     }
 
     h1,
@@ -175,13 +175,13 @@
       font-family: var(--font-display);
       font-weight: 600;
       line-height: 1.3;
-      font-size: clamp(1rem, 2.2vw, 1.2rem); /* Escala dinámica */
+      font-size: clamp(1rem, 2.2vw, 1.224rem);
       color: var(--text-primary);
     }
 
     h1,
     h2 {
-      font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+      font-size: clamp(1.1rem, 2.4vw, 1.326rem);
     }
 
     strong {
@@ -209,7 +209,7 @@
     }
     li {
       margin: 0.15rem 0;
-      font-size: clamp(0.8rem, 1.8vw, 1rem);
+      font-size: clamp(0.816rem, 1.8vw, 1.02rem);
     }
     li::marker {
       color: var(--text-muted);
@@ -223,7 +223,7 @@
     code:not(pre code),
     .md-code {
       font-family: var(--font-mono);
-      font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+      font-size: clamp(0.714rem, 1.6vw, 0.867rem);
       background: var(--bg-elevated);
       padding: 0.1em 0.35em;
       border-radius: var(--radius-sm);
@@ -238,11 +238,11 @@
       background: color-mix(in srgb, var(--bg-surface) 80%, transparent);
       border: 1px solid var(--glass-border);
       overflow-x: auto;
-      font-size: clamp(0.7rem, 1.6vw, 0.85rem); /* Escala en móviles */
+      font-size: clamp(0.714rem, 1.6vw, 0.867rem);
 
       code {
         font-family: var(--font-mono);
-        font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+        font-size: clamp(0.714rem, 1.6vw, 0.867rem);
         color: var(--text-primary);
         white-space: pre;
       }
@@ -257,18 +257,18 @@
 
     table {
       width: 100%;
-      min-width: 100%; /* Evita overflow en móviles */
+      min-width: 100%;
       border-collapse: collapse;
-      font-size: clamp(0.7rem, 1.6vw, 0.92rem);
+      font-size: clamp(0.714rem, 1.6vw, 0.938rem);
     }
 
     table th,
     table td {
-      padding: 0.4rem 0.5rem; /* Menos padding en móviles */
+      padding: 0.4rem 0.5rem;
       border-bottom: 1px solid var(--glass-border);
       text-align: left;
       vertical-align: top;
-      font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+      font-size: clamp(0.714rem, 1.6vw, 0.867rem);
     }
 
     table th {
@@ -277,7 +277,7 @@
       color: var(--text-primary);
       background: color-mix(in srgb, var(--trace) 10%, transparent);
       white-space: nowrap;
-      font-size: clamp(0.75rem, 1.7vw, 0.9rem);
+      font-size: clamp(0.765rem, 1.7vw, 0.918rem);
     }
 
     table tbody tr:last-child td {
@@ -294,9 +294,9 @@
 
     .md-table {
       width: 100%;
-      min-width: 100%; /* Evita overflow en móviles */
+      min-width: 100%;
       border-collapse: collapse;
-      font-size: clamp(0.7rem, 1.6vw, 0.92rem);
+      font-size: clamp(0.714rem, 1.6vw, 0.938rem);
     }
 
     .md-table th,
@@ -305,7 +305,7 @@
       border-bottom: 1px solid var(--glass-border);
       text-align: left;
       vertical-align: top;
-      font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+      font-size: clamp(0.714rem, 1.6vw, 0.867rem);
     }
 
     .md-table th {
@@ -314,7 +314,7 @@
       color: var(--text-primary);
       background: color-mix(in srgb, var(--trace) 10%, transparent);
       white-space: nowrap;
-      font-size: clamp(0.75rem, 1.7vw, 0.9rem);
+      font-size: clamp(0.765rem, 1.7vw, 0.918rem);
     }
 
     .md-table tbody tr:last-child td {
@@ -327,42 +327,36 @@
 .bubble__footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: 0.25rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 0.25rem 0 3px 3px;
 }
 
 .bubble__time {
   font-family: var(--font-mono);
-  font-size: clamp(0.65rem, 1.5vw, var(--fs-mono-sm)); /* Escala dinámica */
+  font-size: clamp(0.65rem, 1.5vw, var(--fs-mono-sm));
   color: var(--text-muted);
 }
-
 
 .bubble__copy {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.5rem 0.75rem; /* Más grande para touch */
+  justify-content: center;
+  width: 22px;
+  height: 22px;
   border-radius: var(--radius-sm);
-  border: 1px solid transparent;
+  border: none;
   background: transparent;
   color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: clamp(var(--fs-mono-sm), 1.8vw, var(--fs-small)); /* Escala dinámica */
   cursor: pointer;
   opacity: 0;
   transition:
     color var(--t-fast) var(--ease),
-    border-color var(--t-fast) var(--ease),
     background-color var(--t-fast) var(--ease),
     opacity var(--t-fast) var(--ease);
-  min-width: 48px; /* Tamaño mínimo para touch */
-  min-height: 48px;
 
   &:hover {
     color: var(--trace);
-    border-color: var(--glass-border);
     background: var(--bg-elevated);
   }
 
@@ -372,14 +366,12 @@
   }
 }
 
-/* Aparece al pasar el cursor por la burbuja o al enfocar con teclado */
 .bubble--agent:hover .bubble__copy,
 .bubble--user:hover .bubble__copy,
 .bubble__copy:focus-visible {
   opacity: 1;
 }
 
-/* En dispositivos táctiles (sin hover) el botón queda siempre visible */
 @media (hover: none) {
   .bubble__copy {
     opacity: 1;
