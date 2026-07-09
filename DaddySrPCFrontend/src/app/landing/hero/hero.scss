@@ -32,6 +32,7 @@
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.875rem;
   margin-top: 2rem;
 }

@@ -44,6 +44,9 @@ import { SiteFooter } from './site-footer/site-footer';
       transition: top var(--t-fast) var(--ease);
     }
     .skip-link:focus { top: 1rem; }
+    @media (max-width: 768px) {
+      main { padding-top: 68px; }
+    }
   `],
 })
 export class LandingPage {}

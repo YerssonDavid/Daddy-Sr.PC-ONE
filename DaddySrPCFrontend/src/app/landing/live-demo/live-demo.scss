@@ -4,7 +4,8 @@
 }
 
 .demo__head {
-  max-width: 44ch;
+  max-width: 760px;
+  margin-inline: auto;
   margin-bottom: 2.5rem;
 }
 .demo__head h2 {
@@ -18,7 +19,7 @@
 /* Contenedor del chat */
 .chat {
   position: relative;
-  width: 95vw; /* Ancho relativo al viewport en móviles */
+  width: 100%;
   max-width: 760px;
   margin-inline: auto;
   background: var(--glass-surface);
@@ -28,10 +29,6 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-card), 0 24px 60px rgba(0, 0, 0, 0.22);
-  
-  @media (min-width: 768px) {
-    width: auto; /* Ancho original para desktop */
-  }
 }
 
 .chat__bar {
@@ -123,10 +120,10 @@
   justify-content: flex-end;
 }
 .msg__bubble {
-  max-width: 85vw; /* Ancho relativo al viewport en móviles */
+  max-width: 85%;
   padding: 0.6rem 0.8rem; /* Menos padding en móviles */
   border-radius: 12px;
-  font-size: clamp(var(--fs-mono-sm), 1.8vw, var(--fs-small)); /* Escala dinámica */
+  font-size: clamp(calc(var(--fs-mono-sm) * 1.03), calc(1.8vw * 1.03), calc(var(--fs-small) * 1.03)); /* Escala dinámica */
   line-height: 1.55;
   background: color-mix(in srgb, var(--bg-elevated) 78%, transparent);
   border: 1px solid var(--glass-border);
@@ -164,41 +161,6 @@
   animation-delay: 0.3s;
 }
 
-/* Selector de nivel */
-.chat__levels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem; /* Menos espacio entre botones en móviles */
-  padding: 0.5rem 0.75rem 0;
-  justify-content: center; /* Centrar botones en móviles */
-  
-  @media (min-width: 768px) {
-    gap: 0.5rem;
-    padding: 0.75rem 1.1rem 0;
-    justify-content: flex-start;
-  }
-}
-.level {
-  font-family: var(--font-mono);
-  font-size: clamp(0.65rem, 1.6vw, var(--fs-mono-sm)); /* Escala dinámica */
-  padding: 0.5rem 0.9rem; /* Más padding para touch */
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-secondary);
-  transition: all var(--t-fast) var(--ease);
-  min-height: 36px; /* Altura mínima para touch */
-}
-.level:hover {
-  border-color: var(--trace);
-  color: var(--text-primary);
-}
-.level.is-active {
-  background: var(--solder-tint);
-  border-color: var(--solder);
-  color: var(--solder);
-}
-
 /* Input */
 .chat__input {
   display: flex;
@@ -227,7 +189,7 @@
   background: transparent;
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: clamp(var(--fs-mono-sm), 1.8vw, var(--fs-small)); /* Escala dinámica */
+  font-size: clamp(calc(var(--fs-mono-sm) * 1.03), calc(1.8vw * 1.03), calc(var(--fs-small) * 1.03)); /* Escala dinámica */
   outline: none;
   min-height: 44px; /* Altura mínima para touch */
 }
@@ -275,7 +237,7 @@
   }
 }
 .gate__panel {
-  width: 95vw; /* Ancho relativo al viewport en móviles */
+  width: 90%;
   max-width: 420px;
   background: var(--glass-elevated);
   backdrop-filter: blur(var(--blur));
@@ -383,15 +345,5 @@
   .chat__body {
     height: 55vh; /* Altura relativa al viewport */
     max-height: 300px;
-  }
-  
-  .chat__levels {
-    flex-direction: column; /* Apilar botones verticalmente en móviles pequeños */
-    align-items: center;
-  }
-  
-  .level {
-    width: 100%; /* Ancho completo para botones apilados */
-    max-width: 200px;
   }
 }

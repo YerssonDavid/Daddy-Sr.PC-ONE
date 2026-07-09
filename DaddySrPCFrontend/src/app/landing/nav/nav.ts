@@ -2,11 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
+  inject,
   signal,
 } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { LangSelector } from '../../shared/lang-selector/lang-selector';
 import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
+import { GithubStars } from '../../shared/github-stars/github-stars.service';
 
 @Component({
   selector: 'app-nav',
@@ -18,6 +20,7 @@ import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
 export class Nav {
   protected readonly scrolled = signal(false);
   protected readonly menuOpen = signal(false);
+  protected readonly ghStars = inject(GithubStars);
 
   @HostListener('window:scroll')
   onScroll(): void {
