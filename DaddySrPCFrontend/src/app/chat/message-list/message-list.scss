@@ -49,6 +49,10 @@
   margin-inline: auto;
   padding-bottom: 6em;
 
+  @media (max-width: 640px) {
+    padding-bottom: 4em;
+  }
+
   @media (min-width: 768px) {
     gap: 1rem;
     max-width: 960px;
