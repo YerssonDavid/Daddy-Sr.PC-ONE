@@ -27,17 +27,11 @@
   grid-template-rows: auto auto auto 1fr;
   min-height: 0;
   position: relative;
-  overflow: hidden;
 }
 
-/* Cuando el header flota (isla), los mensajes comienzan debajo de la cápsula */
-.chat-main:has(.chat-header--floating) app-message-list {
-  padding-top: 80px;
 
-  @media (max-width: 640px) {
-    padding-top: 70px;
-  }
-}
+
+
 
 /* Tokens del chat */
 :host {
@@ -113,10 +107,6 @@
 
   .chat-shell:not([data-sidebar='expanded']) .chat-backdrop {
     display: none;
-  }
-
-  .chat-main {
-    padding-bottom: 100px;
   }
 
   :host {
