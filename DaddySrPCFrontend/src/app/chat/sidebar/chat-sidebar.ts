@@ -1,14 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  HostListener,
   inject,
   input,
   output,
+  signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ChatStore, Conversation } from '../state/chat-store';
 import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
+import { GithubStars } from '../../shared/github-stars/github-stars.service';
 
 @Component({
   selector: 'app-chat-sidebar',
@@ -25,7 +28,14 @@ export class ChatSidebar {
 
   private readonly router = inject(Router);
   protected readonly store = inject(ChatStore);
+  protected readonly ghStars = inject(GithubStars);
   protected readonly isSupportRoute = this.router.url.includes('/chat/support');
+  protected readonly menuOpenId = signal<string | null>(null);
+
+  @HostListener('document:click')
+  closeMenu(): void {
+    this.menuOpenId.set(null);
+  }
 
   newChat(): void {
     this.store.newConversation();
@@ -41,6 +51,11 @@ export class ChatSidebar {
 
   goHome(): void {
     this.router.navigate(['/home']);
+  }
+
+  toggleMenu(event: Event, id: string): void {
+    event.stopPropagation();
+    this.menuOpenId.set(this.menuOpenId() === id ? null : id);
   }
 
   selectConversation(conv: Conversation): void {
