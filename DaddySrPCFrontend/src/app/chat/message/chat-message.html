@@ -14,12 +14,10 @@
     @for (block of message().blocks; track $index) {
       @switch (block.kind) {
         @case ('text') {
-           @if (block.text) {
-             @if (message().role === 'agent') {
+           @if (message().role === 'agent') {
                <markdown class="bubble__md" [data]="block.text | mdNormalize" />
-             } @else {
-               <p class="bubble__text">{{ block.text }}</p>
-             }
+           } @else {
+             <p class="bubble__text">{{ block.text }}</p>
            }
         }
         @case ('table') {
@@ -36,7 +34,7 @@
 
     @if (message().role === 'agent' && message().pending) {
       <div class="bubble__writing" role="status" aria-label="Daddy está escribiendo">
-        {{ 'chat.thinking' | transloco }}<span class="bubble__writing-dot"></span>
+        <span class="bubble__writing-dot"></span>
         <span class="bubble__writing-dot"></span>
         <span class="bubble__writing-dot"></span>
       </div>
