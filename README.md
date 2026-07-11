@@ -158,7 +158,8 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 - El agente de atención al cliente está restringido únicamente a documentación empresarial vía RAG.
 - El agente de prueba, disponible sin registro, usa un modelo más ligero (Qwen3.5-9B) y carece de memoria y RAG, aunque sí tiene búsqueda web en tiempo real.
 
->[!NOTE] Actualmente no se requiere registro para probar el modelo, puede acceder al modelo con más capacidades mediante el botón de `Equipo ONE: probar agente completo`. 
+>[!NOTE]
+>Actualmente no se requiere registro para probar el modelo, puede acceder al modelo con más capacidades mediante el botón de `Equipo ONE: probar agente completo`. 
 
 ---
 ## Comprobante agentes
