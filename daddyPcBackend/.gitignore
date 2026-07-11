@@ -18,6 +18,18 @@ target/
 *.iws
 *.iml
 *.ipr
+.qodo
+.mvn
+./.mvn
+/scripts
+../.qodo
+.gcloudignore
+.gitattributes
+CaCertificate-daddypc-database-instance.pub:Zone.Identifier
+CaCertificate-daddypc-database-instance.pub
+mvnw
+mvnw.cmd
+.gitignore
 
 ### NetBeans ###
 /nbproject/private/
@@ -33,4 +45,3 @@ CaCertificate-daddypc-database-instance.pub
 CaCertificate-daddypc-database-instance.pub:Zone.Identifier
 .opencode/
 doppler.json
-scripts/
