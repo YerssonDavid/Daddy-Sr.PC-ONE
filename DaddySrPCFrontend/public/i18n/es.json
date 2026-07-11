@@ -24,10 +24,8 @@
     "ctaSecondary": "¿Cómo funciona?",
     "free": "3 consultas sin necesidad de registro (con limitaciones)",
     "freeTrial": "3 consultas sin necesidad de registro (con limitaciones)",
-    "oneTrial": {
-      "line1": "Acceso temporal para pruebas",
-      "line2": "Equipo ONE: probar agente completo"
-    },
+    "oneTrial": "Acceso temporal",
+    "oneTrialTag": "Para equipo ONE",
     "demo": {
       "ariaLabel": "Demostración de conversación con Daddy Sr.PC sobre compatibilidad de GPU.",
       "question": "¿Una RTX 4070 cabe en un gabinete mini-ITX?",
@@ -71,8 +69,8 @@
       "body": "Pruébalo sin registrarte. El contador queda visible y baja con cada pregunta. Ten en cuenta que el modo de prueba tiene limitaciones."
     },
     "step4": {
-      "title": "Regístrate para seguir",
-      "body": "Gratis con 15 consultas por día, o continúa sin límites creando tu cuenta."
+      "title": "3 consultas sin registro",
+      "body": "Continúa sin límites creando tu cuenta. (Temporalmente registro deshabilitado, tienes acceso libre al modelo completo)"
     }
   },
   "demo": {
@@ -99,14 +97,9 @@
     "bannerStrong": "Te queda 1 pregunta. Después, crea tu cuenta para continuar.",
     "gate": {
       "eyebrow": "// Llegaste al límite de prueba",
-      "title": "Hiciste 15 preguntas. ¡Listo!",
-      "text": "¿Quieres seguir? Regístrate gratis:",
-      "feature1": "15 preguntas por día",
-      "feature2": "Historial de tus chats",
-      "feature3": "Respuestas a tu nivel",
-      "cta": "Crear cuenta gratuita",
-      "login": "Ya tengo cuenta",
-      "fine": "Sin sorpresas. La mayoría usa el plan gratis."
+      "title": "Probar agente completo",
+      "cta": "Probar agente completo",
+      "close": "Cerrar"
     },
     "replies": {
       "novato": {
@@ -196,6 +189,11 @@
     "submitting": "Creando cuenta…",
     "loginPrompt": "¿Ya tienes cuenta?",
     "loginCta": "Iniciar sesión",
+    "disabled": {
+      "title": "Registro temporalmente deshabilitado",
+      "desc": "Estamos realizando mantenimiento en esta sección.",
+      "countdown": "Disponible muy pronto..."
+    },
     "errors": {
       "nameRequired": "El nombre es requerido",
       "surnameRequired": "El apellido es requerido",
@@ -271,6 +269,11 @@
     "submitting": "Ingresando…",
     "registerPrompt": "¿No tienes cuenta?",
     "registerCta": "Registrarte gratis",
+    "disabled": {
+      "title": "Inicio de sesión temporalmente deshabilitado",
+      "desc": "Estamos realizando mantenimiento en esta sección.",
+      "countdown": "Disponible muy pronto..."
+    },
     "errors": {
       "emailRequired": "El correo es requerido",
       "emailInvalid": "Correo no válido",

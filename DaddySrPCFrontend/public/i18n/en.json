@@ -24,10 +24,8 @@
     "ctaSecondary": "How it works?",
     "free": "3 free queries · no sign-up",
     "freeTrial": "3 free queries · no sign-up",
-    "oneTrial": {
-      "line1": "Temporary access for testing",
-      "line2": "ONE Team: try the full agent"
-    },
+    "oneTrial": "Temporary access",
+    "oneTrialTag": "For ONE Team",
     "demo": {
       "note": "Note:",
       "limitedCapabilities": "This trial mode uses a model with limited capabilities.",
@@ -77,8 +75,8 @@
       "body": "Try it without signing up. The counter stays visible and drops with each question."
     },
     "step4": {
-      "title": "Sign up to keep going",
-      "body": "Free with 15 queries per day, or continue without limits by creating your account."
+      "title": "3 queries without sign-up",
+      "body": "Continue without limits by creating your account. (Registration temporarily disabled — you have free access to the complete model)"
     }
   },
   "demo": {
@@ -105,14 +103,9 @@
     "bannerStrong": "1 query left. Create your account to continue.",
     "gate": {
       "eyebrow": "// You've reached the trial limit",
-      "title": "You asked 3 questions. Nice work.",
-      "text": "Want to keep going? Sign up for free:",
-      "feature1": "15 questions per day",
-      "feature2": "Chat history",
-      "feature3": "Replies tuned to your level",
-      "cta": "Create free account",
-      "login": "I already have an account",
-      "fine": "No surprises. Most users stick with the free plan."
+      "title": "Try the full agent",
+      "cta": "Try the full agent",
+      "close": "Close"
     },
     "replies": {
       "novato": {
@@ -202,6 +195,11 @@
     "submitting": "Creating account…",
     "loginPrompt": "Already have an account?",
     "loginCta": "Log in",
+    "disabled": {
+      "title": "Registration temporarily disabled",
+      "desc": "We are performing maintenance on this section.",
+      "countdown": "Available very soon..."
+    },
     "errors": {
       "nameRequired": "First name is required",
       "surnameRequired": "Last name is required",
@@ -277,6 +275,11 @@
     "submitting": "Signing in…",
     "registerPrompt": "Don't have an account?",
     "registerCta": "Sign up for free",
+    "disabled": {
+      "title": "Login temporarily disabled",
+      "desc": "We are performing maintenance on this section.",
+      "countdown": "Available very soon..."
+    },
     "errors": {
       "emailRequired": "Email is required",
       "emailInvalid": "Invalid email address",
