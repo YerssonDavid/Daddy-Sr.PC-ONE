@@ -97,10 +97,10 @@
         </button>
       </form>
 
-      <!-- Gate de registro -->
+      <!-- Gate: probar agente completo -->
       @if (gateOpen()) {
         <div class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-          <div class="gate__panel">
+          <div class="gate__panel gate__panel--full">
             <div class="gate__header">
               <p class="eyebrow">{{ 'demo.gate.eyebrow' | transloco }}</p>
               <button type="button" class="gate__close" (click)="closeGate()" aria-label="Close">
@@ -110,19 +110,10 @@
               </button>
             </div>
             <h3 id="gate-title" class="gate__title">{{ 'demo.gate.title' | transloco }}</h3>
-            <p class="gate__text">{{ 'demo.gate.text' | transloco }}</p>
-            <ul class="gate__list mono">
-              <li>{{ 'demo.gate.feature1' | transloco }}</li>
-              <li>{{ 'demo.gate.feature2' | transloco }}</li>
-              <li>{{ 'demo.gate.feature3' | transloco }}</li>
-            </ul>
             <div class="gate__actions">
-              <a class="btn btn--primary" href="#hero">{{ 'demo.gate.cta' | transloco }}</a>
-              <button type="button" class="btn btn--ghost" (click)="closeGate()">
-                {{ 'demo.gate.login' | transloco }}
-              </button>
+              <a class="btn btn--primary" routerLink="/chat">{{ 'demo.gate.cta' | transloco }}</a>
+              <button type="button" class="btn btn--ghost" (click)="closeGate()">{{ 'demo.gate.close' | transloco }}</button>
             </div>
-            <p class="gate__fine">{{ 'demo.gate.fine' | transloco }}</p>
           </div>
         </div>
       }
