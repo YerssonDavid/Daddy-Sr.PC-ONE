@@ -257,7 +257,8 @@ El backend sigue **Arquitectura Hexagonal (Ports & Adapters)** con separación e
 | `application/` | Puertos de entrada/salida y casos de uso |
 | `infraestructure/` | Adaptadores, controladores REST, persistencia JPA |
 
->[!NOTE] El backend está alojado en **GCP** y la base de datos en **OCI**, comunicándose a través de una **VPN privada**.
+>[!NOTE]
+>El backend está alojado en **GCP** y la base de datos en **OCI**, comunicándose a través de una **VPN privada**.
 
 ---
 
