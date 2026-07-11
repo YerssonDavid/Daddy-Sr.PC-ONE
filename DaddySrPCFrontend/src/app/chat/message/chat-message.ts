@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { ChatMessage as ChatMessageModel } from '../state/chat-store';
 import { CHAT_AGENT_CONFIG } from '../state/chat-agent.config';
 import { SpecTable } from '../message-blocks/spec-table';
@@ -11,7 +12,7 @@ import { MdNormalizePipe, stripModelThinking } from './markdown.pipe';
 @Component({
   selector: 'app-chat-message',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SpecTable, Admonition, CodeBlock, DatePipe, MarkdownComponent, MdNormalizePipe],
+  imports: [SpecTable, Admonition, CodeBlock, DatePipe, MarkdownComponent, MdNormalizePipe, TranslocoPipe],
   templateUrl: './chat-message.html',
   styleUrl: './chat-message.scss',
 })

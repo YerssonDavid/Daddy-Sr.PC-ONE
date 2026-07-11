@@ -100,6 +100,7 @@
     "placeholder": "E.g.: Does AM5 use DDR4 or DDR5?",
     "sendAriaLabel": "Send message",
     "typingAriaLabel": "Daddy is typing",
+    "thinking": "Thinking",
     "bannerSoft": "{{ count }} free queries left. Sign up to keep going without limits.",
     "bannerStrong": "1 query left. Create your account to continue.",
     "gate": {
@@ -256,6 +257,7 @@
     "settingsAppearance": "Appearance",
     "settingsLight": "Light",
     "settingsDark": "Dark",
+    "thinking": "Thinking",
     "errorConnect": "There was an error connecting to Daddy. Please try again."
   },
   "login": {

@@ -100,6 +100,7 @@
     "placeholder": "Ex.: AM5 usa DDR4 ou DDR5?",
     "sendAriaLabel": "Enviar mensagem",
     "typingAriaLabel": "Daddy está digitando",
+    "thinking": "Pensando",
     "bannerSoft": "Restam {{ count }} consultas grátis. Cadastre-se para continuar sem limites.",
     "bannerStrong": "Resta 1 consulta. Crie sua conta para continuar.",
     "gate": {
@@ -256,6 +257,7 @@
     "settingsAppearance": "Aparência",
     "settingsLight": "Claro",
     "settingsDark": "Escuro",
+    "thinking": "Pensando",
     "errorConnect": "Ocorreu um erro ao conectar com o Daddy. Tente novamente."
   },
   "login": {

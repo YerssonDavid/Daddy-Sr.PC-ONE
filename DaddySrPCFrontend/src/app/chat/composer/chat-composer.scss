@@ -80,7 +80,9 @@
     background-color var(--t-fast) var(--ease),
     transform var(--t-fast) var(--ease),
     box-shadow var(--t-fast) var(--ease),
-    opacity var(--t-fast) var(--ease);
+    opacity var(--t-fast) var(--ease),
+    width var(--t-fast) var(--ease),
+    border-radius var(--t-fast) var(--ease);
 
   &:hover:not(:disabled) {
     filter: brightness(1.08);
@@ -102,9 +104,32 @@
   }
 
   &--typing {
-    opacity: 0.7;
+    width: auto;
+    padding: 0 0.9rem;
+    border-radius: 8em;
+    opacity: 0.8;
     cursor: wait;
+    gap: 1px;
   }
+}
+
+.composer__thinking {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.composer__dot {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1;
+  animation: dot-bounce 1.4s ease-in-out infinite;
+}
+.composer__dot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.composer__dot:nth-child(4) {
+  animation-delay: 0.4s;
 }
 
 .composer__send-emoji {
@@ -119,12 +144,15 @@
   margin-right: 0.125rem;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.spin {
-  animation: spin 0.9s linear infinite;
+@keyframes dot-bounce {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
 }
 
 /* Mobile */
@@ -156,6 +184,11 @@
   .composer__send-btn {
     width: 32px;
     height: 32px;
+
+    &--typing {
+      width: auto;
+      padding: 0 0.7rem;
+    }
   }
 
   .composer--expanded .composer__send-btn {
