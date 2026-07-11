@@ -40,3 +40,6 @@ spring:
 
 tavily:
   api-key: ${TAVILY_API}
+
+time:
+  api: ${GET_TIME_API}
