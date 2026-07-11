@@ -61,6 +61,20 @@
 
     @if (!success()) {
 
+      @if (disabled()) {
+        <div class="reg-card reg-disabled">
+          <div class="reg-disabled__icon">
+            <svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true">
+              <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2.5" opacity=".35"/>
+              <path d="M24 14v12M24 30v2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h1 class="reg-disabled__title">{{ 'register.disabled.title' | transloco }}</h1>
+          <p class="reg-disabled__desc">{{ 'register.disabled.desc' | transloco }}</p>
+          <p class="reg-disabled__countdown">{{ 'register.disabled.countdown' | transloco }}</p>
+        </div>
+      } @else {
+
       <!-- Progress track (stays alive across step changes) -->
       <nav class="reg-progress" [attr.aria-label]="'register.stepOf' | transloco: {step: step(), total: TOTAL}">
         @for (n of STEPS; track n) {
@@ -87,6 +101,7 @@
           }
         }
       </nav>
+
 
       <!-- Step card — @for with track s recreates element on step change → CSS enter animation fires -->
       @for (s of [step()]; track s) {
@@ -386,6 +401,7 @@
           }
 
         </div>
+      }
       }
 
     } @else {

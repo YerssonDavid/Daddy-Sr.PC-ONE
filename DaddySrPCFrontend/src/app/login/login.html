@@ -102,6 +102,20 @@
 
     @if (!success()) {
 
+      @if (disabled()) {
+        <div class="lg-card lg-disabled">
+          <div class="lg-disabled__icon">
+            <svg viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true">
+              <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2.5" opacity=".35"/>
+              <path d="M24 14v12M24 30v2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h1 class="lg-disabled__title">{{ 'login.disabled.title' | transloco }}</h1>
+          <p class="lg-disabled__desc">{{ 'login.disabled.desc' | transloco }}</p>
+          <p class="lg-disabled__countdown">{{ 'login.disabled.countdown' | transloco }}</p>
+        </div>
+      } @else {
+
       <div class="lg-card" [class.is-shaking]="shaking()">
 
         <p class="eyebrow lg-card__eyebrow">{{ 'login.eyebrow' | transloco }}</p>
@@ -239,6 +253,7 @@
         </p>
 
       </div>
+      }
 
     } @else {
 

@@ -15,6 +15,7 @@ import { AuthService } from '../core/auth.service';
 const EMAIL_RE  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_UPPER  = /[A-Z]/;
 const PWD_SYMBOL = /[^A-Za-z0-9]/;
+const TARGET_DATE = new Date('2026-07-28T00:00:00');
 
 export type Step     = 1 | 2 | 3;
 export type Interest = 'gamer' | 'creator' | 'overclocker' | 'aprendiz';
@@ -48,6 +49,8 @@ export class Register {
 
   /* ---- Step 3: Perfil ---- */
   protected readonly interest = signal<Interest | ''>('');
+
+  protected readonly disabled = signal(true);
 
   protected readonly dirty   = signal(new Set<string>());
   protected readonly loading    = signal(false);

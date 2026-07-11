@@ -14,6 +14,7 @@ import { AuthService } from '../core/auth.service';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_ATTEMPTS = 3;
+const TARGET_DATE = new Date('2026-07-28T00:00:00');
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,8 @@ const MAX_ATTEMPTS = 3;
 export class Login {
   private readonly auth   = inject(AuthService);
   private readonly router = inject(Router);
+
+  protected readonly disabled = signal(true);
 
   protected readonly email       = signal('');
   protected readonly password    = signal('');
@@ -66,7 +69,7 @@ export class Login {
   }
 
   submit(): void {
-    if (this.locked() || this.loading()) return;
+    if (this.disabled() || this.locked() || this.loading()) return;
 
     this.dirty.update(d => new Set([...d, 'email', 'password']));
     if (!this.canSubmit()) { this.shake(); return; }
