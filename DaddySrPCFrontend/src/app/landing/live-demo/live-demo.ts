@@ -23,8 +23,6 @@ function uuid(): string {
   return crypto.randomUUID?.() ?? Math.random().toString(36).slice(2);
 }
 
-type Level = 'novato' | 'intermedio' | 'avanzado';
-
 interface ChatMessage {
   id: string;
   role: 'user' | 'agent';
@@ -48,7 +46,6 @@ export class LiveDemo implements OnInit, OnDestroy {
 
   protected readonly messages = signal<ChatMessage[]>([]);
   protected readonly remaining = signal(TOTAL_REQUESTS);
-  protected readonly level = signal<Level>('intermedio');
   protected readonly draft = signal('');
   protected readonly typing = signal(false);
   protected readonly gateOpen = signal(false);
@@ -60,8 +57,6 @@ export class LiveDemo implements OnInit, OnDestroy {
     if (r <= 5) return 'soft';
     return 'none';
   });
-
-  protected readonly levels: Level[] = ['novato', 'intermedio', 'avanzado'];
 
   private readonly body = viewChild<ElementRef<HTMLElement>>('body');
   private timers: ReturnType<typeof setTimeout>[] = [];
@@ -103,10 +98,6 @@ export class LiveDemo implements OnInit, OnDestroy {
     this.draft.set('');
     this.typing.set(false);
     this.gateOpen.set(false);
-  }
-
-  setLevel(level: Level): void {
-    this.level.set(level);
   }
 
   send(): void {

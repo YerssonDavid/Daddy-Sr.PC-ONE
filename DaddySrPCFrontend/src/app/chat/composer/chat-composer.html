@@ -1,11 +1,12 @@
 <form
   class="composer"
+  [class.composer--expanded]="expanded()"
   (submit)="$event.preventDefault(); submit()"
   aria-label="Enviar mensaje a Daddy"
 >
-  <!-- Input row -->
-  <div class="composer__input-row">
-    <label for="chat-input" class="visually-hidden">{{ 'chat.placeholder' | transloco }}</label>
+  <label for="chat-input" class="visually-hidden">{{ 'chat.placeholder' | transloco }}</label>
+
+  <div class="composer__body">
     <textarea
       #textarea
       id="chat-input"
@@ -25,7 +26,6 @@
       [attr.aria-label]="'chat.placeholder' | transloco"
     ></textarea>
 
-    <!-- Send button -->
     <button
       type="submit"
       class="composer__send-btn"
@@ -35,11 +35,11 @@
       [attr.aria-label]="typing() ? 'Enviando…' : 'Enviar mensaje'"
     >
       @if (isSent()) {
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
           <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       } @else if (typing()) {
-        <svg class="spin" viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+        <svg class="spin" viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
           <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" stroke-dasharray="25 30" stroke-linecap="round"/>
         </svg>
       } @else {
@@ -47,7 +47,4 @@
       }
     </button>
   </div>
-
-  <!-- Hint -->
-  <p class="composer__hint">{{ 'chat.sendEnterHint' | transloco }}</p>
 </form>

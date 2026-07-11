@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
+import { GithubStars } from '../../shared/github-stars/github-stars.service';
 import { RequestCounter } from '../state/request-counter.service';
 import { CHAT_AGENT_CONFIG } from '../state/chat-agent.config';
 
@@ -17,4 +18,5 @@ export class ChatHeader {
 
   protected readonly counter = inject(RequestCounter);
   protected readonly agentConfig = inject(CHAT_AGENT_CONFIG);
+  protected readonly ghStars = inject(GithubStars);
 }

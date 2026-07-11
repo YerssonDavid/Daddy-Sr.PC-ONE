@@ -24,6 +24,7 @@ export class ChatComposer {
 
   protected readonly draft = signal('');
   protected readonly isSent = signal(false);
+  protected readonly expanded = signal(false);
 
   private readonly textarea = viewChild<ElementRef<HTMLTextAreaElement>>('textarea');
 
@@ -54,7 +55,13 @@ export class ChatComposer {
     const el = this.textarea()?.nativeElement;
     if (!el) return;
     el.style.height = 'auto';
-    el.style.height = `${Math.min(el.scrollHeight, 160)}px`;
+    if (el.value) {
+      const height = Math.min(el.scrollHeight, 120);
+      el.style.height = `${height}px`;
+      this.expanded.set(height > 40);
+    } else {
+      this.expanded.set(false);
+    }
   }
 
   private playBriefSentState(): void {

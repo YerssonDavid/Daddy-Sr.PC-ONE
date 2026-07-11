@@ -100,6 +100,36 @@
   transform: scaleX(1);
 }
 
+/* ---- GitHub Star ---- */
+.nav__gh-star {
+  --star-color: #e3b341;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--t-fast) var(--ease);
+}
+.nav__gh-star svg path {
+  fill: var(--star-color);
+  stroke: var(--star-color);
+  transition: fill var(--t-fast) var(--ease);
+}
+.nav__gh-star:hover {
+  color: var(--star-color);
+}
+.nav__gh-star:hover svg path {
+  fill: var(--star-color);
+}
+.nav__gh-count {
+  font-variant-numeric: tabular-nums;
+}
+.nav__gh-label {
+  font-size: var(--fs-tiny);
+  opacity: 0.75;
+}
+
 /* Auth mobile (oculto en desktop) */
 .nav__auth-mobile {
   display: none;
@@ -182,12 +212,27 @@
 }
 
 @media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+  .nav__inner {
+    justify-content: center;
+  }
+  .brand {
+    margin-right: auto;
+  }
+
   .nav__burger {
     display: inline-flex;
   }
 
-  /* Ocultar auth desktop y mostrar solo en menú hamburguesa */
+  /* Ocultar auth desktop y GitHub star, mostrar solo en menú hamburguesa */
   .nav__auth-desktop {
+    display: none;
+  }
+  .nav__gh-star {
     display: none;
   }
 
@@ -215,12 +260,25 @@
   .nav__links > a {
     display: block;
     width: 100%;
-    padding: 0.9rem 1.5rem;
+    padding: 0.9rem 2rem;
     border-bottom: 1px solid var(--glass-border);
     font-size: var(--fs-body);
   }
   .nav__links > a::after {
     display: none;
+  }
+
+  .nav__links .nav__gh-star {
+    display: flex;
+    width: 100%;
+    padding: 0.9rem 2rem;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: var(--fs-body);
+    border-radius: 0;
+  }
+  .nav__links .nav__gh-star svg {
+    width: 16px;
+    height: 16px;
   }
 
   /* Auth dentro del menú mobile */

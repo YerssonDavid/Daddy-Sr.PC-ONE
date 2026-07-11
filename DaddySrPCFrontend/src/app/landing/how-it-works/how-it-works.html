@@ -5,9 +5,9 @@
       <h2 appReveal [revealDelay]="60">{{ 'howItWorks.heading' | transloco }}</h2>
     </header>
 
-    <ol class="howit__steps">
+    <div class="howit__steps">
       @for (s of steps; track s.n; let last = $last) {
-        <li class="step" appReveal [revealDelay]="$index * 90">
+        <div class="step" appReveal [revealDelay]="$index * 90">
           <span class="step__n mono">{{ s.n }}</span>
           <div class="step__content">
             <h3 class="step__title">{{ 'howItWorks.' + s.key + '.title' | transloco }}</h3>
@@ -16,8 +16,8 @@
           @if (!last) {
             <span class="step__trace" aria-hidden="true"></span>
           }
-        </li>
+        </div>
       }
-    </ol>
+    </div>
   </div>
 </section>

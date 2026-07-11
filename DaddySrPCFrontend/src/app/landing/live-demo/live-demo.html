@@ -60,25 +60,6 @@
         }
       </div>
 
-      <!-- Selector de nivel -->
-      <div
-        class="chat__levels"
-        role="group"
-        [attr.aria-label]="'demo.levelAriaLabel' | transloco"
-      >
-        @for (lv of levels; track lv) {
-          <button
-            type="button"
-            class="level"
-            [class.is-active]="level() === lv"
-            [attr.aria-pressed]="level() === lv"
-            (click)="setLevel(lv)"
-          >
-            {{ 'demo.levels.' + lv | transloco }}
-          </button>
-        }
-      </div>
-
       <!-- Input -->
       <form class="chat__input" (ngSubmit)="send()">
         <label
