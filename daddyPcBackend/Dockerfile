@@ -12,7 +12,7 @@ RUN apk add --no-cache ca-certificates && \
     chown -R app:app /app
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-COPY CaCertificate-daddypc-database-instance.pub /app/certs/ca-certificate.crt
+COPY --chown=app:app CaCertificate-daddypc-database-instance.pub /app/certs/ca-certificate.crt
 USER app
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
