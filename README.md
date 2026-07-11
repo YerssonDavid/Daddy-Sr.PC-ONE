@@ -43,7 +43,7 @@ Una estrella ayuda al proyecto a llegar a más personas. ¡Gracias! 🙌
 
 Daddy Sr.PC es un **agente de IA conversacional enfocado 100% en el ecosistema PC**.
 
-No es un chatbot genérico. Es un asistente especializado que te acompaña durante todo el proceso: desde que tienes una duda sobre compatibilidad, hasta que encuentras el build perfecto para tu presupuesto. Daddy Sr.PC combina razonamiento profundo con información técnica actualizada para darte respuestas confiables y personalizadas.
+No es un chatbot genérico. Es un Agente especializado que te acompaña durante todo el proceso: desde que tienes una duda sobre compatibilidad, hasta que encuentras el build perfecto para tu presupuesto. Daddy Sr.PC combina razonamiento profundo con información técnica actualizada para darte respuestas confiables y personalizadas.
 
 Puede ayudarte con:
 
@@ -108,7 +108,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 - 🧠 **Memoria de conversación** — recuerda tu setup y preferencias a lo largo del chat
 - 🌐 **Datos en tiempo real** — conectado a fuentes confiables de hardware
 - 💬 **Conversación natural** — no necesitas saber tecnicismos para interactuar
-- 🌍 **Multilenguaje** — disponible en Español, Inglés y Portugués
+- 🌍 **Multilenguaje** — Interfaz disponible en Español, Inglés y Portugués
 - 📱 **PWA** — instalable como aplicación en cualquier dispositivo
 - 🎨 **Tema claro/oscuro** — UI adaptable a tu preferencia
 
