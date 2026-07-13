@@ -21,6 +21,8 @@ Un agente de inteligencia artificial que te **acompaña, guía y resuelve** todo
 [![RAG](https://img.shields.io/badge/RAG-Enabled-success.svg)]()
 [![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8.svg)]()
 [![i18n](https://img.shields.io/badge/i18n-ES%20%7C%20EN%20%7C%20PT-orange.svg)]()
+[![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?logo=googlecloud&logoColor=white)]()
+[![Oracle Cloud](https://img.shields.io/badge/Oracle_Cloud-F80000?logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNTAwIDUwMCI+PHJlY3Qgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIHJ4PSI4MCIgZmlsbD0iI0Y4MDAwMCIvPjxwYXRoIGQ9Ik0xMDAgMjUwYzAtODMgNjctMTUwIDE1MC0xNTBzMTUwIDY3IDE1MCAxNTAtNjcgMTUwLTE1MCAxNTAtMTUwLTY3LTE1MC0xNTB6bTYwIDBjMCA1MCA0MCA5MCA5MCA5MHM5MC00MCA5MC05MC00MC05MC05MC05MC05MCA0MC05MCA5MHoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=&logoColor=white)]()
 
 </p>
 
@@ -145,7 +147,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 
 | Característica | Soporte Técnico (`/chat`) | Atención al Cliente (`/chat/support`) | Agente de Prueba (Página principal) |
 |---|---|---|---|
-| **Modelo** | GLM-5.0 | GLM-5.0 | Qwen3.5-9B |
+| **Modelo** | minimax M3 | minimax M3 | Qwen3-8B |
 | **Búsqueda web en tiempo real** | ✅ Sí | ❌ No | ✅ Sí |
 | **Documentación técnica (RAG)** | ✅ Sí | ✅ Sí | ❌ No |
 | **Memoria de conversación** | ✅ Sí | ✅ Sí | ❌ No |
@@ -156,7 +158,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 **Notas:**
 - El agente de soporte técnico es el más completo, combinando RAG + búsqueda web en tiempo real.
 - El agente de atención al cliente está restringido únicamente a documentación empresarial vía RAG.
-- El agente de prueba, disponible sin registro, usa un modelo más ligero (Qwen3.5-9B) y carece de memoria y RAG, aunque sí tiene búsqueda web en tiempo real.
+- El agente de prueba, disponible sin registro, usa un modelo más ligero (Qwen3-8B) y carece de memoria y RAG, aunque sí tiene búsqueda web en tiempo real.
 
 >[!NOTE]
 >Actualmente no se requiere registro para probar el modelo, puede acceder al modelo con más capacidades mediante el botón de `Equipo ONE: probar agente completo`. 
@@ -212,7 +214,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 | Spring Security | — | Autenticación y autorización |
 | Spring Data JPA | — | Persistencia y ORM |
 | PostgreSQL + PgVector | — | Base de datos + búsqueda semántica |
-| SiliconFlow API | — | LLM (GLM-5.0, Qwen3.5-9B) |
+| SiliconFlow API | — | LLM (minimax M3, Qwen3-8B) |
 | Tavily API | — | Búsqueda web en tiempo real |
 
 ### Infraestructura de IA
