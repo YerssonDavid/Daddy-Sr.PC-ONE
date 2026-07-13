@@ -22,9 +22,9 @@ spring:
       api-key: ${OPENAI_API_KEY}
       chat:
         options:
-          model: zai-org/GLM-5
+          model: MiniMaxAI/MiniMax-M3
           temperature: 0.3
-          max-tokens: 4096
+          max-tokens: 1000
       embedding:
         options:
           model: Qwen/Qwen3-Embedding-0.6B
@@ -40,3 +40,6 @@ spring:
 
 tavily:
   api-key: ${TAVILY_API}
+
+time:
+  api: ${GET_TIME_API}

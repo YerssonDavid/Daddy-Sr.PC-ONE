@@ -16,7 +16,7 @@ public class AssistantFreeAdapter implements IAssistantAIFreeClient {
     public AssistantFreeAdapter(TavilySearchToolsAdapter tavilySearchToolsAdapter, ChatClient.Builder chatClient) {
         this.tavilySearchToolsAdapter = tavilySearchToolsAdapter;
         this.chatClient = chatClient.defaultOptions(OpenAiChatOptions.builder()
-                .model("Qwen/Qwen3.5-9B")
+                .model("Qwen/Qwen3-8B")
                 .maxTokens(4096)
                 .temperature(0.3))
                 .defaultSystem(SystemPromptAgentFree.getPrompt())

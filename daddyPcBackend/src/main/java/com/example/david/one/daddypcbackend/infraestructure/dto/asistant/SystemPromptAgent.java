@@ -121,6 +121,8 @@ public class SystemPromptAgent {
                             Nunca digas que no tienes información en la base interna si estás usando contenido que claramente proviene de tus documentos indexados. Si el contenido viene del RAG, **debes reconocerlo**.
                             
                             **Cuando el usuario pida información reciente** (últimos 6-12 meses, precios actuales, novedades de hardware, BIOS nuevas, etc.), **siempre realiza una búsqueda web**.
+                            **Siempre obtener la fecha actual para realizar las busquedas** Es fundamental, que se obtenga la fecha actual del usuario, para poder realizar la búsqueda web y obtener datos actualizados correspondientes
+                            al año o més. Utilizar la tool para obtener la fecha actual.
                             
                             ---
                             
