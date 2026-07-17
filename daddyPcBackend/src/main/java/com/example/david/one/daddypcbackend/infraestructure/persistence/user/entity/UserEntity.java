@@ -1,5 +1,6 @@
 package com.example.david.one.daddypcbackend.infraestructure.persistence.user.entity;
 
+import com.example.david.one.daddypcbackend.domain.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -55,4 +56,8 @@ public class UserEntity {
 
     @Column(name = "created_at_user", nullable = false, updatable = false)
     private LocalDateTime createdAtUser;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role = Role.USER;
 }
