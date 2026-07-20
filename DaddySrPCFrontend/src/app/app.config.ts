@@ -1,9 +1,10 @@
-import { ApplicationConfig, isDevMode, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, inject, isDevMode, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { TranslocoHttpLoader } from './core/transloco-loader';
+import { MaintenanceService } from './core/maintenance.service';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -29,6 +30,9 @@ export const appConfig: ApplicationConfig = {
         prodMode: !isDevMode(),
       },
       loader: TranslocoHttpLoader,
+    }),
+    provideAppInitializer(() => {
+      inject(MaintenanceService).check();
     }),
   ],
 };

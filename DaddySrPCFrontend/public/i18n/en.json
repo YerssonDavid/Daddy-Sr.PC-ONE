@@ -291,5 +291,12 @@
     "successTitle": "Welcome back!",
     "successBody": "Redirecting to the workshop…",
     "successCta": "Go to chat"
+  },
+  "maintenance": {
+    "title": "We are under maintenance",
+    "sub": "We are making improvements to give you a better experience. We'll be back in:",
+    "timerLabel": "Time remaining",
+    "timerAria": "Estimated time remaining",
+    "note": "Thank you for your patience. We'll be back soon."
   }
 }

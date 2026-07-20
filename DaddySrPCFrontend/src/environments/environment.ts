@@ -8,5 +8,7 @@
 export const environment = {
   production: false,
   /** Base del backend. En dev apunta al servidor local. */
-  apiBaseUrl: 'https://backend-daddypc.up-x.me',
+  apiBaseUrl: 'http://localhost:8080',
+  /** Activa la pantalla de mantenimiento global con temporizador. */
+  maintenanceMode: false,
 };

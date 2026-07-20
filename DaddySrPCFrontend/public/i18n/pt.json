@@ -291,5 +291,12 @@
     "successTitle": "Bem-vindo de volta!",
     "successBody": "Redirecionando para o ateliê…",
     "successCta": "Ir para o chat"
+  },
+  "maintenance": {
+    "title": "Estamos em manutenção",
+    "sub": "Estamos fazendo melhorias para oferecer uma melhor experiência. Voltamos em:",
+    "timerLabel": "Tempo restante",
+    "timerAria": "Tempo restante estimado",
+    "note": "Obrigado pela paciência. Estaremos de volta em breve."
   }
 }
