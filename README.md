@@ -22,7 +22,7 @@ Un agente de inteligencia artificial que te **acompaña, guía y resuelve** todo
 [![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8.svg)]()
 [![i18n](https://img.shields.io/badge/i18n-ES%20%7C%20EN%20%7C%20PT-orange.svg)]()
 [![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?logo=googlecloud&logoColor=white)]()
-[![Oracle Cloud](https://img.shields.io/badge/Oracle_Cloud-F80000?logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNTAwIDUwMCI+PHJlY3Qgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIHJ4PSI4MCIgZmlsbD0iI0Y4MDAwMCIvPjxwYXRoIGQ9Ik0xMDAgMjUwYzAtODMgNjctMTUwIDE1MC0xNTBzMTUwIDY3IDE1MCAxNTAtNjcgMTUwLTE1MCAxNTAtMTUwLTY3LTE1MC0xNTB6bTYwIDBjMCA1MCA0MCA5MCA5MCA5MHM5MC00MCA5MC05MC00MC05MC05MC05MC05MCA0MC05MCA5MHoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=&logoColor=white)]()
+
 
 </p>
 
@@ -234,7 +234,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 | Docker / Docker Compose | Contenedorización |
 | Vercel | Hosting del frontend |
 | GCP | Hosting del backend |
-| OCI | Hosting de base de datos PostgreSQL |
+| GCP — Cloud SQL | Base de datos PostgreSQL |
 | Doppler | Gestión de secretos |
 
 ## 🌐 Despliegue
@@ -243,9 +243,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 |---|---|
 | Frontend | [Vercel](https://vercel.com) — [`https://daddypc.up-x.me/`](https://daddypc.up-x.me/) |
 | Backend | Google Cloud Platform (GCP) |
-| Base de datos | Oracle Cloud Infrastructure (OCI) |
-
-El backend en **GCP** y la base de datos en **OCI** se comunican a través de una **VPN privada**.
+| Base de datos | Google Cloud Platform (GCP) — Cloud SQL |
 
 ---
 
@@ -259,8 +257,7 @@ El backend sigue **Arquitectura Hexagonal (Ports & Adapters)** con separación e
 | `application/` | Puertos de entrada/salida y casos de uso |
 | `infraestructure/` | Adaptadores, controladores REST, persistencia JPA |
 
->[!NOTE]
->El backend está alojado en **GCP** y la base de datos en **OCI**, comunicándose a través de una **VPN privada**.
+
 
 ---
 

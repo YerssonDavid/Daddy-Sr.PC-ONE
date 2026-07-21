@@ -141,7 +141,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 
 | Característica | Soporte Técnico (`/chat`) | Atención al Cliente (`/chat/support`) | Agente de Prueba (Página principal) |
 |---|---|---|---|
-| **Modelo** | GLM-5.0 | GLM-5.0 | Qwen3.5-9B |
+| **Modelo** | minimax M3 | minimax M3 | Qwen3-8B |
 | **Búsqueda web en tiempo real** | ✅ Sí | ❌ No | ✅ Sí |
 | **Documentación técnica (RAG)** | ✅ Sí | ✅ Sí | ❌ No |
 | **Memoria de conversación** | ✅ Sí | ✅ Sí | ❌ No |
@@ -152,7 +152,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 **Notas:**
 - El agente de soporte técnico es el más completo, combinando RAG + búsqueda web en tiempo real.
 - El agente de atención al cliente está restringido únicamente a documentación empresarial vía RAG.
-- El agente de prueba, disponible sin registro, usa un modelo más ligero (Qwen3.5-9B) y carece de memoria y RAG, aunque sí tiene búsqueda web en tiempo real.
+- El agente de prueba, disponible sin registro, usa un modelo más ligero (Qwen3-8B) y carece de memoria y RAG, aunque sí tiene búsqueda web en tiempo real.
 
 >[!NOTE] Actualmente no se requiere registro para probar el modelo, puede acceder al modelo con más capacidades mediante el botón de `Equipo ONE: probar agente completo`. 
 
@@ -223,7 +223,7 @@ Arma una PC para gaming 1440p con $1000 de presupuesto.
 | PostgreSQL | Base de datos principal |
 | REST APIs | Comunicación cliente-servidor |
 
->[!NOTE] Para fines de cumplir con los objetivos del challenge, se implemento la base de datos en OCI, pero el backend esta alojado en GCP. Se comunican por medio de 2 tuneles privados en una VPN de GCP a OCI.
+>[!NOTE] La base de datos y el backend están alojados en GCP.
 
 ---
 
