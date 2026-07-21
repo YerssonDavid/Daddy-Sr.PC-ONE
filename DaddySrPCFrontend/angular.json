@@ -49,6 +49,16 @@
                   "maximumError": "1MB"
                 },
                 {
+                  "type": "any",
+                  "maximumWarning": "200kB",
+                  "maximumError": "400kB"
+                },
+                {
+                  "type": "anyLazy",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
                   "type": "anyComponentStyle",
                   "maximumWarning": "14kB",
                   "maximumError": "20kB"

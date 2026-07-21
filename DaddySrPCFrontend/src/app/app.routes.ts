@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { ChatStore } from './chat/state/chat-store';
 import { ChatApi } from './chat/state/chat-api';
 import {
@@ -8,6 +9,17 @@ import {
   type ChatAgentConfig,
 } from './chat/state/chat-agent.config';
 
+const MARKDOWN_PROVIDER = provideMarkdown({
+  markedOptions: {
+    provide: MARKED_OPTIONS,
+    useValue: {
+      gfm: true,
+      breaks: false,
+      pedantic: false,
+    },
+  },
+});
+
 export const routes: Routes = [
   {
     path: '',
@@ -16,6 +28,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
+    providers: [MARKDOWN_PROVIDER],
     loadComponent: () =>
       import('./landing/landing').then((m) => m.LandingPage),
   },
@@ -31,7 +44,7 @@ export const routes: Routes = [
   },
   {
     path: 'chat',
-    providers: [ChatStore, ChatApi],
+    providers: [ChatStore, ChatApi, MARKDOWN_PROVIDER],
     loadComponent: () => import('./chat/chat').then((m) => m.ChatPage),
   },
   {
@@ -39,6 +52,7 @@ export const routes: Routes = [
     providers: [
       ChatStore,
       ChatApi,
+      MARKDOWN_PROVIDER,
       { provide: CHAT_STORAGE_KEY, useValue: 'daddy-support-chat-state' },
       { provide: CHAT_API_ENDPOINT, useValue: '/ask/support' },
       {

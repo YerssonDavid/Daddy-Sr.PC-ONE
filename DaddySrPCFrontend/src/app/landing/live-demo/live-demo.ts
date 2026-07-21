@@ -14,7 +14,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
-import { MarkdownComponent } from 'ngx-markdown';
 import { startWith, switchMap } from 'rxjs';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { MdNormalizePipe, stripModelThinking } from '../../chat/message/markdown.pipe';
@@ -38,7 +37,7 @@ const REPLY_KEYS = ['r1', 'r2'] as const;
 @Component({
   selector: 'app-live-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, RevealDirective, TranslocoPipe, MdNormalizePipe, MarkdownComponent, RouterLink],
+  imports: [FormsModule, RevealDirective, TranslocoPipe, MdNormalizePipe, RouterLink],
   templateUrl: './live-demo.html',
   styleUrl: './live-demo.scss',
 })

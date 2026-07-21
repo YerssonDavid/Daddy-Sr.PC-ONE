@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CircuitTrace } from '../shared/circuit-trace/circuit-trace';
-import { Nav } from './nav/nav';
+import { Nav } from '../shared/nav/nav';
 import { Hero } from './hero/hero';
 import { Features } from './features/features';
 import { HowItWorks } from './how-it-works/how-it-works';
 import { LiveDemo } from './live-demo/live-demo';
 import { Closing } from './closing/closing';
-import { SiteFooter } from './site-footer/site-footer';
+import { SiteFooter } from '../shared/site-footer/site-footer';
 
 @Component({
   selector: 'app-landing',

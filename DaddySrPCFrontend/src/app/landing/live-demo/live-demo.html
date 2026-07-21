@@ -41,7 +41,11 @@
           <div class="msg" [class.msg--user]="m.role === 'user'">
             @for (block of m.blocks; track $index) {
               @if (m.role === 'agent') {
-                <markdown class="msg__bubble" [data]="block.text | mdNormalize" />
+                @defer (on viewport) {
+                  <markdown class="msg__bubble" [data]="block.text | mdNormalize" />
+                } @placeholder {
+                  <p class="msg__bubble">{{ block.text }}</p>
+                }
               } @else {
                 <p class="msg__bubble">{{ block.text }}</p>
               }

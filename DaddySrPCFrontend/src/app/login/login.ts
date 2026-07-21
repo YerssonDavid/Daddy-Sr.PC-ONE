@@ -8,8 +8,8 @@ import {
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { Nav } from '../landing/nav/nav';
-import { SiteFooter } from '../landing/site-footer/site-footer';
+import { Nav } from '../shared/nav/nav';
+import { SiteFooter } from '../shared/site-footer/site-footer';
 import { AuthService } from '../core/auth.service';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
