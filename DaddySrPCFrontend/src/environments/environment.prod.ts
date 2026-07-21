@@ -10,5 +10,5 @@ export const environment = {
   production: true,
   apiBaseUrl: 'https://backend-daddypc.up-x.me',
   /** Activa la pantalla de mantenimiento global con temporizador. */
-  maintenanceMode: true,
+  maintenanceMode: false,
 };
