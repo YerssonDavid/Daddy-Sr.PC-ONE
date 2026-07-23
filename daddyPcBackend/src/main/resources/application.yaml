@@ -35,6 +35,17 @@ spring:
   profiles:
     active: dev
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${OAUTH2_ID_CLIENT}
+            client-secret: ${OAUTH2_CLIENT_SECRET}
+            scope: openid, profile, email
+            authorization-grant-type: authorization_code
+            client-name: Google
+
   autoconfigure:
     exclude: org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
 
