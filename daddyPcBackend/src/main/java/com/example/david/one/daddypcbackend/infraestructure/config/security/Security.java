@@ -1,8 +1,8 @@
 package com.example.david.one.daddypcbackend.infraestructure.config.security;
 
-import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
-import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.oauth.OAuth2ExtractData;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.oauth.OAuthAuthentication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,7 +18,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 @Configuration
+@RequiredArgsConstructor
 public class Security {
+
+    private final OAuth2ExtractData oAuth2ExtractData;
+    private final OAuthAuthentication oAuthAuthentication;
+
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http
@@ -36,6 +41,11 @@ public class Security {
                         .requestMatchers(HttpMethod.POST, "/ask/support").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/ai/free/user").permitAll()
                         .anyRequest().authenticated()
+                )
+                .oauth2Login(oauth -> oauth.userInfoEndpoint(
+                        userInfo -> userInfo.userService(oAuth2ExtractData)
+                )
+                                .successHandler(oAuthAuthentication)
                 );
         return http.build();
     }
