@@ -1,8 +1,12 @@
 package com.example.david.one.daddypcbackend.infraestructure.config.security;
 
+import com.example.david.one.daddypcbackend.infraestructure.config.security.jwt.JwtFilter;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.jwt.JwtProperties;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.jwt.JwtProvider;
 import com.example.david.one.daddypcbackend.infraestructure.config.security.oauth.OAuth2ExtractData;
 import com.example.david.one.daddypcbackend.infraestructure.config.security.oauth.OAuthAuthentication;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

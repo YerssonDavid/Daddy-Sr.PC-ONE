@@ -2,6 +2,7 @@ package com.example.david.one.daddypcbackend.infraestructure.config.beans.user;
 
 import com.example.david.one.daddypcbackend.application.port.in.user.ILoginUser;
 import com.example.david.one.daddypcbackend.application.port.out.user.IPasswordEncoder;
+import com.example.david.one.daddypcbackend.application.port.out.user.ITokenGeneratorR;
 import com.example.david.one.daddypcbackend.application.port.out.user.IUserR;
 import com.example.david.one.daddypcbackend.application.useCase.user.LoginUserUseCase;
 import com.example.david.one.daddypcbackend.application.useCase.user.RegistryUserUseCase;
@@ -16,7 +17,7 @@ public class ConfigUser {
     }
 
     @Bean
-    public LoginUserUseCase loginUserUseCase(IUserR iUserR, IPasswordEncoder iPasswordEncoder) {
-        return new LoginUserUseCase(iUserR, iPasswordEncoder);
+    public LoginUserUseCase loginUserUseCase(IUserR iUserR, IPasswordEncoder iPasswordEncoder, ITokenGeneratorR iTokenGeneratorR) {
+        return new LoginUserUseCase(iUserR, iPasswordEncoder, iTokenGeneratorR);
     }
 }

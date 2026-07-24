@@ -54,3 +54,8 @@ tavily:
 
 time:
   api: ${GET_TIME_API}
+
+jwt-properties:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    expiration-time: ${JWT_EXPIRATION_TIME}
