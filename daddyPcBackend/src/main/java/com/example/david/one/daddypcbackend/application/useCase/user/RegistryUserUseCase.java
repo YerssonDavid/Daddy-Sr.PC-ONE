@@ -5,6 +5,8 @@ import com.example.david.one.daddypcbackend.application.dto.ServerResponseDTO;
 import com.example.david.one.daddypcbackend.application.port.in.user.IRegistryUser;
 import com.example.david.one.daddypcbackend.application.port.out.user.IPasswordEncoder;
 import com.example.david.one.daddypcbackend.application.port.out.user.IUserR;
+import com.example.david.one.daddypcbackend.domain.enums.Provider;
+import com.example.david.one.daddypcbackend.domain.enums.Role;
 import com.example.david.one.daddypcbackend.domain.exception.InputDataInvalid;
 import com.example.david.one.daddypcbackend.domain.model.User;
 import com.example.david.one.daddypcbackend.domain.valueObjects.*;
@@ -55,6 +57,7 @@ public class RegistryUserUseCase implements IRegistryUser {
         InterestVO interest = new InterestVO(command.interest());
 
 
+
         //Encode password
         String passwordHash = passwordEncoder.encodePassword(password.value());
 
@@ -68,6 +71,8 @@ public class RegistryUserUseCase implements IRegistryUser {
         user.setPassword(passwordHash);
         user.setInterest(interest);
         user.setCreatedAtUser(LocalDateTime.now());
+        user.setRole(Role.USER);
+        user.setProvider(Provider.DADDY_PC);
 
         //Save User
         userR.save(user);

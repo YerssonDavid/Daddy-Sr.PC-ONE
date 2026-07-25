@@ -1,5 +1,7 @@
 package com.example.david.one.daddypcbackend.domain.model;
 
+import com.example.david.one.daddypcbackend.domain.enums.Provider;
+import com.example.david.one.daddypcbackend.domain.enums.Role;
 import com.example.david.one.daddypcbackend.domain.valueObjects.*;
 
 import java.time.LocalDateTime;
@@ -14,11 +16,13 @@ public class User {
     private String password;
     private InterestVO interest;
     private LocalDateTime createdAtUser;
+    private Role role;
+    private Provider provider;
 
     public User() {
     }
 
-    public User(UUID id, NameVO name, SurnameVO surname, EmailVO email, ApodVO apod, String password, InterestVO interest, LocalDateTime createdAtUser) {
+    public User(UUID id, NameVO name, SurnameVO surname, EmailVO email, ApodVO apod, String password, InterestVO interest, LocalDateTime createdAtUser, Role role,  Provider provider) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -27,6 +31,8 @@ public class User {
         this.password = password;
         this.interest = interest;
         this.createdAtUser = createdAtUser;
+        this.role = role;
+        this.provider = provider;
     }
 
     public UUID getId() {
@@ -35,6 +41,14 @@ public class User {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 
     public NameVO getName() {
@@ -91,5 +105,13 @@ public class User {
 
     public void setCreatedAtUser(LocalDateTime createdAtUser) {
         this.createdAtUser = createdAtUser;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

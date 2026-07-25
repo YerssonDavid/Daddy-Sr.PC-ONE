@@ -1,15 +1,21 @@
 package com.example.david.one.daddypcbackend.infraestructure.config.security;
 
-import org.springframework.ai.chat.memory.ChatMemory;
-import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
-import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.jwt.JwtFilter;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.jwt.JwtProperties;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.jwt.JwtProvider;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.oauth.OAuth2ExtractData;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.oauth.OAuthAuthentication;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -17,22 +23,42 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 @Configuration
+@RequiredArgsConstructor
+@EnableConfigurationProperties(JwtProperties.class)
 public class Security {
+
+    private final OAuth2ExtractData oAuth2ExtractData;
+    private final OAuthAuthentication oAuthAuthentication;
+    private final JwtFilter jwtFilter;
+
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
-        http
+        return http
+                //CORS configuration to allow requests from frontend (Angular on localhost:4200)
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
+                //Session required for OAuth2 to store state parameter and compare it on callback
+                .sessionManagement(session -> session.sessionCreationPolicy(
+                        SessionCreationPolicy.IF_REQUIRED
+                ))
                 .authorizeHttpRequests(auth -> auth
+                        //Public routes - no authentication required
                         .requestMatchers(HttpMethod.POST, "/registry/user").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login/user").permitAll()
-                        //Set authorization for token
-                        .requestMatchers(HttpMethod.POST, "/ask").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/ask/support").permitAll()
+                        //Protected routes - require USER role (JWT authentication)
+                        .requestMatchers(HttpMethod.POST, "/ask").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/ask/support").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/ai/free/user").permitAll()
                         .anyRequest().authenticated()
-                );
-        return http.build();
+                )
+                .oauth2Login(oauth -> {
+                    oauth.userInfoEndpoint(
+                            userInfo -> userInfo.userService(oAuth2ExtractData)
+                    );
+                    oauth.successHandler(oAuthAuthentication);
+                })
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     //Password Encoder
@@ -46,9 +72,8 @@ public class Security {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("https://daddypc.up-x.me"));
-        //config.setAllowedOrigins(List.of("http://localhost:4200"));
-        config.setAllowedMethods(List.of("*"));
+        //config.setAllowedOrigins(List.of("https://daddypc.up-x.me"));
+        config.setAllowedOrigins(List.of("http://localhost:4200"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Request-With"));
         config.setAllowCredentials(true);
 

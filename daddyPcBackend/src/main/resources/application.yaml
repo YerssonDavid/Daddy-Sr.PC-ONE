@@ -1,3 +1,8 @@
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: TRACE
+
 spring:
   application:
     name: daddyPcBackend
@@ -35,6 +40,17 @@ spring:
   profiles:
     active: dev
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${OAUTH2_ID_CLIENT}
+            client-secret: ${OAUTH2_SECRET_CLIENT}
+            scope: openid, profile, email
+            authorization-grant-type: authorization_code
+            client-name: Google
+
   autoconfigure:
     exclude: org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
 
@@ -43,3 +59,8 @@ tavily:
 
 time:
   api: ${GET_TIME_API}
+
+jwt-properties:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    expiration-time: ${JWT_EXPIRATION_TIME}

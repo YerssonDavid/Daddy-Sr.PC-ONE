@@ -20,6 +20,8 @@ public class UserMapper {
         entity.setPassword(user.getPassword());
         entity.setInterest(user.getInterest().value());
         entity.setCreatedAtUser(user.getCreatedAtUser());
+        entity.setRole(user.getRole());
+        entity.setProvider(user.getProvider());
 
         return entity;
     }
@@ -30,14 +32,16 @@ public class UserMapper {
         }
 
         return new User(
-            entity.getId(),
-            new NameVO(entity.getName()),
-            new SurnameVO(entity.getSurname()),
-            new EmailVO(entity.getEmail()),
-            new ApodVO(entity.getApod()),
-            entity.getPassword(),
-            new InterestVO(entity.getInterest()),
-            entity.getCreatedAtUser()
+                entity.getId(),
+                new NameVO(entity.getName()),
+                new SurnameVO(entity.getSurname()),
+                new EmailVO(entity.getEmail()),
+                new ApodVO(entity.getApod()),
+                entity.getPassword(),
+                new InterestVO(entity.getInterest()),
+                entity.getCreatedAtUser(),
+                entity.getRole(),
+                entity.getProvider()
         );
     }
 }
