@@ -9,4 +9,8 @@
 export const environment = {
   production: true,
   apiBaseUrl: 'https://backend-daddypc.up-x.me',
+  /** Endpoint de Spring Security que arranca el flujo OAuth2 con Google. */
+  oauthGoogleUrl: 'https://backend.daddypc.up-x.me/oauth2/authorization/google',
+  /** Activa la pantalla de mantenimiento global con temporizador. */
+  maintenanceMode: false,
 };

@@ -209,8 +209,21 @@
   border-radius: var(--radius-sm);
   background: var(--solder);
   color: var(--solder-ink);
-  transition: filter var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease);
+  transition:
+    filter var(--t-fast) var(--ease),
+    opacity var(--t-fast) var(--ease),
+    width var(--t-fast) var(--ease),
+    border-radius var(--t-fast) var(--ease),
+    gap var(--t-fast) var(--ease);
   min-width: 44px; /* Tamaño mínimo para touch */
+  gap: 0;
+
+  &--typing {
+    width: auto;
+    padding: 0 0.9rem;
+    border-radius: 8em;
+    gap: 1px;
+  }
 }
 .chat__send:hover:not(:disabled) {
   filter: brightness(1.08);
@@ -218,6 +231,25 @@
 .chat__send:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+.chat__thinking {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.chat__dot {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1;
+  animation: dot-bounce 1.4s ease-in-out infinite;
+}
+.chat__dot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.chat__dot:nth-child(4) {
+  animation-delay: 0.4s;
 }
 
 /* Gate de registro */
@@ -236,6 +268,35 @@
     padding: 1.5rem;
   }
 }
+.gate__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gate__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+
+  &:hover {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+  }
+}
+
 .gate__panel {
   width: 90%;
   max-width: 420px;
@@ -253,6 +314,19 @@
     padding: 1.75rem;
   }
 }
+
+.gate__panel--full {
+  text-align: center;
+}
+
+.gate__panel--full .gate__title {
+  font-size: clamp(1.15rem, 3vw, 1.35rem);
+  margin: 1rem 0 1.5rem;
+}
+
+.gate__panel--full .gate__actions {
+  justify-content: center;
+}
 @keyframes gate-in {
   from {
     opacity: 0;
@@ -267,31 +341,6 @@
   margin: 0.5rem 0 0.6rem; /* Menos margen en móviles */
   font-size: clamp(1.1rem, 2.5vw, 1.25rem); /* Escala dinámica */
 }
-.gate__text {
-  color: var(--text-secondary);
-  font-size: var(--fs-small);
-}
-.gate__list {
-  margin: 0.85rem 0 1.25rem;
-  display: grid;
-  gap: 0.4rem;
-  font-size: var(--fs-mono-sm);
-  color: var(--text-secondary);
-}
-.gate__list li {
-  position: relative;
-  padding-left: 1.2rem;
-}
-.gate__list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.45em;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--solder);
-}
 .gate__actions {
   display: flex;
   flex-wrap: wrap;
@@ -303,10 +352,16 @@
     justify-content: flex-start;
   }
 }
-.gate__fine {
-  margin-top: 1rem;
-  font-size: var(--fs-tiny);
-  color: var(--text-muted);
+
+@keyframes dot-bounce {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
 }
 
 /* Keyframes locales */

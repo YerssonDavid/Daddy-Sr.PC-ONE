@@ -1,10 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MaintenanceOverlay } from './shared/maintenance-overlay/maintenance-overlay';
+import { MaintenanceService } from './core/maintenance.service';
 
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterOutlet],
-  template: '<router-outlet />',
+  imports: [RouterOutlet, MaintenanceOverlay],
+  template: `
+    @if (maintenance.active()) {
+      <app-maintenance-overlay />
+    }
+    <router-outlet />
+  `,
 })
-export class App {}
+export class App {
+  protected readonly maintenance = inject(MaintenanceService);
+}

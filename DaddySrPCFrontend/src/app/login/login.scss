@@ -373,6 +373,49 @@
 }
 
 /* ============================================================
+   Google OAuth2 button (Spring Security redirect)
+   ============================================================ */
+.lg-google-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-body);
+  line-height: 1;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    box-shadow   var(--t-normal) var(--ease),
+    transform    var(--t-normal) var(--ease);
+
+  &:hover {
+    background: color-mix(in srgb, var(--bg-elevated) 70%, var(--solder-tint) 8%);
+    border-color: color-mix(in srgb, var(--border) 60%, var(--solder) 40%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--solder) 12%, transparent);
+  }
+
+  &:active { transform: translateY(0); }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--trace-tint);
+  }
+}
+
+.lg-google-btn__icon { flex-shrink: 0; display: block; }
+
+/* ============================================================
    Submit button
    ============================================================ */
 .lg-submit {
@@ -392,6 +435,49 @@
 }
 
 .lg-submit__spin { animation: spin 0.8s linear infinite; }
+
+/* ============================================================
+   Disabled state
+   ============================================================ */
+.lg-disabled {
+  text-align: center;
+  padding: 3rem 2rem;
+  animation: lg-enter 0.4s var(--ease) both;
+}
+
+.lg-disabled__icon {
+  color: var(--solder);
+  margin-bottom: 1.25rem;
+  filter: drop-shadow(0 0 16px var(--solder-tint));
+}
+
+.lg-disabled__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.lg-disabled__desc {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  max-width: 32ch;
+  margin-inline: auto;
+  line-height: 1.5;
+}
+
+.lg-disabled__countdown {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  background: color-mix(in srgb, var(--solder-tint) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--solder) 30%, transparent);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--solder);
+  font-weight: 600;
+}
 
 /* ============================================================
    Register link

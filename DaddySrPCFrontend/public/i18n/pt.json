@@ -24,10 +24,8 @@
     "ctaSecondary": "Como funciona?",
     "free": "15 consultas grátis · sem cadastro",
     "freeTrial": "3 consultas grátis · sem cadastro",
-    "oneTrial": {
-      "line1": "Acesso temporário para testes",
-      "line2": "Equipe ONE: testar agente completo"
-    },
+    "oneTrial": "Acesso temporário",
+    "oneTrialTag": "Para equipe ONE",
     "demo": {
       "note": "Nota:",
       "limitedCapabilities": "Este modo de teste usa um modelo com capacidades limitadas.",
@@ -77,8 +75,8 @@
       "body": "Experimente sem se cadastrar. O contador fica visível e diminui com cada pergunta."
     },
     "step4": {
-      "title": "Cadastre-se para continuar",
-      "body": "Grátis com 15 consultas por dia, ou continue sem limites criando sua conta."
+      "title": "3 consultas sem cadastro",
+      "body": "Continue sem limites criando sua conta. (Cadastro temporariamente desativado — você tem acesso livre ao modelo completo)"
     }
   },
   "demo": {
@@ -100,18 +98,14 @@
     "placeholder": "Ex.: AM5 usa DDR4 ou DDR5?",
     "sendAriaLabel": "Enviar mensagem",
     "typingAriaLabel": "Daddy está digitando",
+    "thinking": "Pensando",
     "bannerSoft": "Restam {{ count }} consultas grátis. Cadastre-se para continuar sem limites.",
     "bannerStrong": "Resta 1 consulta. Crie sua conta para continuar.",
     "gate": {
       "eyebrow": "// Você atingiu o limite do teste",
-      "title": "Você fez 15 perguntas. Muito bem.",
-      "text": "Quer continuar? Cadastre-se grátis:",
-      "feature1": "15 perguntas por dia",
-      "feature2": "Histórico de conversas",
-      "feature3": "Respostas no seu nível",
-      "cta": "Criar conta gratuita",
-      "login": "Já tenho uma conta",
-      "fine": "Sem surpresas. A maioria usa o plano gratuito."
+      "title": "Testar o agente completo",
+      "cta": "Testar o agente completo",
+      "close": "Fechar"
     },
     "replies": {
       "novato": {
@@ -199,8 +193,14 @@
     "back": "Voltar",
     "submit": "Criar conta gratuita",
     "submitting": "Criando conta…",
+    "google": "Cadastrar com o Google",
     "loginPrompt": "Já tem uma conta?",
     "loginCta": "Entrar",
+    "disabled": {
+      "title": "Cadastro temporariamente desativado",
+      "desc": "Estamos realizando manutenção nesta seção.",
+      "countdown": "Disponível muito em breve..."
+    },
     "errors": {
       "nameRequired": "O nome é obrigatório",
       "surnameRequired": "O sobrenome é obrigatório",
@@ -274,8 +274,14 @@
     "forgot": "Esqueceu sua senha?",
     "submit": "Entrar",
     "submitting": "Entrando…",
+    "google": "Continuar com o Google",
     "registerPrompt": "Não tem uma conta?",
     "registerCta": "Cadastre-se grátis",
+    "disabled": {
+      "title": "Login temporariamente desativado",
+      "desc": "Estamos realizando manutenção nesta seção.",
+      "countdown": "Disponível muito em breve..."
+    },
     "errors": {
       "emailRequired": "O e-mail é obrigatório",
       "emailInvalid": "E-mail inválido",
@@ -287,5 +293,12 @@
     "successTitle": "Bem-vindo de volta!",
     "successBody": "Redirecionando para o ateliê…",
     "successCta": "Ir para o chat"
+  },
+  "maintenance": {
+    "title": "Estamos em manutenção",
+    "sub": "Estamos fazendo melhorias para oferecer uma melhor experiência. Voltamos em:",
+    "timerLabel": "Tempo restante",
+    "timerAria": "Tempo restante estimado",
+    "note": "Obrigado pela paciência. Estaremos de volta em breve."
   }
 }

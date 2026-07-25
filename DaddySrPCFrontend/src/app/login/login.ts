@@ -8,12 +8,14 @@ import {
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { Nav } from '../landing/nav/nav';
-import { SiteFooter } from '../landing/site-footer/site-footer';
+import { Nav } from '../shared/nav/nav';
+import { SiteFooter } from '../shared/site-footer/site-footer';
 import { AuthService } from '../core/auth.service';
+import { environment } from '../../environments/environment';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_ATTEMPTS = 3;
+const TARGET_DATE = new Date('2026-07-28T00:00:00');
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,11 @@ const MAX_ATTEMPTS = 3;
 export class Login {
   private readonly auth   = inject(AuthService);
   private readonly router = inject(Router);
+
+  // TODO(provisional): el flag de mantenimiento debe controlarse desde el
+  // backend con un guard de fecha / feature flag. Mientras, se desactiva en
+  // desarrollo para no mostrar el aviso "Estamos realizando mantenimiento".
+  protected readonly disabled = signal(environment.maintenanceMode);
 
   protected readonly email       = signal('');
   protected readonly password    = signal('');
@@ -58,6 +65,11 @@ export class Login {
     this.dirty.update(d => new Set([...d, field]));
   }
 
+  /** Redirige al flujo OAuth2 con Google gestionado por Spring Security. */
+  loginWithGoogle(): void {
+    this.auth.loginWithGoogle();
+  }
+
   private shake(): void {
     if (!this.shaking()) {
       this.shaking.set(true);
@@ -66,7 +78,7 @@ export class Login {
   }
 
   submit(): void {
-    if (this.locked() || this.loading()) return;
+    if (this.disabled() || this.locked() || this.loading()) return;
 
     this.dirty.update(d => new Set([...d, 'email', 'password']));
     if (!this.canSubmit()) { this.shake(); return; }

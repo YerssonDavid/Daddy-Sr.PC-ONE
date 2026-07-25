@@ -15,7 +15,11 @@
       @switch (block.kind) {
         @case ('text') {
            @if (message().role === 'agent') {
-               <markdown class="bubble__md" [data]="block.text | mdNormalize" />
+               @defer (on viewport) {
+                 <markdown class="bubble__md" [data]="block.text | mdNormalize" />
+               } @placeholder {
+                 <p class="bubble__text">{{ block.text }}</p>
+               }
            } @else {
              <p class="bubble__text">{{ block.text }}</p>
            }

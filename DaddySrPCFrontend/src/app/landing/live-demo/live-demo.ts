@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { MarkdownComponent } from 'ngx-markdown';
 import { startWith, switchMap } from 'rxjs';
@@ -37,7 +38,7 @@ const REPLY_KEYS = ['r1', 'r2'] as const;
 @Component({
   selector: 'app-live-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, RevealDirective, TranslocoPipe, MdNormalizePipe, MarkdownComponent],
+  imports: [FormsModule, RevealDirective, TranslocoPipe, MdNormalizePipe, MarkdownComponent, RouterLink],
   templateUrl: './live-demo.html',
   styleUrl: './live-demo.scss',
 })
@@ -176,6 +177,9 @@ export class LiveDemo implements OnInit, OnDestroy {
           );
           this.typing.set(false);
           this.scrollSoon();
+          if (openGateAfter) {
+            this.timers.push(setTimeout(() => this.gateOpen.set(true), 700));
+          }
         },
       });
   }

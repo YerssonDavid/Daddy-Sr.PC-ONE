@@ -8,13 +8,15 @@ import {
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { Nav } from '../landing/nav/nav';
-import { SiteFooter } from '../landing/site-footer/site-footer';
+import { Nav } from '../shared/nav/nav';
+import { SiteFooter } from '../shared/site-footer/site-footer';
 import { AuthService } from '../core/auth.service';
+import { environment } from '../../environments/environment';
 
 const EMAIL_RE  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_UPPER  = /[A-Z]/;
 const PWD_SYMBOL = /[^A-Za-z0-9]/;
+const TARGET_DATE = new Date('2026-07-28T00:00:00');
 
 export type Step     = 1 | 2 | 3;
 export type Interest = 'gamer' | 'creator' | 'overclocker' | 'aprendiz';
@@ -48,6 +50,8 @@ export class Register {
 
   /* ---- Step 3: Perfil ---- */
   protected readonly interest = signal<Interest | ''>('');
+
+  protected readonly disabled = signal(environment.maintenanceMode);
 
   protected readonly dirty   = signal(new Set<string>());
   protected readonly loading    = signal(false);
@@ -138,6 +142,11 @@ export class Register {
 
   touch(field: string): void {
     this.dirty.update(d => new Set([...d, field]));
+  }
+
+  /** Redirige al flujo OAuth2 con Google gestionado por Spring Security. */
+  loginWithGoogle(): void {
+    this.auth.loginWithGoogle();
   }
 
   goToStep(n: Step): void {

@@ -41,7 +41,11 @@
           <div class="msg" [class.msg--user]="m.role === 'user'">
             @for (block of m.blocks; track $index) {
               @if (m.role === 'agent') {
-                <markdown class="msg__bubble" [data]="block.text | mdNormalize" />
+                @defer (on viewport) {
+                  <markdown class="msg__bubble" [data]="block.text | mdNormalize" />
+                } @placeholder {
+                  <p class="msg__bubble">{{ block.text }}</p>
+                }
               } @else {
                 <p class="msg__bubble">{{ block.text }}</p>
               }
@@ -54,7 +58,7 @@
               class="msg__bubble msg__bubble--typing"
               [attr.aria-label]="'demo.typingAriaLabel' | transloco"
             >
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              {{ 'demo.thinking' | transloco }}<span class="dot"></span><span class="dot"></span><span class="dot"></span>
             </p>
           </div>
         }
@@ -80,34 +84,40 @@
         <button
           type="submit"
           class="chat__send"
+          [class.chat__send--typing]="typing()"
           [disabled]="!draft().trim() || typing() || remaining() === 0"
           [attr.aria-label]="'demo.sendAriaLabel' | transloco"
         >
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-            <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          @if (typing()) {
+            <span class="chat__thinking">{{ 'demo.thinking' | transloco }}</span>
+            <span class="chat__dot" aria-hidden="true">.</span>
+            <span class="chat__dot" aria-hidden="true">.</span>
+            <span class="chat__dot" aria-hidden="true">.</span>
+          } @else {
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+              <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          }
         </button>
       </form>
 
-      <!-- Gate de registro -->
+      <!-- Gate: probar agente completo -->
       @if (gateOpen()) {
         <div class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-          <div class="gate__panel">
-            <p class="eyebrow">{{ 'demo.gate.eyebrow' | transloco }}</p>
-            <h3 id="gate-title" class="gate__title">{{ 'demo.gate.title' | transloco }}</h3>
-            <p class="gate__text">{{ 'demo.gate.text' | transloco }}</p>
-            <ul class="gate__list mono">
-              <li>{{ 'demo.gate.feature1' | transloco }}</li>
-              <li>{{ 'demo.gate.feature2' | transloco }}</li>
-              <li>{{ 'demo.gate.feature3' | transloco }}</li>
-            </ul>
-            <div class="gate__actions">
-              <a class="btn btn--primary" href="#hero">{{ 'demo.gate.cta' | transloco }}</a>
-              <button type="button" class="btn btn--ghost" (click)="closeGate()">
-                {{ 'demo.gate.login' | transloco }}
+          <div class="gate__panel gate__panel--full">
+            <div class="gate__header">
+              <p class="eyebrow">{{ 'demo.gate.eyebrow' | transloco }}</p>
+              <button type="button" class="gate__close" (click)="closeGate()" aria-label="Close">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
               </button>
             </div>
-            <p class="gate__fine">{{ 'demo.gate.fine' | transloco }}</p>
+            <h3 id="gate-title" class="gate__title">{{ 'demo.gate.title' | transloco }}</h3>
+            <div class="gate__actions">
+              <a class="btn btn--primary" routerLink="/chat">{{ 'demo.gate.cta' | transloco }}</a>
+              <button type="button" class="btn btn--ghost" (click)="closeGate()">{{ 'demo.gate.close' | transloco }}</button>
+            </div>
           </div>
         </div>
       }

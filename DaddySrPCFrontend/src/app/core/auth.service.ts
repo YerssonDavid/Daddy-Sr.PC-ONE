@@ -29,4 +29,14 @@ export class AuthService {
   login(payload: LoginPayload): Observable<unknown> {
     return this.http.post(`${this.BASE}/login/user`, payload);
   }
+
+  /**
+   * Inicia el flujo OAuth2 con Google delegando al backend (Spring Security).
+   * Una redirección full-page es necesaria para que el navegador siga la
+   * cadena de redirecciones de Google y Spring pueda establecer la sesión
+   * (cookie JSESSIONID) en el dominio del backend.
+   */
+  loginWithGoogle(): void {
+    window.location.href = environment.oauthGoogleUrl;
+  }
 }
