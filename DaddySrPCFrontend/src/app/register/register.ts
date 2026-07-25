@@ -11,6 +11,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { Nav } from '../shared/nav/nav';
 import { SiteFooter } from '../shared/site-footer/site-footer';
 import { AuthService } from '../core/auth.service';
+import { environment } from '../../environments/environment';
 
 const EMAIL_RE  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PWD_UPPER  = /[A-Z]/;
@@ -50,7 +51,7 @@ export class Register {
   /* ---- Step 3: Perfil ---- */
   protected readonly interest = signal<Interest | ''>('');
 
-  protected readonly disabled = signal(true);
+  protected readonly disabled = signal(environment.maintenanceMode);
 
   protected readonly dirty   = signal(new Set<string>());
   protected readonly loading    = signal(false);
@@ -141,6 +142,11 @@ export class Register {
 
   touch(field: string): void {
     this.dirty.update(d => new Set([...d, field]));
+  }
+
+  /** Redirige al flujo OAuth2 con Google gestionado por Spring Security. */
+  loginWithGoogle(): void {
+    this.auth.loginWithGoogle();
   }
 
   goToStep(n: Step): void {
