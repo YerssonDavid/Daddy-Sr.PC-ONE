@@ -193,6 +193,7 @@
     "back": "Back",
     "submit": "Create free account",
     "submitting": "Creating account…",
+    "google": "Sign up with Google",
     "loginPrompt": "Already have an account?",
     "loginCta": "Log in",
     "disabled": {
@@ -273,6 +274,7 @@
     "forgot": "Forgot your password?",
     "submit": "Sign in",
     "submitting": "Signing in…",
+    "google": "Continue with Google",
     "registerPrompt": "Don't have an account?",
     "registerCta": "Sign up for free",
     "disabled": {

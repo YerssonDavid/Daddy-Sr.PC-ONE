@@ -187,6 +187,7 @@
     "back": "Atrás",
     "submit": "Crear cuenta gratuita",
     "submitting": "Creando cuenta…",
+    "google": "Registrarse con Google",
     "loginPrompt": "¿Ya tienes cuenta?",
     "loginCta": "Iniciar sesión",
     "disabled": {
@@ -267,6 +268,7 @@
     "forgot": "¿Olvidaste tu contraseña?",
     "submit": "Entrar",
     "submitting": "Ingresando…",
+    "google": "Continuar con Google",
     "registerPrompt": "¿No tienes cuenta?",
     "registerCta": "Registrarte gratis",
     "disabled": {
