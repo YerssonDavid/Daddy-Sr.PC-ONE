@@ -1,6 +1,7 @@
 package com.example.david.one.daddypcbackend.infraestructure.config.security.oauth;
 
 import com.example.david.one.daddypcbackend.application.command.user.GenerateTokenUserCommand;
+import com.example.david.one.daddypcbackend.domain.enums.Role;
 import com.example.david.one.daddypcbackend.infraestructure.config.security.jwt.JwtProvider;
 import com.example.david.one.daddypcbackend.infraestructure.persistence.user.entity.UserEntity;
 import com.example.david.one.daddypcbackend.infraestructure.persistence.user.repository.user.IUserRJpa;
@@ -28,15 +29,16 @@ public class OAuthAuthentication implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        //Successful OAuth2 authentication with Google
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
         String email = (String) attributes.get("email");
 
+        //Check if user already exists in DB, if not create automatically
         UserEntity user = iUserRJpa.findByEmail(email)
                 .orElseGet(() -> {
                     UUID id = UUID.randomUUID();
-
                     while(true){
                         if(iUserRJpa.findById(id).isPresent()){
                             id = UUID.randomUUID();
@@ -45,28 +47,30 @@ public class OAuthAuthentication implements AuthenticationSuccessHandler {
                         }
                     }
 
+                    //Build new user with Google data
                     UserEntity userEntity = UserEntity.builder()
                             .id(id)
                             .email(email)
-                            .name((String) attributes.get("username"))
                             .providerId((String) attributes.get("sub"))
                             .provider(com.example.david.one.daddypcbackend.domain.enums.Provider.GOOGLE)
                             .createdAtUser(LocalDateTime.now())
+                            .role(Role.USER)
                             .build();
 
                     return iUserRJpa.save(userEntity);
                 });
 
+        //Create command with user data to generate JWT
         GenerateTokenUserCommand command = new GenerateTokenUserCommand(
                 user.getId(),
                 user.getEmail(),
                 user.getRole()
         );
 
-        //Generate Token
+        //Generate JWT token with user information
         String token = jwtProvider.generateToken(command);
 
-        //Redirect
+        //Redirect to frontend with token as query param
         String redirect = urlFrontend + "/api/auth/oauth?t=" + token;
         response.sendRedirect(redirect);
     }

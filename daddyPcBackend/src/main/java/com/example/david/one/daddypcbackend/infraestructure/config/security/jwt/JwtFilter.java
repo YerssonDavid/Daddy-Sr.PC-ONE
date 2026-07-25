@@ -10,8 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -27,29 +25,36 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        //Extract JWT token from Authorization header: Bearer <token>
         String jwt = request.getHeader("Authorization");
         final String username;
         final String idUser;
 
+        //If Authorization header contains a Bearer token, process it
         if(jwt != null && jwt.startsWith("Bearer ")){
             String token = jwt.substring(7);
 
+            //Check if token has expired
             if(jwtProvider.isExpired(token)){
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.getWriter().write("Token expired");
+                response.getWriter().write("Expired token");
                 return;
             }
 
+            //Extract claims from token (email, id, role)
             Claims claims = jwtProvider.extractClaims(token);
             username = claims.getSubject();
             idUser = claims.get("id", String.class);
 
+            //If user is not yet authenticated in security context
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 if (jwtProvider.tokenIsValid(token)) {
+                    //Get role from claims and assign as Spring Security authority
                     String role = claims.get("role", String.class);
                     List<GrantedAuthority> authority = List.of(new SimpleGrantedAuthority("ROLE_" + role));
 
+                    //Create Spring authentication token with JWT data
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             username,
                             idUser,
@@ -57,19 +62,23 @@ public class JwtFilter extends OncePerRequestFilter {
                     );
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
+                    //Set authentication in security context
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
 
+            //Continue with filter chain
             filterChain.doFilter(request, response);
         } else {
+            //If no Bearer token, respond with 401 but let pass through
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("No token provided");
+            filterChain.doFilter(request, response);
             return;
         }
     }
 
-    // API that not required authorization or token JWT
+    //Routes that do not require authorization or JWT token (login, registry, and free AI query)
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();

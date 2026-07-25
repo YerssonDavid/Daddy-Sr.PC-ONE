@@ -34,26 +34,29 @@ public class Security {
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         return http
+                //CORS configuration to allow requests from frontend (Angular on localhost:4200)
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
-                //Permit session for OAuth
+                //Session required for OAuth2 to store state parameter and compare it on callback
                 .sessionManagement(session -> session.sessionCreationPolicy(
                         SessionCreationPolicy.IF_REQUIRED
                 ))
                 .authorizeHttpRequests(auth -> auth
+                        //Public routes - no authentication required
                         .requestMatchers(HttpMethod.POST, "/registry/user").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login/user").permitAll()
-                        //Set authorization for token
+                        //Protected routes - require USER role (JWT authentication)
                         .requestMatchers(HttpMethod.POST, "/ask").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/ask/support").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/ai/free/user").permitAll()
                         .anyRequest().authenticated()
                 )
-                .oauth2Login(oauth -> oauth.userInfoEndpoint(
-                        userInfo -> userInfo.userService(oAuth2ExtractData)
-                )
-                                .successHandler(oAuthAuthentication)
-                )
+                .oauth2Login(oauth -> {
+                    oauth.userInfoEndpoint(
+                            userInfo -> userInfo.userService(oAuth2ExtractData)
+                    );
+                    oauth.successHandler(oAuthAuthentication);
+                })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
