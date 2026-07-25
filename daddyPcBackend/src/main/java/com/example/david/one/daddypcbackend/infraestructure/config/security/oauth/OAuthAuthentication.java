@@ -1,5 +1,7 @@
 package com.example.david.one.daddypcbackend.infraestructure.config.security.oauth;
 
+import com.example.david.one.daddypcbackend.application.command.user.GenerateTokenUserCommand;
+import com.example.david.one.daddypcbackend.infraestructure.config.security.jwt.JwtProvider;
 import com.example.david.one.daddypcbackend.infraestructure.persistence.user.entity.UserEntity;
 import com.example.david.one.daddypcbackend.infraestructure.persistence.user.repository.user.IUserRJpa;
 import jakarta.servlet.ServletException;
@@ -20,8 +22,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OAuthAuthentication implements AuthenticationSuccessHandler {
 
-    private String urlFrontend = "https://daddypc.up-x.me";
-    private IUserRJpa iUserRJpa;
+    private String urlFrontend = "http://localhost:4200"; //"https://daddypc.up-x.me";
+    private final IUserRJpa iUserRJpa;
+    private final JwtProvider jwtProvider;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -54,11 +57,17 @@ public class OAuthAuthentication implements AuthenticationSuccessHandler {
                     return iUserRJpa.save(userEntity);
                 });
 
-        //Generate Token
+        GenerateTokenUserCommand command = new GenerateTokenUserCommand(
+                user.getId(),
+                user.getEmail(),
+                user.getRole()
+        );
 
+        //Generate Token
+        String token = jwtProvider.generateToken(command);
 
         //Redirect
-        String redirect = urlFrontend + "/api/auth/oauth?t"; // + token;
+        String redirect = urlFrontend + "/api/auth/oauth?t=" + token;
         response.sendRedirect(redirect);
     }
 }

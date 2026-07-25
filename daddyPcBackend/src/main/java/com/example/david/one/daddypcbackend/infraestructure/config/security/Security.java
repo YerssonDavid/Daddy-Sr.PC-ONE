@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -23,14 +24,16 @@ import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
+@EnableConfigurationProperties(JwtProperties.class)
 public class Security {
 
     private final OAuth2ExtractData oAuth2ExtractData;
     private final OAuthAuthentication oAuthAuthentication;
+    private final JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
-        http
+        return http
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 //Permit session for OAuth
@@ -50,8 +53,9 @@ public class Security {
                         userInfo -> userInfo.userService(oAuth2ExtractData)
                 )
                                 .successHandler(oAuthAuthentication)
-                );
-        return http.build();
+                )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     //Password Encoder
@@ -65,9 +69,8 @@ public class Security {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("https://daddypc.up-x.me"));
-        //config.setAllowedOrigins(List.of("http://localhost:4200"));
-        config.setAllowedMethods(List.of("*"));
+        //config.setAllowedOrigins(List.of("https://daddypc.up-x.me"));
+        config.setAllowedOrigins(List.of("http://localhost:4200"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Request-With"));
         config.setAllowCredentials(true);
 
