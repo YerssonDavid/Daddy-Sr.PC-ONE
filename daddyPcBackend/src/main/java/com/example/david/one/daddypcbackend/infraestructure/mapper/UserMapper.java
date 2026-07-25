@@ -21,6 +21,7 @@ public class UserMapper {
         entity.setInterest(user.getInterest().value());
         entity.setCreatedAtUser(user.getCreatedAtUser());
         entity.setRole(user.getRole());
+        entity.setProvider(user.getProvider());
 
         return entity;
     }
@@ -39,7 +40,8 @@ public class UserMapper {
                 entity.getPassword(),
                 new InterestVO(entity.getInterest()),
                 entity.getCreatedAtUser(),
-                entity.getRole()
+                entity.getRole(),
+                entity.getProvider()
         );
     }
 }
